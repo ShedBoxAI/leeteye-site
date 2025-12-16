@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master heaps and priority queues. Get min/max elements in O(log n) time.">
+    <title>Heaps & Priority Queues - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Data Structure</span>
+        <h1>Heaps & Priority Queues</h1>
+
+        <p class="intro">
+            Need to repeatedly find the smallest (or largest) element? A heap gives you that in O(log n). It's like a VIP queue where the most important person is always at the front.
+        </p>
+
+        <h2>The Core Idea</h2>
+        <p>
+            A heap is a tree where every parent is smaller (min-heap) or larger (max-heap) than its children. The root is always the min or max. When you add or remove, the heap reshuffles to maintain this property.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Use a heap when you need to repeatedly extract the min/max, or when you need the "top K" of something.</p>
+        </div>
+
+        <h2>Python's heapq Module</h2>
+        <p>Python only has min-heap. For max-heap, negate the values:</p>
+        <pre><code><span class="code-keyword">import</span> heapq
+
+<span class="code-comment"># Min heap</span>
+heap = []
+heapq.heappush(heap, <span class="code-number">3</span>)
+heapq.heappush(heap, <span class="code-number">1</span>)
+heapq.heappush(heap, <span class="code-number">2</span>)
+<span class="code-func">print</span>(heapq.heappop(heap))  <span class="code-comment"># 1 (smallest)</span>
+
+<span class="code-comment"># Max heap (negate values)</span>
+max_heap = []
+heapq.heappush(max_heap, -<span class="code-number">3</span>)
+heapq.heappush(max_heap, -<span class="code-number">1</span>)
+<span class="code-func">print</span>(-heapq.heappop(max_heap))  <span class="code-comment"># 3 (largest)</span></code></pre>
+
+        <h2>Classic: Top K Frequent Elements</h2>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">topKFrequent</span>(nums, k):
+    count = Counter(nums)
+
+    <span class="code-comment"># Min heap of size k</span>
+    heap = []
+    <span class="code-keyword">for</span> num, freq <span class="code-keyword">in</span> count.items():
+        heapq.heappush(heap, (freq, num))
+        <span class="code-keyword">if</span> <span class="code-func">len</span>(heap) > k:
+            heapq.heappop(heap)
+
+    <span class="code-keyword">return</span> [num <span class="code-keyword">for</span> freq, num <span class="code-keyword">in</span> heap]</code></pre>
+
+        <table class="complexity-table">
+            <tr>
+                <th>Operation</th>
+                <th>Time</th>
+            </tr>
+            <tr>
+                <td>Push</td>
+                <td><code>O(log n)</code></td>
+            </tr>
+            <tr>
+                <td>Pop (min/max)</td>
+                <td><code>O(log n)</code></td>
+            </tr>
+            <tr>
+                <td>Peek (min/max)</td>
+                <td><code>O(1)</code></td>
+            </tr>
+            <tr>
+                <td>Heapify array</td>
+                <td><code>O(n)</code></td>
+            </tr>
+        </table>
+
+        <div class="when-to-use">
+            <h3>When to Use a Heap</h3>
+            <ul>
+                <li><strong>Top K elements</strong> - K largest, K most frequent</li>
+                <li><strong>Merge K sorted lists</strong> - Always pick the smallest head</li>
+                <li><strong>Running median</strong> - Two heaps (min + max)</li>
+                <li><strong>Dijkstra's algorithm</strong> - Pick minimum distance node</li>
+                <li><strong>Task scheduling</strong> - Process by priority</li>
+            </ul>
+        </div>
+
+        <div class="callout tip">
+            <div class="callout-title">Pro Tip</div>
+            <p>For Top K problems, a heap of size K is often more efficient than sorting everything. You keep only what you need.</p>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Heap problems have elegant solutions. Discover them in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

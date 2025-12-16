@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master Binary Search Trees: ordered trees for efficient search, insert, and delete.">
+    <title>Binary Search Tree - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Data Structure</span>
+        <h1>Binary Search Tree</h1>
+
+        <p class="intro">
+            A Binary Search Tree (BST) is a tree where every node follows one rule: left children are smaller, right children are larger. This simple property gives you O(log n) search, insert, and delete - when the tree is balanced.
+        </p>
+
+        <h2>The BST Property</h2>
+        <p>
+            For every node: all values in its left subtree are smaller, all values in its right subtree are larger. This ordering makes search efficient - you always know which way to go.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>An <strong>inorder traversal</strong> of a BST gives you elements in sorted order. This is incredibly useful - it means you can validate a BST or find the kth smallest element using inorder.</p>
+        </div>
+
+        <h2>Classic: Validate BST</h2>
+        <p>
+            The trick: each node must be within a valid range.
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">isValidBST</span>(root):
+    <span class="code-keyword">def</span> <span class="code-func">validate</span>(node, min_val, max_val):
+        <span class="code-keyword">if not</span> node:
+            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+
+        <span class="code-keyword">if</span> node.val <= min_val <span class="code-keyword">or</span> node.val >= max_val:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+
+        <span class="code-keyword">return</span> (validate(node.left, min_val, node.val) <span class="code-keyword">and</span>
+                validate(node.right, node.val, max_val))
+
+    <span class="code-keyword">return</span> validate(root, float(<span class="code-string">'-inf'</span>), float(<span class="code-string">'inf'</span>))</code></pre>
+
+        <h2>Classic: Kth Smallest Element</h2>
+        <p>
+            Use inorder traversal - it visits nodes in sorted order:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">kthSmallest</span>(root, k):
+    stack = []
+    current = root
+
+    <span class="code-keyword">while</span> stack <span class="code-keyword">or</span> current:
+        <span class="code-keyword">while</span> current:
+            stack.append(current)
+            current = current.left
+
+        current = stack.pop()
+        k -= <span class="code-number">1</span>
+        <span class="code-keyword">if</span> k == <span class="code-number">0</span>:
+            <span class="code-keyword">return</span> current.val
+
+        current = current.right</code></pre>
+
+        <div class="when-to-use">
+            <h3>BST Operations</h3>
+            <ul>
+                <li><strong>Search</strong> - Go left if smaller, right if larger</li>
+                <li><strong>Insert</strong> - Search for the spot, then add</li>
+                <li><strong>Delete</strong> - Find successor/predecessor to replace</li>
+                <li><strong>Find min/max</strong> - Go all the way left/right</li>
+                <li><strong>Inorder successor</strong> - Next larger element</li>
+            </ul>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">Watch Out</div>
+            <p>A skewed BST (all nodes on one side) degrades to O(n) operations. That's why we have self-balancing trees like AVL and Red-Black trees in practice.</p>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>BST problems test your understanding of tree structure and recursion. Master them in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

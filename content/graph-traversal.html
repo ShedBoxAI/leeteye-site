@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master BFS and DFS for graph traversal. Find paths, connected components, and more.">
+    <title>Graph Traversal - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Algorithm</span>
+        <h1>Graph Traversal</h1>
+
+        <p class="intro">
+            BFS and DFS are the two fundamental ways to explore a graph. BFS goes wide (level by level), DFS goes deep (as far as possible before backtracking). Knowing when to use each is half the battle.
+        </p>
+
+        <h2>BFS: Breadth-First Search</h2>
+        <p>
+            Explore all neighbors first, then their neighbors. Uses a queue. Great for shortest paths in unweighted graphs.
+        </p>
+        <pre><code><span class="code-keyword">from</span> collections <span class="code-keyword">import</span> deque
+
+<span class="code-keyword">def</span> <span class="code-func">bfs</span>(graph, start):
+    visited = {start}
+    queue = deque([start])
+
+    <span class="code-keyword">while</span> queue:
+        node = queue.popleft()
+        <span class="code-func">print</span>(node)  <span class="code-comment"># Process node</span>
+
+        <span class="code-keyword">for</span> neighbor <span class="code-keyword">in</span> graph[node]:
+            <span class="code-keyword">if</span> neighbor <span class="code-keyword">not in</span> visited:
+                visited.add(neighbor)
+                queue.append(neighbor)</code></pre>
+
+        <h2>DFS: Depth-First Search</h2>
+        <p>
+            Go as deep as possible, then backtrack. Can use recursion or a stack.
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">dfs</span>(graph, node, visited):
+    <span class="code-keyword">if</span> node <span class="code-keyword">in</span> visited:
+        <span class="code-keyword">return</span>
+
+    visited.add(node)
+    <span class="code-func">print</span>(node)  <span class="code-comment"># Process node</span>
+
+    <span class="code-keyword">for</span> neighbor <span class="code-keyword">in</span> graph[node]:
+        dfs(graph, neighbor, visited)</code></pre>
+
+        <div class="key-insight">
+            <div class="key-insight-title">BFS vs DFS</div>
+            <p><strong>BFS</strong>: Shortest path, level-order traversal, closer nodes first.<br>
+            <strong>DFS</strong>: Path finding, cycle detection, topological sort, exhaustive search.</p>
+        </div>
+
+        <h2>Classic: Number of Islands</h2>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">numIslands</span>(grid):
+    <span class="code-keyword">if not</span> grid:
+        <span class="code-keyword">return</span> <span class="code-number">0</span>
+
+    count = <span class="code-number">0</span>
+    rows, cols = <span class="code-func">len</span>(grid), <span class="code-func">len</span>(grid[<span class="code-number">0</span>])
+
+    <span class="code-keyword">def</span> <span class="code-func">dfs</span>(r, c):
+        <span class="code-keyword">if</span> r < <span class="code-number">0</span> <span class="code-keyword">or</span> r >= rows <span class="code-keyword">or</span> c < <span class="code-number">0</span> <span class="code-keyword">or</span> c >= cols:
+            <span class="code-keyword">return</span>
+        <span class="code-keyword">if</span> grid[r][c] != <span class="code-string">'1'</span>:
+            <span class="code-keyword">return</span>
+
+        grid[r][c] = <span class="code-string">'0'</span>  <span class="code-comment"># Mark visited</span>
+        dfs(r+<span class="code-number">1</span>, c)
+        dfs(r-<span class="code-number">1</span>, c)
+        dfs(r, c+<span class="code-number">1</span>)
+        dfs(r, c-<span class="code-number">1</span>)
+
+    <span class="code-keyword">for</span> r <span class="code-keyword">in</span> <span class="code-func">range</span>(rows):
+        <span class="code-keyword">for</span> c <span class="code-keyword">in</span> <span class="code-func">range</span>(cols):
+            <span class="code-keyword">if</span> grid[r][c] == <span class="code-string">'1'</span>:
+                count += <span class="code-number">1</span>
+                dfs(r, c)
+
+    <span class="code-keyword">return</span> count</code></pre>
+
+        <div class="when-to-use">
+            <h3>Choosing BFS vs DFS</h3>
+            <ul>
+                <li><strong>Shortest path (unweighted)</strong> - BFS</li>
+                <li><strong>Finding any path</strong> - DFS (simpler)</li>
+                <li><strong>Level-order traversal</strong> - BFS</li>
+                <li><strong>Detecting cycles</strong> - DFS</li>
+                <li><strong>Connected components</strong> - Either works</li>
+            </ul>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Graph problems are everywhere. Build your intuition in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master the two pointers technique for efficient array traversal. Learn when and how to use this essential pattern.">
+    <title>Two Pointers - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Technique</span>
+        <h1>Two Pointers</h1>
+
+        <p class="intro">
+            Two pointers is one of those techniques that feels like magic the first time you see it. Instead of nested loops giving you O(n²), you walk two pointers through the array and solve it in O(n). Beautiful.
+        </p>
+
+        <h2>The Core Idea</h2>
+        <p>
+            Use two indices (pointers) that move through your data structure. How they move depends on the problem - sometimes they start at opposite ends and walk toward each other, sometimes they start together and one chases the other.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Two pointers work best on <strong>sorted arrays</strong> or when you're looking for pairs/subarrays with a specific property. The sorted order gives you information about how to move the pointers.</p>
+        </div>
+
+        <h2>The Two Main Patterns</h2>
+
+        <h3>1. Opposite Ends (Converging)</h3>
+        <p>Start one pointer at the beginning, one at the end, and move them toward each other:</p>
+        <pre><code>left = <span class="code-number">0</span>
+right = <span class="code-func">len</span>(arr) - <span class="code-number">1</span>
+
+<span class="code-keyword">while</span> left < right:
+    <span class="code-comment"># Check condition, move pointers</span>
+    <span class="code-keyword">if</span> some_condition:
+        left += <span class="code-number">1</span>
+    <span class="code-keyword">else</span>:
+        right -= <span class="code-number">1</span></code></pre>
+
+        <h3>2. Same Direction (Fast & Slow)</h3>
+        <p>Both pointers start at the beginning, but one moves faster:</p>
+        <pre><code>slow = <span class="code-number">0</span>
+<span class="code-keyword">for</span> fast <span class="code-keyword">in</span> <span class="code-func">range</span>(<span class="code-func">len</span>(arr)):
+    <span class="code-keyword">if</span> some_condition:
+        arr[slow] = arr[fast]
+        slow += <span class="code-number">1</span></code></pre>
+
+        <h2>Real Example: Valid Palindrome</h2>
+        <p>
+            Check if a string reads the same forwards and backwards. Classic two-pointer territory:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">isPalindrome</span>(s):
+    left, right = <span class="code-number">0</span>, <span class="code-func">len</span>(s) - <span class="code-number">1</span>
+
+    <span class="code-keyword">while</span> left < right:
+        <span class="code-comment"># Skip non-alphanumeric</span>
+        <span class="code-keyword">while</span> left < right <span class="code-keyword">and not</span> s[left].isalnum():
+            left += <span class="code-number">1</span>
+        <span class="code-keyword">while</span> left < right <span class="code-keyword">and not</span> s[right].isalnum():
+            right -= <span class="code-number">1</span>
+
+        <span class="code-keyword">if</span> s[left].lower() != s[right].lower():
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+
+        left += <span class="code-number">1</span>
+        right -= <span class="code-number">1</span>
+
+    <span class="code-keyword">return</span> <span class="code-keyword">True</span></code></pre>
+
+        <h2>Real Example: Two Sum II (Sorted Array)</h2>
+        <p>
+            When the array is sorted, two pointers beats a hash map in space efficiency:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">twoSum</span>(numbers, target):
+    left, right = <span class="code-number">0</span>, <span class="code-func">len</span>(numbers) - <span class="code-number">1</span>
+
+    <span class="code-keyword">while</span> left < right:
+        total = numbers[left] + numbers[right]
+        <span class="code-keyword">if</span> total == target:
+            <span class="code-keyword">return</span> [left + <span class="code-number">1</span>, right + <span class="code-number">1</span>]
+        <span class="code-keyword">elif</span> total < target:
+            left += <span class="code-number">1</span>   <span class="code-comment"># Need bigger sum</span>
+        <span class="code-keyword">else</span>:
+            right -= <span class="code-number">1</span>  <span class="code-comment"># Need smaller sum</span></code></pre>
+        <p>
+            The sorted order tells us: if sum is too small, move left up (bigger number). If too big, move right down (smaller number).
+        </p>
+
+        <div class="when-to-use">
+            <h3>When to Use Two Pointers</h3>
+            <ul>
+                <li><strong>Sorted arrays</strong> - Finding pairs with a target sum</li>
+                <li><strong>Palindrome checks</strong> - Compare from both ends</li>
+                <li><strong>Removing duplicates</strong> - In-place with slow/fast pointers</li>
+                <li><strong>Merging sorted arrays</strong> - Compare heads of both</li>
+                <li><strong>Container with most water</strong> - Classic converging pointers</li>
+            </ul>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">Why It Works</div>
+            <p>With sorted data, each pointer movement eliminates possibilities. Moving left up means "all pairs with current left are too small." That's a lot of eliminated options in one step!</p>
+        </div>
+
+        <h2>Common Mistakes</h2>
+        <ul>
+            <li><strong>Forgetting to sort</strong> - Two pointers on unsorted data often doesn't work</li>
+            <li><strong>Off-by-one errors</strong> - Use <code>&lt;</code> vs <code>&lt;=</code> carefully</li>
+            <li><strong>Infinite loops</strong> - Make sure pointers always move</li>
+        </ul>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Build muscle memory with two pointer problems in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

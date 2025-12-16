@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master sorting algorithms and know when to use each one.">
+    <title>Sorting Algorithms - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Algorithm</span>
+        <h1>Sorting Algorithms</h1>
+
+        <p class="intro">
+            Sorting is one of the most studied problems in computer science. In interviews, you'll rarely implement sort from scratch - but understanding how they work helps you choose the right approach and recognize when sorting simplifies a problem.
+        </p>
+
+        <h2>Quick Reference</h2>
+        <pre><code><span class="code-comment"># Python's built-in (Timsort) - use this!</span>
+nums.sort()           <span class="code-comment"># In-place</span>
+sorted(nums)          <span class="code-comment"># Returns new list</span>
+
+<span class="code-comment"># Custom sort key</span>
+nums.sort(key=<span class="code-keyword">lambda</span> x: x[<span class="code-number">1</span>])  <span class="code-comment"># Sort by second element</span>
+nums.sort(key=<span class="code-func">abs</span>)             <span class="code-comment"># Sort by absolute value</span>
+nums.sort(reverse=<span class="code-keyword">True</span>)        <span class="code-comment"># Descending</span></code></pre>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Many problems become trivial after sorting. Two Sum with sorted input? Two pointers. Finding duplicates? Adjacent after sorting. Meeting rooms? Sort by start time. Always ask: would sorting help?</p>
+        </div>
+
+        <h2>Merge Sort (O(n log n), stable)</h2>
+        <p>
+            Divide, sort halves, merge. Great for linked lists and external sorting.
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">mergeSort</span>(arr):
+    <span class="code-keyword">if</span> <span class="code-func">len</span>(arr) <= <span class="code-number">1</span>:
+        <span class="code-keyword">return</span> arr
+
+    mid = <span class="code-func">len</span>(arr) // <span class="code-number">2</span>
+    left = mergeSort(arr[:mid])
+    right = mergeSort(arr[mid:])
+
+    <span class="code-keyword">return</span> merge(left, right)
+
+<span class="code-keyword">def</span> <span class="code-func">merge</span>(left, right):
+    result = []
+    i = j = <span class="code-number">0</span>
+    <span class="code-keyword">while</span> i < <span class="code-func">len</span>(left) <span class="code-keyword">and</span> j < <span class="code-func">len</span>(right):
+        <span class="code-keyword">if</span> left[i] <= right[j]:
+            result.append(left[i])
+            i += <span class="code-number">1</span>
+        <span class="code-keyword">else</span>:
+            result.append(right[j])
+            j += <span class="code-number">1</span>
+    result.extend(left[i:])
+    result.extend(right[j:])
+    <span class="code-keyword">return</span> result</code></pre>
+
+        <h2>Quick Select (O(n) average)</h2>
+        <p>
+            Find kth smallest without fully sorting:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">quickSelect</span>(nums, k):
+    pivot = nums[<span class="code-func">len</span>(nums) // <span class="code-number">2</span>]
+    left = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> nums <span class="code-keyword">if</span> x < pivot]
+    mid = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> nums <span class="code-keyword">if</span> x == pivot]
+    right = [x <span class="code-keyword">for</span> x <span class="code-keyword">in</span> nums <span class="code-keyword">if</span> x > pivot]
+
+    <span class="code-keyword">if</span> k <= <span class="code-func">len</span>(left):
+        <span class="code-keyword">return</span> quickSelect(left, k)
+    <span class="code-keyword">elif</span> k <= <span class="code-func">len</span>(left) + <span class="code-func">len</span>(mid):
+        <span class="code-keyword">return</span> pivot
+    <span class="code-keyword">else</span>:
+        <span class="code-keyword">return</span> quickSelect(right, k - <span class="code-func">len</span>(left) - <span class="code-func">len</span>(mid))</code></pre>
+
+        <div class="when-to-use">
+            <h3>Choosing a Sort</h3>
+            <ul>
+                <li><strong>General purpose</strong> - Use built-in sort (Timsort)</li>
+                <li><strong>Linked list</strong> - Merge sort (no random access needed)</li>
+                <li><strong>Nearly sorted</strong> - Insertion sort (O(n) in best case)</li>
+                <li><strong>Find kth element</strong> - Quick select (O(n) average)</li>
+                <li><strong>Small range integers</strong> - Counting sort (O(n + k))</li>
+                <li><strong>Need stability</strong> - Merge sort or Timsort</li>
+            </ul>
+        </div>
+
+        <div class="callout tip">
+            <div class="callout-title">Pro Tip</div>
+            <p>Python's sort is stable - equal elements keep their original order. This matters when sorting by multiple keys: sort by secondary key first, then primary.</p>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Sorting is fundamental to countless algorithms. Master it in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

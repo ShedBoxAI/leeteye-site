@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LeetEye - Build pattern recognition intuition for coding interviews. Master algorithms through interactive learning, not memorization.">
+    <meta name="keywords" content="leetcode, coding interview, algorithms, data structures, pattern recognition, interview prep">
+    <meta name="author" content="LeetEye">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="LeetEye - See Patterns Instantly">
+    <meta property="og:description" content="Build pattern recognition intuition for coding interviews. Master algorithms through interactive learning.">
+    <meta property="og:image" content="assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LeetEye - See Patterns Instantly">
+    <meta name="twitter:description" content="Build pattern recognition intuition for coding interviews.">
+
+    <title>LeetEye - See Patterns Instantly</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/app_icon.png">
+    <link rel="apple-touch-icon" href="assets/app_icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="assets/logo.png" alt="LeetEye" class="nav-logo-img">
+                <span class="nav-logo-text">Leet<span class="logo-highlight">Eye</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#support" class="nav-link">Support Us</a>
+            </div>
+            <a href="#download" class="nav-cta">Download</a>
+        </div>
+    </nav>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <span>126 problems across 18 patterns. Master them all.</span>
+        <a href="#patterns">See all patterns <span class="arrow">→</span></a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Floating decorative cards -->
+        <div class="floating-cards">
+            <!-- Left side cards -->
+            <div class="float-card float-card-1">
+                <div class="float-card-header">
+                    <span class="float-card-tag">Two Pointers</span>
+                    <span class="float-card-progress">✓</span>
+                </div>
+                <div class="float-card-title">Valid Palindrome</div>
+            </div>
+
+            <div class="float-card float-card-2">
+                <div class="float-card-question">What's the time complexity?</div>
+                <div class="float-card-options">
+                    <span class="float-option">O(n²)</span>
+                    <span class="float-option correct">O(n)</span>
+                </div>
+            </div>
+
+            <!-- Right side cards -->
+            <div class="float-card float-card-3">
+                <div class="float-card-pattern">Hash Map</div>
+                <div class="float-card-insight">O(1) lookup for complement</div>
+            </div>
+
+            <div class="float-card float-card-4">
+                <div class="float-card-stats">
+                    <div class="stat-item">
+                        <span class="stat-num">12</span>
+                        <span class="stat-txt">Completed</span>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="float-card float-card-5">
+                <span class="float-badge">Sliding Window</span>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1 class="hero-title">
+                Build pattern recognition for coding interviews through interactive MCQs, not passive video watching
+            </h1>
+            <p class="hero-subtitle">
+                Stop memorizing LeetCode solutions. LeetEye breaks down each problem into focused questions that teach you <em>why</em> patterns work, so you can recognize and apply them to new problems instantly. 5 minutes per problem. No account required.
+            </p>
+            <div class="hero-cta">
+                <a href="https://apps.apple.com/app/leeteye" class="btn btn-primary">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download for iOS
+                </a>
+            </div>
+            <a href="#how-it-works" class="hero-link">See how it works →</a>
+        </div>
+    </section>
+
+    <!-- Feature Callout Card -->
+    <section class="feature-callout">
+        <div class="container">
+            <div class="callout-card">
+                <div class="callout-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <div class="callout-content">
+                    <h3>Learn anywhere, anytime</h3>
+                    <p>Each problem takes just 5 minutes. Perfect for commutes, lunch breaks, or quick study sessions. Build intuition in small, focused bursts instead of hour-long grinding sessions.</p>
+                </div>
+                <a href="#features" class="btn btn-secondary">Explore features</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos/Social Proof -->
+    <section class="social-proof">
+        <p class="social-proof-text">Built for engineers preparing for interviews at</p>
+        <div class="logos-wrapper">
+            <div class="logos-track">
+                <!-- First set -->
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google"><span>Google</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Meta"><span>Meta</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="Amazon"><span>Amazon</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Apple"><span>Apple</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/netflix.svg" alt="Netflix"><span>Netflix</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn"><span>LinkedIn</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/uber.svg" alt="Uber"></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airbnb.svg" alt="Airbnb"><span>Airbnb</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/stripe.svg" alt="Stripe"><span>Stripe</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nvidia.svg" alt="NVIDIA"><span>NVIDIA</span></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google"><span>Google</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Meta"><span>Meta</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="Amazon"><span>Amazon</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Apple"><span>Apple</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/netflix.svg" alt="Netflix"><span>Netflix</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn"><span>LinkedIn</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/uber.svg" alt="Uber"></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/airbnb.svg" alt="Airbnb"><span>Airbnb</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/stripe.svg" alt="Stripe"><span>Stripe</span></div>
+                <div class="company-logo"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/nvidia.svg" alt="NVIDIA"><span>NVIDIA</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <div class="problem-content">
+                <h2 class="section-title">The problem with grinding LeetCode</h2>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3>Hours of passive watching</h3>
+                        <p>YouTube tutorials feel productive but don't build real problem-solving skills.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <h3>Memorizing, not understanding</h3>
+                        <p>You remember solutions but can't recognize when to apply them to new problems.</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3>Interview anxiety</h3>
+                        <p>You've solved this type before, but under pressure you can't recall the pattern.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <div class="solution-badge">The LeetEye Approach</div>
+            <h2 class="section-title">Train your pattern recognition,<br>not your memory.</h2>
+            <p class="section-subtitle">
+                LeetEye breaks down each problem into focused MCQs that teach you
+                <em>why</em> solutions work, not just what they are.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <!-- Code Preview - Full Width -->
+            <div class="code-feature" id="code-visual">
+                <div class="code-feature-content">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Python solutions that click</h3>
+                    <p>After mastering the pattern, see clean Python implementations that match exactly what you learned. No confusing alternative approaches.</p>
+                </div>
+                <div class="code-feature-visual">
+                    <!-- Code Block 1: Two Sum (Hash Map) -->
+                    <div class="code-block active" data-problem="Two Sum">
+                        <div class="code-line"><span class="code-keyword">def</span> <span class="code-func">twoSum</span>(nums, target):</div>
+                        <div class="code-line">    seen = {}  <span class="code-comment"># O(1) lookup</span></div>
+                        <div class="code-line">    <span class="code-keyword">for</span> i, num <span class="code-keyword">in</span> <span class="code-func">enumerate</span>(nums):</div>
+                        <div class="code-line">        comp = target - num</div>
+                        <div class="code-line">        <span class="code-keyword">if</span> comp <span class="code-keyword">in</span> seen:</div>
+                        <div class="code-line">            <span class="code-keyword">return</span> [seen[comp], i]</div>
+                        <div class="code-line">        seen[num] = i</div>
+                    </div>
+                    <!-- Code Block 2: Valid Palindrome (Two Pointers) -->
+                    <div class="code-block" data-problem="Valid Palindrome">
+                        <div class="code-line"><span class="code-keyword">def</span> <span class="code-func">isPalindrome</span>(s):</div>
+                        <div class="code-line">    l, r = <span class="code-num">0</span>, <span class="code-func">len</span>(s) - <span class="code-num">1</span></div>
+                        <div class="code-line">    <span class="code-keyword">while</span> l < r:</div>
+                        <div class="code-line">        <span class="code-keyword">while</span> l < r <span class="code-keyword">and not</span> s[l].isalnum():</div>
+                        <div class="code-line">            l += <span class="code-num">1</span></div>
+                        <div class="code-line">        <span class="code-keyword">if</span> s[l].lower() != s[r].lower():</div>
+                        <div class="code-line">            <span class="code-keyword">return False</span></div>
+                    </div>
+                    <!-- Code Block 3: Max Subarray (Kadane's) -->
+                    <div class="code-block" data-problem="Maximum Subarray">
+                        <div class="code-line"><span class="code-keyword">def</span> <span class="code-func">maxSubArray</span>(nums):</div>
+                        <div class="code-line">    max_sum = cur_sum = nums[<span class="code-num">0</span>]</div>
+                        <div class="code-line">    <span class="code-keyword">for</span> num <span class="code-keyword">in</span> nums[<span class="code-num">1</span>:]:</div>
+                        <div class="code-line">        cur_sum = <span class="code-func">max</span>(num, cur_sum + num)</div>
+                        <div class="code-line">        max_sum = <span class="code-func">max</span>(max_sum, cur_sum)</div>
+                        <div class="code-line">    <span class="code-keyword">return</span> max_sum</div>
+                        <div class="code-line">    <span class="code-comment"># Kadane's Algorithm O(n)</span></div>
+                    </div>
+                    <!-- Code Block 4: Binary Search -->
+                    <div class="code-block" data-problem="Binary Search">
+                        <div class="code-line"><span class="code-keyword">def</span> <span class="code-func">search</span>(nums, target):</div>
+                        <div class="code-line">    l, r = <span class="code-num">0</span>, <span class="code-func">len</span>(nums) - <span class="code-num">1</span></div>
+                        <div class="code-line">    <span class="code-keyword">while</span> l <= r:</div>
+                        <div class="code-line">        mid = (l + r) // <span class="code-num">2</span></div>
+                        <div class="code-line">        <span class="code-keyword">if</span> nums[mid] == target: <span class="code-keyword">return</span> mid</div>
+                        <div class="code-line">        <span class="code-keyword">elif</span> nums[mid] < target: l = mid + <span class="code-num">1</span></div>
+                        <div class="code-line">        <span class="code-keyword">else</span>: r = mid - <span class="code-num">1</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 Feature Cards - Even Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3>Understand the "why"</h3>
+                    <p>Each MCQ targets a specific insight: why hash maps beat nested loops, when to use two pointers, what makes a problem greedy.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Interactive MCQs</h3>
+                    <p>Every problem broken into bite-sized questions that test your understanding of the pattern, not just the answer.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3>5-minute sessions</h3>
+                    <p>Perfect for commutes, lunch breaks, or quick practice. Build intuition in small, focused bursts.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3>Concept deep-dives</h3>
+                    <p>Stuck on a pattern? Tap to review comprehensive guides on hash maps, two pointers, and more.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3>Track your progress</h3>
+                    <p>See which patterns you've mastered and which need more practice. Spaced repetition keeps you sharp.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon-wrapper">
+                        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </div>
+                    <h3>Random challenge mode</h3>
+                    <p>Test yourself with random problems across all patterns. Perfect for simulating real interview conditions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How LeetEye works</h2>
+            <p class="section-subtitle">Three steps to building lasting pattern recognition</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Choose a pattern</h3>
+                        <p>Start with foundational patterns like Hash Maps or Two Pointers, then progress to advanced topics like Dynamic Programming and Graphs.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Answer focused MCQs</h3>
+                        <p>Each problem is broken into questions that guide your thinking: "What's the key insight?" "Which data structure?" "What's the time complexity?"</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>See the pattern click</h3>
+                        <p>After answering, see the clean Python solution and understand exactly why it works. Review concept guides to deepen understanding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Patterns Section -->
+    <section id="patterns" class="patterns">
+        <div class="container">
+            <h2 class="section-title">Master 18 essential patterns</h2>
+            <div class="patterns-grid">
+                <div class="pattern-tag">Hash Maps</div>
+                <div class="pattern-tag">Two Pointers</div>
+                <div class="pattern-tag">Sliding Window</div>
+                <div class="pattern-tag">Binary Search</div>
+                <div class="pattern-tag">Linked Lists</div>
+                <div class="pattern-tag">Stacks</div>
+                <div class="pattern-tag">Trees</div>
+                <div class="pattern-tag">Tries</div>
+                <div class="pattern-tag">Backtracking</div>
+                <div class="pattern-tag">Heaps</div>
+                <div class="pattern-tag">Graphs</div>
+                <div class="pattern-tag">Dynamic Programming</div>
+                <div class="pattern-tag">Greedy</div>
+                <div class="pattern-tag">Intervals</div>
+                <div class="pattern-tag">Bit Manipulation</div>
+                <div class="pattern-tag">Union Find</div>
+                <div class="pattern-tag">Topological Sort</div>
+                <div class="pattern-tag">Dijkstra's</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="support">
+        <div class="container">
+            <h2 class="section-title">Support Us</h2>
+            <p class="section-subtitle">LeetEye is completely free, built by the creators of <a href="https://shedboxai.com" target="_blank" class="support-link"><img src="logo_without_text_new_shedboxai.png" alt="ShedboxAI" class="shedbox-logo">ShedboxAI</a></p>
+            <div class="support-content">
+                <p class="support-text">If LeetEye helps you land your dream job, consider buying us a coffee. Your support helps us keep building free tools for developers.</p>
+                <a href="https://buymeacoffee.com/amnox" target="_blank" class="btn btn-support">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M2 21V19H20V21H2ZM20 8V5H18V8H20ZM20 3C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V8C22 8.53043 21.7893 9.03914 21.4142 9.41421C21.0391 9.78929 20.5304 10 20 10H18V13C18 14.0609 17.5786 15.0783 16.8284 15.8284C16.0783 16.5786 15.0609 17 14 17H8C6.93913 17 5.92172 16.5786 5.17157 15.8284C4.42143 15.0783 4 14.0609 4 13V3H20ZM16 5H6V13C6 13.5304 6.21071 14.0391 6.58579 14.4142C6.96086 14.7893 7.46957 15 8 15H14C14.5304 15 15.0391 14.7893 15.4142 14.4142C15.7893 14.0391 16 13.5304 16 13V5Z"/>
+                    </svg>
+                    Buy us a coffee
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="download" class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-glow"></div>
+                <img src="assets/logo.png" alt="LeetEye" class="cta-logo">
+                <h2 class="cta-title">Ready to see patterns instantly?</h2>
+                <p class="cta-subtitle">Download LeetEye and start building real interview intuition today.</p>
+                <a href="https://apps.apple.com/app/leeteye" class="btn btn-primary btn-large">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download for iOS
+                </a>
+                <p class="cta-note">Free to start • No account required</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/logo.png" alt="LeetEye" class="footer-logo">
+                    <span class="footer-logo-text">Leet<span class="footer-logo-highlight">Eye</span></span>
+                </div>
+                <p class="footer-tagline">Made with love for developers, by developers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

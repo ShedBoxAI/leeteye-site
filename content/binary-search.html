@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master binary search and its variations. Learn to cut your search space in half with every step.">
+    <title>Binary Search - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Algorithm</span>
+        <h1>Binary Search</h1>
+
+        <p class="intro">
+            Binary search is the art of cutting your problem in half with each step. Instead of checking every element (O(n)), you eliminate half the remaining options each time (O(log n)). A million elements? Just 20 comparisons.
+        </p>
+
+        <h2>The Core Idea</h2>
+        <p>
+            If your data is sorted (or has some monotonic property), you can make smart decisions about where to look next. Check the middle - if it's too big, search left; if too small, search right.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Binary search isn't just for "find this value." It's for any problem where you can answer "is this answer too big or too small?" That includes searching on the answer itself.</p>
+        </div>
+
+        <h2>The Classic Template</h2>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">binarySearch</span>(arr, target):
+    left, right = <span class="code-number">0</span>, <span class="code-func">len</span>(arr) - <span class="code-number">1</span>
+
+    <span class="code-keyword">while</span> left <= right:
+        mid = (left + right) // <span class="code-number">2</span>
+
+        <span class="code-keyword">if</span> arr[mid] == target:
+            <span class="code-keyword">return</span> mid
+        <span class="code-keyword">elif</span> arr[mid] < target:
+            left = mid + <span class="code-number">1</span>
+        <span class="code-keyword">else</span>:
+            right = mid - <span class="code-number">1</span>
+
+    <span class="code-keyword">return</span> -<span class="code-number">1</span>  <span class="code-comment"># Not found</span></code></pre>
+
+        <h2>Finding Boundaries</h2>
+        <p>
+            Often you need the first or last occurrence, not just any match. Here's how to find the leftmost (first) position:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">leftmostPosition</span>(arr, target):
+    left, right = <span class="code-number">0</span>, <span class="code-func">len</span>(arr)
+
+    <span class="code-keyword">while</span> left < right:
+        mid = (left + right) // <span class="code-number">2</span>
+        <span class="code-keyword">if</span> arr[mid] < target:
+            left = mid + <span class="code-number">1</span>
+        <span class="code-keyword">else</span>:
+            right = mid  <span class="code-comment"># Don't exclude mid yet</span>
+
+    <span class="code-keyword">return</span> left</code></pre>
+
+        <h2>Binary Search on Answer</h2>
+        <p>
+            This is where it gets interesting. Sometimes you binary search not on an array, but on the possible answers. "What's the minimum capacity to ship packages in D days?" becomes "can we ship with capacity X in D days?"
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">minCapacity</span>(weights, days):
+    <span class="code-keyword">def</span> <span class="code-func">canShip</span>(capacity):
+        <span class="code-comment"># Check if this capacity works</span>
+        day_count = <span class="code-number">1</span>
+        current = <span class="code-number">0</span>
+        <span class="code-keyword">for</span> w <span class="code-keyword">in</span> weights:
+            <span class="code-keyword">if</span> current + w > capacity:
+                day_count += <span class="code-number">1</span>
+                current = <span class="code-number">0</span>
+            current += w
+        <span class="code-keyword">return</span> day_count <= days
+
+    <span class="code-comment"># Binary search on capacity</span>
+    left = <span class="code-func">max</span>(weights)
+    right = <span class="code-func">sum</span>(weights)
+
+    <span class="code-keyword">while</span> left < right:
+        mid = (left + right) // <span class="code-number">2</span>
+        <span class="code-keyword">if</span> canShip(mid):
+            right = mid
+        <span class="code-keyword">else</span>:
+            left = mid + <span class="code-number">1</span>
+
+    <span class="code-keyword">return</span> left</code></pre>
+
+        <div class="when-to-use">
+            <h3>When to Use Binary Search</h3>
+            <ul>
+                <li><strong>Sorted arrays</strong> - Find element, find insertion point</li>
+                <li><strong>Finding boundaries</strong> - First/last occurrence, ceiling/floor</li>
+                <li><strong>Minimizing/maximizing</strong> - Minimum capacity, maximum speed</li>
+                <li><strong>Rotated sorted arrays</strong> - Find pivot, search in rotated</li>
+                <li><strong>Search space is monotonic</strong> - If X works, all X' > X work</li>
+            </ul>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">The Tricky Bits</div>
+            <p>Binary search bugs are notorious. Use <code>left <= right</code> vs <code>left < right</code> carefully. Update with <code>mid + 1</code> or <code>mid - 1</code> to avoid infinite loops. When in doubt, trace through a small example.</p>
+        </div>
+
+        <h2>Common Pitfalls</h2>
+        <ul>
+            <li><strong>Integer overflow</strong> - Use <code>left + (right - left) // 2</code> in some languages</li>
+            <li><strong>Off-by-one errors</strong> - Should right be <code>len-1</code> or <code>len</code>?</li>
+            <li><strong>Infinite loops</strong> - Make sure the search space shrinks each iteration</li>
+        </ul>
+
+        <div class="callout tip">
+            <div class="callout-title">Pro Tip</div>
+            <p>Python's <code>bisect</code> module has <code>bisect_left</code> and <code>bisect_right</code> for finding insertion points. Great for quick implementations.</p>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Binary search has many variations. Practice them all in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

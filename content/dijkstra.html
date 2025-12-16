@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master Dijkstra's algorithm for finding shortest paths in weighted graphs.">
+    <title>Dijkstra's Algorithm - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Algorithm</span>
+        <h1>Dijkstra's Algorithm</h1>
+
+        <p class="intro">
+            Dijkstra's algorithm finds the shortest path from one node to all others in a weighted graph. It's BFS's smarter cousin - instead of exploring level by level, it always explores the closest unvisited node first.
+        </p>
+
+        <h2>The Core Idea</h2>
+        <p>
+            Maintain distances to all nodes (initially infinite except source). Repeatedly pick the unvisited node with the smallest distance, mark it visited, and update its neighbors' distances if you found a shorter path through this node.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Dijkstra is <strong>greedy</strong> and it works because edge weights are non-negative. Once you've found the shortest path to a node, you'll never find a shorter one. Negative edges break this guarantee.</p>
+        </div>
+
+        <h2>Classic Implementation</h2>
+        <pre><code><span class="code-keyword">import</span> heapq
+
+<span class="code-keyword">def</span> <span class="code-func">dijkstra</span>(graph, start):
+    distances = {node: float(<span class="code-string">'inf'</span>) <span class="code-keyword">for</span> node <span class="code-keyword">in</span> graph}
+    distances[start] = <span class="code-number">0</span>
+    heap = [(<span class="code-number">0</span>, start)]  <span class="code-comment"># (distance, node)</span>
+
+    <span class="code-keyword">while</span> heap:
+        dist, node = heapq.heappop(heap)
+
+        <span class="code-comment"># Skip if we've found a better path</span>
+        <span class="code-keyword">if</span> dist > distances[node]:
+            <span class="code-keyword">continue</span>
+
+        <span class="code-keyword">for</span> neighbor, weight <span class="code-keyword">in</span> graph[node]:
+            new_dist = dist + weight
+            <span class="code-keyword">if</span> new_dist < distances[neighbor]:
+                distances[neighbor] = new_dist
+                heapq.heappush(heap, (new_dist, neighbor))
+
+    <span class="code-keyword">return</span> distances</code></pre>
+
+        <h2>Classic: Network Delay Time</h2>
+        <p>
+            How long until all nodes receive a signal?
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">networkDelayTime</span>(times, n, k):
+    <span class="code-comment"># Build adjacency list</span>
+    graph = {i: [] <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(<span class="code-number">1</span>, n + <span class="code-number">1</span>)}
+    <span class="code-keyword">for</span> u, v, w <span class="code-keyword">in</span> times:
+        graph[u].append((v, w))
+
+    distances = dijkstra(graph, k)
+    max_dist = <span class="code-func">max</span>(distances.values())
+
+    <span class="code-keyword">return</span> max_dist <span class="code-keyword">if</span> max_dist < float(<span class="code-string">'inf'</span>) <span class="code-keyword">else</span> -<span class="code-number">1</span></code></pre>
+
+        <div class="when-to-use">
+            <h3>When to Use Dijkstra</h3>
+            <ul>
+                <li><strong>Shortest path</strong> - In weighted graphs with non-negative edges</li>
+                <li><strong>Network routing</strong> - Find optimal paths</li>
+                <li><strong>GPS navigation</strong> - Real-world shortest paths</li>
+                <li><strong>Game AI pathfinding</strong> - With varying terrain costs</li>
+            </ul>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">Negative Edges?</div>
+            <p>Dijkstra doesn't work with negative edge weights. Use Bellman-Ford instead, which is slower but handles negatives. For negative cycles, there's no shortest path at all.</p>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Dijkstra is essential for graph problems. Build your intuition in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

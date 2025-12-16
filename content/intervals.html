@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master interval problems: merging, overlapping, and scheduling. Sort and sweep.">
+    <title>Interval Problems - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Pattern</span>
+        <h1>Interval Problems</h1>
+
+        <p class="intro">
+            Interval problems are everywhere: calendar apps, scheduling, resource allocation. The secret sauce? Sort by start (or end) time, then sweep through.
+        </p>
+
+        <h2>The Core Pattern</h2>
+        <p>
+            Almost every interval problem starts with sorting. Then you walk through and make decisions based on overlaps.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Two intervals [a, b] and [c, d] overlap if <code>a < d</code> and <code>c < b</code>. Or simpler: they DON'T overlap if one ends before the other starts.</p>
+        </div>
+
+        <h2>Classic: Merge Intervals</h2>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">merge</span>(intervals):
+    intervals.sort(key=<span class="code-keyword">lambda</span> x: x[<span class="code-number">0</span>])
+    merged = []
+
+    <span class="code-keyword">for</span> interval <span class="code-keyword">in</span> intervals:
+        <span class="code-keyword">if</span> merged <span class="code-keyword">and</span> merged[-<span class="code-number">1</span>][<span class="code-number">1</span>] >= interval[<span class="code-number">0</span>]:
+            <span class="code-comment"># Overlaps with previous - extend it</span>
+            merged[-<span class="code-number">1</span>][<span class="code-number">1</span>] = <span class="code-func">max</span>(merged[-<span class="code-number">1</span>][<span class="code-number">1</span>], interval[<span class="code-number">1</span>])
+        <span class="code-keyword">else</span>:
+            merged.append(interval)
+
+    <span class="code-keyword">return</span> merged</code></pre>
+
+        <h2>Classic: Meeting Rooms II</h2>
+        <p>Minimum number of meeting rooms needed:</p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">minMeetingRooms</span>(intervals):
+    starts = sorted([i[<span class="code-number">0</span>] <span class="code-keyword">for</span> i <span class="code-keyword">in</span> intervals])
+    ends = sorted([i[<span class="code-number">1</span>] <span class="code-keyword">for</span> i <span class="code-keyword">in</span> intervals])
+
+    rooms = <span class="code-number">0</span>
+    end_ptr = <span class="code-number">0</span>
+
+    <span class="code-keyword">for</span> start <span class="code-keyword">in</span> starts:
+        <span class="code-keyword">if</span> start < ends[end_ptr]:
+            rooms += <span class="code-number">1</span>  <span class="code-comment"># Need new room</span>
+        <span class="code-keyword">else</span>:
+            end_ptr += <span class="code-number">1</span>  <span class="code-comment"># Reuse a room</span>
+
+    <span class="code-keyword">return</span> rooms</code></pre>
+
+        <div class="when-to-use">
+            <h3>Common Interval Patterns</h3>
+            <ul>
+                <li><strong>Merge overlapping</strong> - Sort by start, extend end</li>
+                <li><strong>Insert interval</strong> - Find where to insert, then merge</li>
+                <li><strong>Meeting rooms</strong> - Count max concurrent events</li>
+                <li><strong>Non-overlapping count</strong> - Greedy by end time</li>
+            </ul>
+        </div>
+
+        <div class="callout tip">
+            <div class="callout-title">Pro Tip</div>
+            <p>Drawing intervals on a timeline makes the problem much clearer. Seriously, grab a pen.</p>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Interval problems follow predictable patterns. Learn them in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

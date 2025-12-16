@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master the sliding window technique for subarray and substring problems. Learn fixed and variable window patterns.">
+    <title>Sliding Window - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Technique</span>
+        <h1>Sliding Window</h1>
+
+        <p class="intro">
+            Imagine a window that slides across your array, keeping track of what's inside. Instead of recalculating everything from scratch each time, you just update what enters and leaves the window. That's O(n) instead of O(n²).
+        </p>
+
+        <h2>The Core Idea</h2>
+        <p>
+            You maintain a "window" - a contiguous subarray or substring. As you slide it across your data, you efficiently update your answer by only considering what changed: the element leaving the window and the element entering it.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>If the problem asks about <strong>contiguous subarrays/substrings</strong> with some property (max sum, unique characters, target sum), think sliding window.</p>
+        </div>
+
+        <h2>Two Types of Windows</h2>
+
+        <h3>1. Fixed-Size Window</h3>
+        <p>Window size is given. Find max sum of k consecutive elements:</p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">maxSumSubarray</span>(arr, k):
+    <span class="code-comment"># Initialize first window</span>
+    window_sum = <span class="code-func">sum</span>(arr[:k])
+    max_sum = window_sum
+
+    <span class="code-comment"># Slide the window</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(k, <span class="code-func">len</span>(arr)):
+        window_sum += arr[i] - arr[i - k]  <span class="code-comment"># Add new, remove old</span>
+        max_sum = <span class="code-func">max</span>(max_sum, window_sum)
+
+    <span class="code-keyword">return</span> max_sum</code></pre>
+
+        <h3>2. Variable-Size Window</h3>
+        <p>Window grows and shrinks based on conditions:</p>
+        <pre><code>left = <span class="code-number">0</span>
+<span class="code-keyword">for</span> right <span class="code-keyword">in</span> <span class="code-func">range</span>(<span class="code-func">len</span>(arr)):
+    <span class="code-comment"># Expand window - add arr[right]</span>
+
+    <span class="code-keyword">while</span> window_is_invalid:
+        <span class="code-comment"># Shrink window - remove arr[left]</span>
+        left += <span class="code-number">1</span>
+
+    <span class="code-comment"># Update answer with current valid window</span></code></pre>
+
+        <h2>Real Example: Longest Substring Without Repeating</h2>
+        <p>
+            Find the length of the longest substring with all unique characters. This is the classic variable window problem:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">lengthOfLongestSubstring</span>(s):
+    seen = <span class="code-func">set</span>()
+    left = <span class="code-number">0</span>
+    max_len = <span class="code-number">0</span>
+
+    <span class="code-keyword">for</span> right <span class="code-keyword">in</span> <span class="code-func">range</span>(<span class="code-func">len</span>(s)):
+        <span class="code-comment"># Shrink until no duplicate</span>
+        <span class="code-keyword">while</span> s[right] <span class="code-keyword">in</span> seen:
+            seen.remove(s[left])
+            left += <span class="code-number">1</span>
+
+        seen.add(s[right])
+        max_len = <span class="code-func">max</span>(max_len, right - left + <span class="code-number">1</span>)
+
+    <span class="code-keyword">return</span> max_len</code></pre>
+
+        <h2>Real Example: Minimum Window Substring</h2>
+        <p>
+            Find the smallest window containing all characters of a target string. This is a harder variant:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">minWindow</span>(s, t):
+    need = Counter(t)
+    missing = <span class="code-func">len</span>(t)
+    left = start = end = <span class="code-number">0</span>
+
+    <span class="code-keyword">for</span> right, char <span class="code-keyword">in</span> <span class="code-func">enumerate</span>(s, <span class="code-number">1</span>):
+        <span class="code-keyword">if</span> need[char] > <span class="code-number">0</span>:
+            missing -= <span class="code-number">1</span>
+        need[char] -= <span class="code-number">1</span>
+
+        <span class="code-keyword">if</span> missing == <span class="code-number">0</span>:  <span class="code-comment"># Valid window</span>
+            <span class="code-comment"># Shrink from left</span>
+            <span class="code-keyword">while</span> need[s[left]] < <span class="code-number">0</span>:
+                need[s[left]] += <span class="code-number">1</span>
+                left += <span class="code-number">1</span>
+            <span class="code-comment"># Update result</span>
+            <span class="code-keyword">if</span> end == <span class="code-number">0</span> <span class="code-keyword">or</span> right - left < end - start:
+                start, end = left, right</code></pre>
+
+        <div class="when-to-use">
+            <h3>When to Use Sliding Window</h3>
+            <ul>
+                <li><strong>Contiguous subarrays</strong> - Max/min sum of size k</li>
+                <li><strong>Substrings with constraints</strong> - Unique chars, at most k distinct</li>
+                <li><strong>Finding minimum/maximum window</strong> - Smallest window containing X</li>
+                <li><strong>Counting subarrays</strong> - Subarrays with sum equal to k</li>
+            </ul>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">The Mental Model</div>
+            <p>Think of your right pointer as "exploring" and your left pointer as "optimizing." Right expands to find valid windows, left shrinks to find the best one.</p>
+        </div>
+
+        <h2>Common Patterns</h2>
+        <ul>
+            <li><strong>Use a hash map</strong> to track character frequencies in the window</li>
+            <li><strong>Track a "valid" condition</strong> - when is the window acceptable?</li>
+            <li><strong>Update answer</strong> inside or after the shrinking loop, depending on the problem</li>
+        </ul>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Sliding window clicks after a few practice problems. Try them in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

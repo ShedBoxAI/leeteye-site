@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how hash sets provide O(1) membership testing. Perfect for checking duplicates and unique elements.">
+    <title>Hash Sets - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Data Structure</span>
+        <h1>Hash Sets</h1>
+
+        <p class="intro">
+            A hash set is the simplest answer to "have I seen this before?" It stores unique elements and answers membership questions in O(1) time. No duplicates, no values, just pure existence checking.
+        </p>
+
+        <h2>Why Sets?</h2>
+        <p>
+            Sometimes you don't need to store values - you just need to know if something exists. That's where sets shine. They're like a guest list at a party: either you're on it, or you're not.
+        </p>
+        <p>
+            Sets automatically handle duplicates for you. Add the same element twice? It only appears once. This makes them perfect for finding unique elements.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Use a set when you care about "is it there?" but not "what's its value?" If you need key-value pairs, reach for a hash map instead.</p>
+        </div>
+
+        <h2>Time Complexity</h2>
+        <table class="complexity-table">
+            <tr>
+                <th>Operation</th>
+                <th>Average</th>
+            </tr>
+            <tr>
+                <td>Check membership (<code>in</code>)</td>
+                <td><code>O(1)</code></td>
+            </tr>
+            <tr>
+                <td>Add element</td>
+                <td><code>O(1)</code></td>
+            </tr>
+            <tr>
+                <td>Remove element</td>
+                <td><code>O(1)</code></td>
+            </tr>
+        </table>
+
+        <h2>The Classic Pattern</h2>
+        <pre><code><span class="code-comment"># Check for duplicates</span>
+seen = <span class="code-func">set</span>()
+<span class="code-keyword">for</span> item <span class="code-keyword">in</span> items:
+    <span class="code-keyword">if</span> item <span class="code-keyword">in</span> seen:
+        <span class="code-keyword">return</span> <span class="code-keyword">True</span>  <span class="code-comment"># Duplicate found!</span>
+    seen.add(item)
+<span class="code-keyword">return</span> <span class="code-keyword">False</span></code></pre>
+
+        <h2>Real Example: Contains Duplicate</h2>
+        <p>
+            Given an array, return true if any value appears at least twice. This is the most straightforward set problem:
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">containsDuplicate</span>(nums):
+    seen = <span class="code-func">set</span>()
+    <span class="code-keyword">for</span> num <span class="code-keyword">in</span> nums:
+        <span class="code-keyword">if</span> num <span class="code-keyword">in</span> seen:
+            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+        seen.add(num)
+    <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+
+<span class="code-comment"># Or even simpler:</span>
+<span class="code-keyword">def</span> <span class="code-func">containsDuplicate</span>(nums):
+    <span class="code-keyword">return</span> <span class="code-func">len</span>(nums) != <span class="code-func">len</span>(<span class="code-func">set</span>(nums))</code></pre>
+
+        <div class="when-to-use">
+            <h3>When to Use a Hash Set</h3>
+            <ul>
+                <li><strong>Duplicate detection</strong> - Have I seen this element before?</li>
+                <li><strong>Finding unique elements</strong> - Remove duplicates from a list</li>
+                <li><strong>Set operations</strong> - Union, intersection, difference</li>
+                <li><strong>Fast lookup</strong> - When you only need yes/no answers</li>
+                <li><strong>Filtering</strong> - Check if element belongs to a valid set</li>
+            </ul>
+        </div>
+
+        <h2>Powerful Set Operations</h2>
+        <p>Python sets support mathematical operations that can simplify your code:</p>
+        <pre><code>a = {<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>}
+b = {<span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>}
+
+a | b    <span class="code-comment"># Union: {1, 2, 3, 4}</span>
+a & b    <span class="code-comment"># Intersection: {2, 3}</span>
+a - b    <span class="code-comment"># Difference: {1}</span>
+a ^ b    <span class="code-comment"># Symmetric diff: {1, 4}</span></code></pre>
+
+        <div class="callout tip">
+            <div class="callout-title">Pro Tip</div>
+            <p>Converting a list to a set and back is the fastest way to remove duplicates: <code>list(set(items))</code>. Just note that order isn't preserved.</p>
+        </div>
+
+        <h2>Set vs List for Lookup</h2>
+        <p>
+            Checking <code>x in my_list</code> is O(n) - it scans every element. But <code>x in my_set</code> is O(1). When you're doing many lookups, this difference is huge.
+        </p>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Master these patterns with guided practice in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>

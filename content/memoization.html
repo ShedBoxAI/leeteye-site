@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master memoization to optimize recursive solutions by caching results.">
+    <title>Memoization - LeetEye</title>
+    <link rel="icon" type="image/png" href="../assets/app_icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="content.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="../" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <main class="content">
+        <span class="category-badge">Technique</span>
+        <h1>Memoization</h1>
+
+        <p class="intro">
+            Memoization is caching for recursion. If you've already computed the answer for certain inputs, just look it up instead of computing it again. It turns exponential recursion into polynomial time.
+        </p>
+
+        <h2>The Core Idea</h2>
+        <p>
+            Before computing something, check if you've done it before. After computing, save the result. That's it. The magic is that overlapping subproblems get solved once instead of many times.
+        </p>
+
+        <div class="key-insight">
+            <div class="key-insight-title">The Key Insight</div>
+            <p>Memoization is top-down dynamic programming. You write natural recursion, then add caching. It's often easier to reason about than bottom-up DP, and just as efficient.</p>
+        </div>
+
+        <h2>Classic: Fibonacci</h2>
+        <p>
+            Without memoization: O(2^n). With memoization: O(n).
+        </p>
+        <pre><code><span class="code-keyword">def</span> <span class="code-func">fib</span>(n, memo={}):
+    <span class="code-keyword">if</span> n <= <span class="code-number">1</span>:
+        <span class="code-keyword">return</span> n
+
+    <span class="code-keyword">if</span> n <span class="code-keyword">in</span> memo:
+        <span class="code-keyword">return</span> memo[n]
+
+    memo[n] = fib(n - <span class="code-number">1</span>, memo) + fib(n - <span class="code-number">2</span>, memo)
+    <span class="code-keyword">return</span> memo[n]</code></pre>
+
+        <h2>Python's Built-in: @lru_cache</h2>
+        <p>
+            Python makes it even easier:
+        </p>
+        <pre><code><span class="code-keyword">from</span> functools <span class="code-keyword">import</span> lru_cache
+
+@lru_cache(maxsize=<span class="code-keyword">None</span>)
+<span class="code-keyword">def</span> <span class="code-func">fib</span>(n):
+    <span class="code-keyword">if</span> n <= <span class="code-number">1</span>:
+        <span class="code-keyword">return</span> n
+    <span class="code-keyword">return</span> fib(n - <span class="code-number">1</span>) + fib(n - <span class="code-number">2</span>)</code></pre>
+
+        <h2>Classic: Coin Change</h2>
+        <pre><code>@lru_cache(maxsize=<span class="code-keyword">None</span>)
+<span class="code-keyword">def</span> <span class="code-func">coinChange</span>(coins, amount):
+    <span class="code-keyword">if</span> amount == <span class="code-number">0</span>:
+        <span class="code-keyword">return</span> <span class="code-number">0</span>
+    <span class="code-keyword">if</span> amount < <span class="code-number">0</span>:
+        <span class="code-keyword">return</span> float(<span class="code-string">'inf'</span>)
+
+    min_coins = float(<span class="code-string">'inf'</span>)
+    <span class="code-keyword">for</span> coin <span class="code-keyword">in</span> coins:
+        result = coinChange(coins, amount - coin)
+        min_coins = <span class="code-func">min</span>(min_coins, result + <span class="code-number">1</span>)
+
+    <span class="code-keyword">return</span> min_coins</code></pre>
+
+        <div class="when-to-use">
+            <h3>When to Use Memoization</h3>
+            <ul>
+                <li><strong>Overlapping subproblems</strong> - Same inputs computed multiple times</li>
+                <li><strong>Optimal substructure</strong> - Answer builds from smaller answers</li>
+                <li><strong>Recursive solutions</strong> - Natural top-down approach</li>
+                <li><strong>State can be hashed</strong> - Inputs work as dictionary keys</li>
+            </ul>
+        </div>
+
+        <div class="callout tip">
+            <div class="callout-title">Pro Tip</div>
+            <p>If your recursive function has the same inputs producing the same outputs (pure function), it can be memoized. If it depends on external state, it can't.</p>
+        </div>
+
+        <div class="footer-cta">
+            <h3>Practice Makes Perfect</h3>
+            <p>Memoization is a superpower for recursive problems. Master it in LeetEye.</p>
+            <a href="https://apps.apple.com/app/leeteye" class="cta-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                Open LeetEye
+            </a>
+        </div>
+    </main>
+</body>
+</html>
