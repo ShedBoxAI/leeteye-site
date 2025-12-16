@@ -58,8 +58,8 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <!-- Floating decorative cards -->
-        <div class="floating-cards">
+        <!-- Floating decorative cards (absolute on desktop, inline on mobile) -->
+        <div class="floating-cards floating-cards-desktop">
             <!-- Left side cards -->
             <div class="float-card float-card-1">
                 <div class="float-card-header">
@@ -104,6 +104,47 @@
             <h1 class="hero-title">
                 Build pattern recognition for coding interviews through interactive MCQs, not passive video watching
             </h1>
+
+            <!-- Mobile floating cards - shown after title -->
+            <div class="floating-cards floating-cards-mobile">
+                <div class="float-card float-card-1">
+                    <div class="float-card-header">
+                        <span class="float-card-tag">Two Pointers</span>
+                        <span class="float-card-progress">✓</span>
+                    </div>
+                    <div class="float-card-title">Valid Palindrome</div>
+                </div>
+
+                <div class="float-card float-card-2">
+                    <div class="float-card-question">What's the time complexity?</div>
+                    <div class="float-card-options">
+                        <span class="float-option">O(n²)</span>
+                        <span class="float-option correct">O(n)</span>
+                    </div>
+                </div>
+
+                <div class="float-card float-card-3">
+                    <div class="float-card-pattern">Hash Map</div>
+                    <div class="float-card-insight">O(1) lookup for complement</div>
+                </div>
+
+                <div class="float-card float-card-4">
+                    <div class="float-card-stats">
+                        <div class="stat-item">
+                            <span class="stat-num">12</span>
+                            <span class="stat-txt">Completed</span>
+                        </div>
+                        <div class="stat-bar">
+                            <div class="stat-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="float-card float-card-5">
+                    <span class="float-badge">Sliding Window</span>
+                </div>
+            </div>
+
             <p class="hero-subtitle">
                 Stop memorizing LeetCode solutions. LeetEye breaks down each problem into focused questions that teach you <em>why</em> patterns work, so you can recognize and apply them to new problems instantly. 5 minutes per problem. No account required.
             </p>

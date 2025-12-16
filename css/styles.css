@@ -433,10 +433,99 @@ img {
     font-weight: 600;
 }
 
-/* Hide floating cards on smaller screens */
+/* Mobile cards hidden by default on desktop */
+.floating-cards-mobile {
+    display: none;
+}
+
+/* Hide desktop floating cards on smaller screens */
 @media (max-width: 1200px) {
-    .floating-cards {
+    .floating-cards-desktop {
         display: none;
+    }
+}
+
+/* Mobile floating cards styles - always applied to mobile container */
+.floating-cards-mobile {
+    position: relative;
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.floating-cards-mobile .float-card {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    animation: none !important;
+    transform: none !important;
+    padding: 12px 14px;
+    font-size: 0.75rem;
+    box-shadow: none;
+}
+
+.floating-cards-mobile .float-card-4 {
+    min-width: auto;
+}
+
+.floating-cards-mobile .float-card-5 {
+    grid-column: span 2;
+    justify-self: center;
+    padding: 8px 14px;
+}
+
+.floating-cards-mobile .float-card-tag {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+}
+
+.floating-cards-mobile .float-card-title {
+    font-size: 0.75rem;
+}
+
+.floating-cards-mobile .float-card-question {
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+}
+
+.floating-cards-mobile .float-card-options {
+    gap: 6px;
+}
+
+.floating-cards-mobile .float-option {
+    padding: 4px 10px;
+    font-size: 0.65rem;
+}
+
+.floating-cards-mobile .float-card-pattern {
+    font-size: 0.75rem;
+}
+
+.floating-cards-mobile .float-card-insight {
+    font-size: 0.65rem;
+}
+
+.floating-cards-mobile .float-card-stats .stat-num {
+    font-size: 1.2rem;
+}
+
+.floating-cards-mobile .float-card-stats .stat-txt {
+    font-size: 0.6rem;
+}
+
+.floating-cards-mobile .float-badge {
+    font-size: 0.65rem;
+    padding: 4px 10px;
+}
+
+/* Show mobile cards only on mobile */
+@media (max-width: 768px) {
+    .floating-cards-mobile {
+        display: grid;
     }
 }
 
