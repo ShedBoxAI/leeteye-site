@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Minimum Window Substring using Sliding Window. medium difficulty. Time: O(|s| + |t|), Space: O(|s| + |t|).">
+    <link rel="canonical" href="https://leeteye.com/problems/sliding-window/minimum-window-substring.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Minimum Window Substring Solution | Sliding Window | LeetEye">
+    <meta property="og:description" content="Learn how to solve Minimum Window Substring using Sliding Window. medium difficulty. Time: O(|s| + |t|), Space: O(|s| + |t|).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/sliding-window/minimum-window-substring.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Minimum Window Substring Solution | Sliding Window | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Minimum Window Substring using Sliding Window. medium difficulty. Time: O(|s| + |t|), Space: O(|s| + |t|).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Minimum Window Substring Solution | Sliding Window | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Minimum Window Substring",
+        "description": "Expand right until valid, shrink left while still valid, track minimum. Validity = all target chars satisfied.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "We use sliding window because:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "A window is valid when:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "We expand the window when:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "Once window is valid, we shrink from left to:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "To efficiently check if window contains all of t:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "We update our answer (minimum window) when:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Minimum Window Substring?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(|s| + |t|) time complexity and O(|s| + |t|) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Minimum Window Substring use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Minimum Window Substring uses the Sliding Window pattern. Expand window until valid (contains all of t). Then shrink from left while still valid. Track minimum."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/sliding-window/">Sliding Window</a></li>
+            <li aria-current="page">Minimum Window Substring</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/sliding-window/" class="pattern-badge">Sliding Window</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Minimum Window Substring</h1>
+                <p class="problem-tags">
+                    <span class="tag">sliding-window</span>
+<span class="tag">minimum-window-substring</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given two strings <code>s</code> and <code>t</code> of lengths <code>m</code> and <code>n</code> respectively, return the minimum window substring of <code>s</code> such that every character in <code>t</code> (including duplicates) is included in the window. If there is no such substring, return the empty string <code>""</code>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> s = &quot;ADOBECODEBANC&quot;, t = &quot;ABC&quot;</div>
+            <div class="example-output"><strong>Output:</strong> &quot;BANC&quot;</div>
+            <div class="example-explanation">&quot;BANC&quot; is the smallest window containing &#039;A&#039;, &#039;B&#039;, and &#039;C&#039;.</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> s = &quot;a&quot;, t = &quot;a&quot;</div>
+            <div class="example-output"><strong>Output:</strong> &quot;a&quot;</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 3</div>
+            <div class="example-input"><strong>Input:</strong> s = &quot;a&quot;, t = &quot;aa&quot;</div>
+            <div class="example-output"><strong>Output:</strong> &quot;&quot;</div>
+            <div class="example-explanation">Need two &#039;a&#039;s but only one exists.</div>
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Expand window until valid (contains all of t). Then shrink from left while still valid. Track minimum.</p>
+                <p class="one-liner"><em>Expand right until valid, shrink left while still valid, track minimum. Validity = all target chars satisfied.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">minimum window substring</span> <span class="trigger-tag">sliding-window</span></span>,
+                    think <strong>Sliding Window</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                We use sliding window because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> We&#039;re looking for a contiguous substring
+            </div>
+            <div class="step-explanation">
+                Substring = contiguous sequence. Window maintains contiguity.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                A window is valid when:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It contains each char from t with at least the required frequency
+            </div>
+            <div class="step-explanation">
+                If t = "aab", window needs at least 2 'a's and 1 'b'. Frequencies matter.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                We expand the window when:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Window is not yet valid
+            </div>
+            <div class="step-explanation">
+                Need to include more chars to meet the requirement. Once valid, try shrinking.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                Once window is valid, we shrink from left to:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Find a smaller valid window
+            </div>
+            <div class="step-explanation">
+                We want minimum window. Maybe some chars on the left aren't needed. Shrink until invalid, track min valid.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                To efficiently check if window contains all of t:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Track &quot;how many char requirements are fully met&quot;
+            </div>
+            <div class="step-explanation">
+                For each char in t, track if window has enough. Count how many chars have met quota. When count equals unique chars in t, window is valid.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                We update our answer (minimum window) when:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Window is valid and smaller than current best
+            </div>
+            <div class="step-explanation">
+                Only valid windows count. Among valid, we want smallest.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> minWindow(s: <span class="code-func">str</span>, t: <span class="code-func">str</span>) -&gt; <span class="code-func">str</span>:
+    <span class="code-keyword">if</span> <span class="code-keyword">not</span> t <span class="code-keyword">or</span> <span class="code-keyword">not</span> s:
+        <span class="code-keyword">return</span> <span class="code-string">&quot;&quot;</span>
+    
+    <span class="code-keyword">from</span> collections <span class="code-keyword">import</span> Counter
+    t_count = Counter(t)
+    required = <span class="code-func">len</span>(t_count)
+    
+    left = <span class="code-number">0</span>
+    formed = <span class="code-number">0</span>
+    window_count = {}
+    ans = (<span class="code-func">float</span>(&<span class="code-comment">#039;inf&#039;), None, None)  # (length, left, right)</span>
+    
+    <span class="code-keyword">for</span> right <span class="code-keyword">in</span> <span class="code-func">range</span>(<span class="code-func">len</span>(s)):
+        char = s[right]
+        window_count[char] = window_count.<span class="code-func">get</span>(char, <span class="code-number">0</span>) + <span class="code-number">1</span>
+        
+        <span class="code-keyword">if</span> char <span class="code-keyword">in</span> t_count <span class="code-keyword">and</span> window_count[char] == t_count[char]:
+            formed += <span class="code-number">1</span>
+        
+        <span class="code-comment"># Shrink window while valid</span>
+        <span class="code-keyword">while</span> formed == required:
+            <span class="code-keyword">if</span> right - left + <span class="code-number">1</span> &lt; ans[<span class="code-number">0</span>]:
+                ans = (right - left + <span class="code-number">1</span>, left, right)
+            
+            left_char = s[left]
+            window_count[left_char] -= <span class="code-number">1</span>
+            <span class="code-keyword">if</span> left_char <span class="code-keyword">in</span> t_count <span class="code-keyword">and</span> window_count[left_char] &lt; t_count[left_char]:
+                formed -= <span class="code-number">1</span>
+            left += <span class="code-number">1</span>
+    
+    <span class="code-keyword">return</span> <span class="code-string">&quot;&quot;</span> <span class="code-keyword">if</span> ans[<span class="code-number">0</span>] == <span class="code-func">float</span>(&<span class="code-comment">#039;inf&#039;) else s[ans[1]:ans[2]+1]</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(|s| + |t|)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(|s| + |t|)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Sliding Window problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=minimum-window-substring" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Sliding Window Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/sliding-window/best-time-to-buy-and-sell-stock.html">
+                <span class="problem-card-title">Best Time to Buy and Sell Stock</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/longest-substring-without-repeating.html">
+                <span class="problem-card-title">Longest Substring Without Repeating Characters</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/longest-repeating-character-replacement.html">
+                <span class="problem-card-title">Longest Repeating Character Replacement</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/permutation-in-string.html">
+                <span class="problem-card-title">Permutation in String</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/sliding-window-maximum.html">
+                <span class="problem-card-title">Sliding Window Maximum</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/sliding-window/" class="see-all-link">See all Sliding Window problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=minimum-window-substring" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

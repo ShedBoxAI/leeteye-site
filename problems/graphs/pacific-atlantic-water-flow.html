@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Pacific Atlantic Water Flow using Graph Traversal. medium difficulty. Time: O(m × n), Space: O(m × n).">
+    <link rel="canonical" href="https://leeteye.com/problems/graphs/pacific-atlantic-water-flow.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pacific Atlantic Water Flow Solution | Graph Traversal | LeetEye">
+    <meta property="og:description" content="Learn how to solve Pacific Atlantic Water Flow using Graph Traversal. medium difficulty. Time: O(m × n), Space: O(m × n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/graphs/pacific-atlantic-water-flow.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pacific Atlantic Water Flow Solution | Graph Traversal | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Pacific Atlantic Water Flow using Graph Traversal. medium difficulty. Time: O(m × n), Space: O(m × n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Pacific Atlantic Water Flow Solution | Graphs | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Pacific Atlantic Water Flow",
+        "description": "Reverse the flow: DFS &#039;uphill&#039; from Pacific edges, DFS &#039;uphill&#039; from Atlantic edges. Answer = intersection of both reachable sets.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Water flows from cell A to B if:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Searching \"uphill\" from ocean means:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "Starting from oceans is better because:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "Pacific-adjacent cells are:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "A cell is in the answer if:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "We run DFS:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Pacific Atlantic Water Flow?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(m × n) time complexity and O(m × n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Pacific Atlantic Water Flow use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Pacific Atlantic Water Flow uses the Graph Traversal pattern. Reverse the flow: start from oceans and flow &quot;uphill.&quot;"
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/graphs/">Graphs</a></li>
+            <li aria-current="page">Pacific Atlantic Water Flow</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/graphs/" class="pattern-badge">Graph Traversal</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Pacific Atlantic Water Flow</h1>
+                <p class="problem-tags">
+                    <span class="tag">graphs</span>
+<span class="tag">pacific-atlantic-water-flow</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    There is an <code>m x n</code> rectangular island that borders both the Pacific Ocean and Atlantic Ocean. The Pacific Ocean touches the island's left and top edges, and the Atlantic Ocean touches the island's right and bottom edges.<br><br>The island is partitioned into a grid of square cells. You are given an <code>m x n</code> integer matrix <code>heights</code> where <code>heights[r][c]</code> represents the height above sea level of the cell at coordinate <code>(r, c)</code>.<br><br>The island receives a lot of rain, and the rain water can flow to neighboring cells directly north, south, east, and west if the neighboring cell's height is less than or equal to the current cell's height. Water can flow from any cell adjacent to an ocean into the ocean.<br><br>Return a 2D list of grid coordinates <code>result</code> where <code>result[i] = [ri, ci]</code> denotes that rain water can flow from cell <code>(ri, ci)</code> to both the Pacific and Atlantic oceans.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1,2,3]</div>
+            <div class="example-output"><strong>Output:</strong> result</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Reverse the flow: start from oceans and flow &quot;uphill.&quot;</p>
+                <p class="one-liner"><em>Reverse the flow: DFS &#039;uphill&#039; from Pacific edges, DFS &#039;uphill&#039; from Atlantic edges. Answer = intersection of both reachable sets.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">pacific atlantic water flow</span> <span class="trigger-tag">graphs</span></span>,
+                    think <strong>Graph Traversal</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Water flows from cell A to B if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> A&#039;s height &gt;= B&#039;s height (water flows downhill or flat)
+            </div>
+            <div class="step-explanation">
+                Water flows to equal or lower heights.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Searching "uphill" from ocean means:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Move to cells with &gt;= height
+            </div>
+            <div class="step-explanation">
+                Reverse of downhill. If water can flow from B to A, we can reach B from A when going uphill.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                Starting from oceans is better because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Fewer starting points (only edges)
+            </div>
+            <div class="step-explanation">
+                Edge cells are O(m+n), vs O(mn) interior cells. Two DFS from edges, then intersect.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                Pacific-adjacent cells are:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Top row and left column
+            </div>
+            <div class="step-explanation">
+                Pacific touches top and left edges.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                A cell is in the answer if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Reachable from both
+            </div>
+            <div class="step-explanation">
+                Must be able to flow to BOTH oceans.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                We run DFS:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Once from Pacific edges, once from Atlantic edges
+            </div>
+            <div class="step-explanation">
+                Track reachability separately, then find intersection.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> pacificAtlantic(heights: List[List[<span class="code-func">int</span>]]) -&gt; List[List[<span class="code-func">int</span>]]:
+    rows, cols = <span class="code-func">len</span>(heights), <span class="code-func">len</span>(heights[<span class="code-number">0</span>])
+    pacific, atlantic = <span class="code-func">set</span>(), <span class="code-func">set</span>()
+    
+    <span class="code-keyword">def</span> dfs(r, c, visit, prev_height):
+        <span class="code-keyword">if</span> (r &lt; <span class="code-number">0</span> <span class="code-keyword">or</span> r &gt;= rows <span class="code-keyword">or</span> c &lt; <span class="code-number">0</span> <span class="code-keyword">or</span> c &gt;= cols <span class="code-keyword">or</span>
+            (r, c) <span class="code-keyword">in</span> visit <span class="code-keyword">or</span> heights[r][c] &lt; prev_height):
+            <span class="code-keyword">return</span>
+        
+        visit.<span class="code-func">add</span>((r, c))
+        dfs(r + <span class="code-number">1</span>, c, visit, heights[r][c])
+        dfs(r - <span class="code-number">1</span>, c, visit, heights[r][c])
+        dfs(r, c + <span class="code-number">1</span>, visit, heights[r][c])
+        dfs(r, c - <span class="code-number">1</span>, visit, heights[r][c])
+    
+    <span class="code-keyword">for</span> c <span class="code-keyword">in</span> <span class="code-func">range</span>(cols):
+        dfs(<span class="code-number">0</span>, c, pacific, <span class="code-number">0</span>)        <span class="code-comment"># Top row (Pacific)</span>
+        dfs(rows - <span class="code-number">1</span>, c, atlantic, <span class="code-number">0</span>) <span class="code-comment"># Bottom row (Atlantic)</span>
+    
+    <span class="code-keyword">for</span> r <span class="code-keyword">in</span> <span class="code-func">range</span>(rows):
+        dfs(r, <span class="code-number">0</span>, pacific, <span class="code-number">0</span>)        <span class="code-comment"># Left col (Pacific)</span>
+        dfs(r, cols - <span class="code-number">1</span>, atlantic, <span class="code-number">0</span>) <span class="code-comment"># Right col (Atlantic)</span>
+    
+    <span class="code-keyword">return</span> <span class="code-func">list</span>(pacific &amp; atlantic)</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(m × n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(m × n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Graph Traversal problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=pacific-atlantic-water-flow" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Graphs Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/graphs/number-of-islands.html">
+                <span class="problem-card-title">Number of Islands</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/clone-graph.html">
+                <span class="problem-card-title">Clone Graph</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/course-schedule.html">
+                <span class="problem-card-title">Course Schedule</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/course-schedule-ii.html">
+                <span class="problem-card-title">Course Schedule II</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/rotting-oranges.html">
+                <span class="problem-card-title">Rotting Oranges</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/graphs/" class="see-all-link">See all Graphs problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=pacific-atlantic-water-flow" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

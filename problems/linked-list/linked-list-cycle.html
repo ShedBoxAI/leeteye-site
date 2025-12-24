@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Linked List Cycle using Linked List. medium difficulty. Time: O(n), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/linked-list/linked-list-cycle.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Linked List Cycle Solution | Linked List | LeetEye">
+    <meta property="og:description" content="Learn how to solve Linked List Cycle using Linked List. medium difficulty. Time: O(n), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/linked-list/linked-list-cycle.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Linked List Cycle Solution | Linked List | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Linked List Cycle using Linked List. medium difficulty. Time: O(n), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Linked List Cycle Solution | Linked List | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Linked List Cycle",
+        "description": "Slow moves 1, fast moves 2. If cycle exists, fast catches slow. If no cycle, fast reaches null.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "To detect a cycle, we could:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "If fast moves 2x speed of slow, in a cycle:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "If slow is at position S and fast is at position F in a cycle:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "If there's no cycle:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "We continue the loop while:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "If slow == fast during traversal:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Linked List Cycle?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Linked List Cycle use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Linked List Cycle uses the Linked List pattern. Fast and slow pointers: if there&#039;s a cycle, they will eventually meet."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/linked-list/">Linked List</a></li>
+            <li aria-current="page">Linked List Cycle</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/linked-list/" class="pattern-badge">Linked List</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Linked List Cycle</h1>
+                <p class="problem-tags">
+                    <span class="tag">linked-list</span>
+<span class="tag">linked-list-cycle</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given <code>head</code>, the head of a linked list, determine if the linked list has a cycle in it.<br><br>There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the <code>next</code> pointer.<br><br>Return <code>true</code> if there is a cycle in the linked list. Otherwise, return <code>false</code>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> head = [3,2,0,-4], pos = 1</div>
+            <div class="example-output"><strong>Output:</strong> true</div>
+            <div class="example-explanation">Tail connects to node at index 1 (0-indexed).</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> head = [1,2], pos = 0</div>
+            <div class="example-output"><strong>Output:</strong> true</div>
+            <div class="example-explanation">Tail connects to node at index 0.</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 3</div>
+            <div class="example-input"><strong>Input:</strong> head = [1], pos = -1</div>
+            <div class="example-output"><strong>Output:</strong> false</div>
+            <div class="example-explanation">No cycle.</div>
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Fast and slow pointers: if there&#039;s a cycle, they will eventually meet.</p>
+                <p class="one-liner"><em>Slow moves 1, fast moves 2. If cycle exists, fast catches slow. If no cycle, fast reaches null.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">linked list cycle</span> <span class="trigger-tag">linked-list</span></span>,
+                    think <strong>Linked List</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                To detect a cycle, we could:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Store visited nodes in a set and check for repeats
+            </div>
+            <div class="step-explanation">
+                If we see the same node twice, there's a cycle. But this uses O(n) space.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                If fast moves 2x speed of slow, in a cycle:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Fast will eventually catch slow
+            </div>
+            <div class="step-explanation">
+                In a cycle, fast gains 1 position on slow each step. Eventually the gap closes to 0.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                If slow is at position S and fast is at position F in a cycle:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> The gap decreases by 1 each step
+            </div>
+            <div class="step-explanation">
+                Fast moves 2, slow moves 1. Relative movement = 1. Gap shrinks by 1.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                If there's no cycle:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Fast reaches null first
+            </div>
+            <div class="step-explanation">
+                Fast moves faster, so it hits the end of the list first (or fast.next is null).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                We continue the loop while:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> fast is not null AND fast.next is not null
+            </div>
+            <div class="step-explanation">
+                Fast moves 2 steps, so we need both fast and fast.next to exist.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                If slow == fast during traversal:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> There is definitely a cycle
+            </div>
+            <div class="step-explanation">
+                For them to meet, fast must have gone around and caught up. Only possible in a cycle.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> hasCycle(head: ListNode) -&gt; <span class="code-func">bool</span>:
+    slow = fast = head
+    
+    <span class="code-keyword">while</span> fast <span class="code-keyword">and</span> fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+        <span class="code-keyword">if</span> slow == fast:
+            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">False</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Linked List problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=linked-list-cycle" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Linked List Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/linked-list/reverse-linked-list.html">
+                <span class="problem-card-title">Reverse Linked List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/merge-two-sorted-lists.html">
+                <span class="problem-card-title">Merge Two Sorted Lists</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/reorder-list.html">
+                <span class="problem-card-title">Reorder List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/remove-nth-node-from-end.html">
+                <span class="problem-card-title">Remove Nth Node From End of List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/copy-list-with-random-pointer.html">
+                <span class="problem-card-title">Copy List with Random Pointer</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/linked-list/" class="see-all-link">See all Linked List problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=linked-list-cycle" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

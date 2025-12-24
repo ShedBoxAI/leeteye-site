@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Cheapest Flights Within K Stops using Advanced Graphs. hard difficulty. Time: O(k × E), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/advanced-graphs/cheapest-flights-within-k-stops.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Cheapest Flights Within K Stops Solution | Advanced Graphs | LeetEye">
+    <meta property="og:description" content="Learn how to solve Cheapest Flights Within K Stops using Advanced Graphs. hard difficulty. Time: O(k × E), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/advanced-graphs/cheapest-flights-within-k-stops.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cheapest Flights Within K Stops Solution | Advanced Graphs | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Cheapest Flights Within K Stops using Advanced Graphs. hard difficulty. Time: O(k × E), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Cheapest Flights Within K Stops Solution | Advanced Graphs | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Cheapest Flights Within K Stops",
+        "description": "Bellman-Ford with k+1 iterations finds shortest path using at most k+1 edges. Each iteration extends paths by one hop.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Standard Dijkstra fails here because:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "At each node, we need to know:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "Bellman-Ford after k+1 iterations gives:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "For modified Dijkstra, heap stores:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "Skip processing if:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Cheapest Flights Within K Stops?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(k × E) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Cheapest Flights Within K Stops use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cheapest Flights Within K Stops uses the Advanced Graphs pattern. Bellman-Ford for k+1 iterations OR modified Dijkstra tracking stops."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/advanced-graphs/">Advanced Graphs</a></li>
+            <li aria-current="page">Cheapest Flights Within K Stops</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-hard">Hard</span>
+                    <a href="/patterns/advanced-graphs/" class="pattern-badge">Advanced Graphs</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Cheapest Flights Within K Stops</h1>
+                <p class="problem-tags">
+                    <span class="tag">advanced-graphs</span>
+<span class="tag">cheapest-flights-within-k-stops</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    There are <code>n</code> cities connected by some number of flights. You are given an array <code>flights</code> where <code>flights[i] = [fromi, toi, pricei]</code> indicates a flight from city <code>fromi</code> to city <code>toi</code> with cost <code>pricei</code>.<br><br>You are also given three integers <code>src</code>, <code>dst</code>, and <code>k</code>, return the cheapest price from <code>src</code> to <code>dst</code> with at most <code>k</code> stops. If there is no such route, return <code>-1</code>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1</div>
+            <div class="example-output"><strong>Output:</strong> 700</div>
+            <div class="example-explanation">0 → 1 → 3 with 1 stop costs 700.</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> n = 3, flights = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 1</div>
+            <div class="example-output"><strong>Output:</strong> 200</div>
+            <div class="example-explanation">0 → 1 → 2 with 1 stop costs 200.</div>
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Bellman-Ford for k+1 iterations OR modified Dijkstra tracking stops.</p>
+                <p class="one-liner"><em>Bellman-Ford with k+1 iterations finds shortest path using at most k+1 edges. Each iteration extends paths by one hop.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">cheapest flights within k stops</span> <span class="trigger-tag">advanced-graphs</span></span>,
+                    think <strong>Advanced Graphs</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Standard Dijkstra fails here because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It ignores the stop constraint
+            </div>
+            <div class="step-explanation">
+                Dijkstra prunes paths greedily. A path with more stops but lower cost might be optimal.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                At each node, we need to know:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Cost AND number of stops
+            </div>
+            <div class="step-explanation">
+                A node might be reached cheaply with many stops, or expensively with few stops. Both matter.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                Bellman-Ford after k+1 iterations gives:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Shortest path using at most k+1 edges
+            </div>
+            <div class="step-explanation">
+                Each iteration extends paths by one edge. k+1 iterations = paths of at most k+1 edges.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                For modified Dijkstra, heap stores:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> (cost, node, stops)
+            </div>
+            <div class="step-explanation">
+                We need to track stops to enforce the constraint.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                Skip processing if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Stops exceed k
+            </div>
+            <div class="step-explanation">
+                We can revisit nodes with fewer stops. Only skip if we've exceeded stop limit.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> findCheapestPrice(n: <span class="code-func">int</span>, flights: List[List[<span class="code-func">int</span>]], src: <span class="code-func">int</span>, dst: <span class="code-func">int</span>, k: <span class="code-func">int</span>) -&gt; <span class="code-func">int</span>:
+    <span class="code-comment"># Bellman-Ford with k+1 iterations</span>
+    <span class="code-comment"># prices[i] = min cost to reach city i</span>
+    prices = [<span class="code-func">float</span>(&<span class="code-comment">#039;inf&#039;)] * n</span>
+    prices[src] = <span class="code-number">0</span>
+    
+    <span class="code-comment"># k stops means k+1 edges</span>
+    <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-func">range</span>(k + <span class="code-number">1</span>):
+        <span class="code-comment"># Use copy to avoid using updated values in same iteration</span>
+        temp = prices.copy()
+        
+        <span class="code-keyword">for</span> u, v, cost <span class="code-keyword">in</span> flights:
+            <span class="code-keyword">if</span> prices[u] != <span class="code-func">float</span>(&<span class="code-comment">#039;inf&#039;):</span>
+                temp[v] = <span class="code-func">min</span>(temp[v], prices[u] + cost)
+        
+        prices = temp
+    
+    <span class="code-keyword">return</span> prices[dst] <span class="code-keyword">if</span> prices[dst] != <span class="code-func">float</span>(&<span class="code-comment">#039;inf&#039;) else -1</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(k × E)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Advanced Graphs problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=cheapest-flights-within-k-stops" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Advanced Graphs Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/advanced-graphs/min-cost-to-connect-all-points.html">
+                <span class="problem-card-title">Min Cost to Connect All Points</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/network-delay-time.html">
+                <span class="problem-card-title">Network Delay Time</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/swim-in-rising-water.html">
+                <span class="problem-card-title">Swim in Rising Water</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/alien-dictionary.html">
+                <span class="problem-card-title">Alien Dictionary</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/reconstruct-itinerary.html">
+                <span class="problem-card-title">Reconstruct Itinerary</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/advanced-graphs/" class="see-all-link">See all Advanced Graphs problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=cheapest-flights-within-k-stops" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Insert Interval using Intervals. medium difficulty. Time: O(n), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/intervals/insert-interval.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Insert Interval Solution | Intervals | LeetEye">
+    <meta property="og:description" content="Learn how to solve Insert Interval using Intervals. medium difficulty. Time: O(n), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/intervals/insert-interval.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Insert Interval Solution | Intervals | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Insert Interval using Intervals. medium difficulty. Time: O(n), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Insert Interval Solution | Intervals | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Insert Interval",
+        "description": "Three phases: (1) add intervals ending before new starts, (2) merge all overlapping intervals with new, (3) add intervals starting after new ends.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Interval [a, b] is completely before newInterval [x, y] if:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Interval [a, b] is completely after newInterval [x, y] if:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "Interval [a, b] overlaps with [x, y] if:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "When merging [a, b] into [x, y]:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "We process intervals:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Insert Interval?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Insert Interval use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Insert Interval uses the Intervals pattern. Three phases: intervals before new (no overlap), merge with new (overlap), intervals after new (no overlap)."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/intervals/">Intervals</a></li>
+            <li aria-current="page">Insert Interval</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/intervals/" class="pattern-badge">Intervals</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Insert Interval</h1>
+                <p class="problem-tags">
+                    <span class="tag">intervals</span>
+<span class="tag">insert-interval</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    You are given an array of non-overlapping intervals <code>intervals</code> where <code>intervals[i] = [starti, endi]</code> represent the start and the end of the <code>ith</code> interval and <code>intervals</code> is sorted in ascending order by <code>starti</code>. You are also given an interval <code>newInterval = [start, end]</code> that represents the start and end of another interval.<br><br>Insert <code>newInterval</code> into <code>intervals</code> such that <code>intervals</code> is still sorted in ascending order by <code>starti</code> and <code>intervals</code> still has no overlapping intervals (merge overlapping intervals if necessary).<br><br>Return <code>intervals</code> after the insertion.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> intervals = [[1,3],[6,9]], newInterval = [2,5]</div>
+            <div class="example-output"><strong>Output:</strong> [[1,5],[6,9]]</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]</div>
+            <div class="example-output"><strong>Output:</strong> [[1,2],[3,10],[12,16]]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Three phases: intervals before new (no overlap), merge with new (overlap), intervals after new (no overlap).</p>
+                <p class="one-liner"><em>Three phases: (1) add intervals ending before new starts, (2) merge all overlapping intervals with new, (3) add intervals starting after new ends.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">insert interval</span> <span class="trigger-tag">intervals</span></span>,
+                    think <strong>Intervals</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Interval [a, b] is completely before newInterval [x, y] if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> b &lt; x
+            </div>
+            <div class="step-explanation">
+                If interval ends before new starts, no overlap. Add to result as-is.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Interval [a, b] is completely after newInterval [x, y] if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> a &gt; y
+            </div>
+            <div class="step-explanation">
+                If interval starts after new ends, no overlap. Add to result as-is.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                Interval [a, b] overlaps with [x, y] if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> a &lt;= y AND b &gt;= x
+            </div>
+            <div class="step-explanation">
+                Overlap when neither is completely before nor after the other.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                When merging [a, b] into [x, y]:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> new_start = min(a, x), new_end = max(b, y)
+            </div>
+            <div class="step-explanation">
+                Merged interval spans from earliest start to latest end.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                We process intervals:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> By start time (given sorted)
+            </div>
+            <div class="step-explanation">
+                Input is sorted by start. Process linearly: before, overlap, after.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> insert(intervals: List[List[<span class="code-func">int</span>]], newInterval: List[<span class="code-func">int</span>]) -&gt; List[List[<span class="code-func">int</span>]]:
+    result = []
+    i = <span class="code-number">0</span>
+    n = <span class="code-func">len</span>(intervals)
+    
+    <span class="code-comment"># Phase 1: Add intervals ending before newInterval starts</span>
+    <span class="code-keyword">while</span> i &lt; n <span class="code-keyword">and</span> intervals[i][<span class="code-number">1</span>] &lt; newInterval[<span class="code-number">0</span>]:
+        result.<span class="code-func">append</span>(intervals[i])
+        i += <span class="code-number">1</span>
+    
+    <span class="code-comment"># Phase 2: Merge overlapping intervals</span>
+    <span class="code-keyword">while</span> i &lt; n <span class="code-keyword">and</span> intervals[i][<span class="code-number">0</span>] &lt;= newInterval[<span class="code-number">1</span>]:
+        newInterval[<span class="code-number">0</span>] = <span class="code-func">min</span>(newInterval[<span class="code-number">0</span>], intervals[i][<span class="code-number">0</span>])
+        newInterval[<span class="code-number">1</span>] = <span class="code-func">max</span>(newInterval[<span class="code-number">1</span>], intervals[i][<span class="code-number">1</span>])
+        i += <span class="code-number">1</span>
+    result.<span class="code-func">append</span>(newInterval)
+    
+    <span class="code-comment"># Phase 3: Add remaining intervals</span>
+    <span class="code-keyword">while</span> i &lt; n:
+        result.<span class="code-func">append</span>(intervals[i])
+        i += <span class="code-number">1</span>
+    
+    <span class="code-keyword">return</span> result</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Intervals problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=insert-interval" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Intervals Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/intervals/merge-intervals.html">
+                <span class="problem-card-title">Merge Intervals</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/intervals/non-overlapping-intervals.html">
+                <span class="problem-card-title">Non-overlapping Intervals</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/intervals/meeting-rooms.html">
+                <span class="problem-card-title">Meeting Rooms</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/intervals/meeting-rooms-ii.html">
+                <span class="problem-card-title">Meeting Rooms II</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/intervals/minimum-interval-to-include-each-query.html">
+                <span class="problem-card-title">Minimum Interval to Include Each Query</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/intervals/" class="see-all-link">See all Intervals problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=insert-interval" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

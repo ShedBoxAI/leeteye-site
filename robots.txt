@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://leeteye.com/sitemap.xml
+Sitemap: https://leeteye.com/sitemap-pseo.xml

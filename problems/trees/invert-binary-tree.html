@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Invert Binary Tree using Tree Traversal. medium difficulty. Time: O(n), Space: O(h).">
+    <link rel="canonical" href="https://leeteye.com/problems/trees/invert-binary-tree.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Invert Binary Tree Solution | Tree Traversal | LeetEye">
+    <meta property="og:description" content="Learn how to solve Invert Binary Tree using Tree Traversal. medium difficulty. Time: O(n), Space: O(h).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/trees/invert-binary-tree.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Invert Binary Tree Solution | Tree Traversal | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Invert Binary Tree using Tree Traversal. medium difficulty. Time: O(n), Space: O(h).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Invert Binary Tree Solution | Trees | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Invert Binary Tree",
+        "description": "At each node, swap left and right children. Recursively invert both subtrees. Return root.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "For a null node, we:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "At each node, we swap:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "At each node, we can:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "After swapping, we:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "After inverting, we return:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "Iteratively, we can use:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Invert Binary Tree?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(h) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Invert Binary Tree use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Invert Binary Tree uses the Tree Traversal pattern. At each node, swap its left and right children. Then recursively do the same for each child."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/trees/">Trees</a></li>
+            <li aria-current="page">Invert Binary Tree</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/trees/" class="pattern-badge">Tree Traversal</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Invert Binary Tree</h1>
+                <p class="problem-tags">
+                    <span class="tag">trees</span>
+<span class="tag">invert-binary-tree</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given the <code>root</code> of a binary tree, invert the tree, and return its root.<br><br>Inverting a binary tree means swapping every left child with its corresponding right child.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> root = [4,2,7,1,3,6,9]</div>
+            <div class="example-output"><strong>Output:</strong> [4,7,2,9,6,3,1]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>At each node, swap its left and right children. Then recursively do the same for each child.</p>
+                <p class="one-liner"><em>At each node, swap left and right children. Recursively invert both subtrees. Return root.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">invert binary tree</span> <span class="trigger-tag">trees</span></span>,
+                    think <strong>Tree Traversal</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                For a null node, we:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Return null
+            </div>
+            <div class="step-explanation">
+                Nothing to swap in an empty tree. Just return null.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                At each node, we swap:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Left and right child pointers
+            </div>
+            <div class="step-explanation">
+                Swap the subtrees, not values. Node keeps its value, but its children switch sides.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                At each node, we can:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Either order works
+            </div>
+            <div class="step-explanation">
+                Swap first, then invert children. Or invert children first, then swap. Both produce correct result.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                After swapping, we:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Invert both children recursively
+            </div>
+            <div class="step-explanation">
+                Each subtree needs to be inverted too. Recurse on both.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                After inverting, we return:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> The original root
+            </div>
+            <div class="step-explanation">
+                Return the (now inverted) root so caller can connect it.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                Iteratively, we can use:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> BFS or DFS with queue/stack
+            </div>
+            <div class="step-explanation">
+                Visit each node (any order), swap its children. Queue (BFS) or stack (DFS) both work.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> invertTree(root: TreeNode) -&gt; TreeNode:
+    <span class="code-keyword">if</span> <span class="code-keyword">not</span> root:
+        <span class="code-keyword">return</span> <span class="code-keyword">None</span>
+    
+    <span class="code-comment"># Swap left and right children</span>
+    root.left, root.right = root.right, root.left
+    
+    <span class="code-comment"># Recursively invert subtrees</span>
+    invertTree(root.left)
+    invertTree(root.right)
+    
+    <span class="code-keyword">return</span> root</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(h)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Tree Traversal problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=invert-binary-tree" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Trees Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/trees/maximum-depth-of-binary-tree.html">
+                <span class="problem-card-title">Maximum Depth of Binary Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/validate-binary-search-tree.html">
+                <span class="problem-card-title">Validate Binary Search Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/lowest-common-ancestor.html">
+                <span class="problem-card-title">Lowest Common Ancestor of a Binary Search Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/binary-tree-level-order-traversal.html">
+                <span class="problem-card-title">Binary Tree Level Order Traversal</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/binary-tree-right-side-view.html">
+                <span class="problem-card-title">Binary Tree Right Side View</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/trees/" class="see-all-link">See all Trees problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=invert-binary-tree" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

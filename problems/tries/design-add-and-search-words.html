@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Design Add and Search Words Data Structure using Trie. medium difficulty. Time: O(m) add, O(26^m) search worst, Space: O(total chars).">
+    <link rel="canonical" href="https://leeteye.com/problems/tries/design-add-and-search-words.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Design Add and Search Words Data Structure Solution | Trie | LeetEye">
+    <meta property="og:description" content="Learn how to solve Design Add and Search Words Data Structure using Trie. medium difficulty. Time: O(m) add, O(26^m) search worst, Space: O(total chars).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/tries/design-add-and-search-words.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Design Add and Search Words Data Structure Solution | Trie | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Design Add and Search Words Data Structure using Trie. medium difficulty. Time: O(m) add, O(26^m) search worst, Space: O(total chars).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Design Add and Search Words Data Structure Solution | Tries | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Design Add and Search Words Data Structure",
+        "description": "Standard trie, but search uses DFS. At `.`, recurse on ALL children. At regular char, follow that path only. Return true if any path reaches is_end.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Adding a word with dots like \"a.c\":",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Searching \"bad\" (no dots):",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "The dot `.` matches:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "To search \".ad\" in a trie:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "When we hit a `.`:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "Searching \"...\" (all dots) in worst case:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Design Add and Search Words Data Structure?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(m) add, O(26^m) search worst time complexity and O(total chars) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Design Add and Search Words Data Structure use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Design Add and Search Words Data Structure uses the Trie pattern. Standard trie insert. For search, when we hit `.`, try ALL children recursively."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/tries/">Tries</a></li>
+            <li aria-current="page">Design Add and Search Words Data Structure</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/tries/" class="pattern-badge">Trie</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Design Add and Search Words Data Structure</h1>
+                <p class="problem-tags">
+                    <span class="tag">tries</span>
+<span class="tag">design-add-and-search-words-data-structure</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Design a data structure that supports adding new words and finding if a string matches any previously added string.<br><br>Implement the <code>WordDictionary</code> class:<br>- <code>WordDictionary()</code> Initializes the object.<br>- <code>void addWord(word)</code> Adds <code>word</code> to the data structure, it can be matched later.<br>- <code>bool search(word)</code> Returns <code>true</code> if there is any string in the data structure that matches <code>word</code> or <code>false</code> otherwise. <code>word</code> may contain dots <code>.</code> where dots can be matched with any letter.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> [&quot;WordDictionary&quot;,&quot;addWord&quot;,&quot;addWord&quot;,&quot;addWord&quot;,&quot;search&quot;,&quot;search&quot;,&quot;search&quot;,&quot;search&quot;]</div>
+            <div class="example-output"><strong>Output:</strong> [null,null,null,null,false,true,true,true]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Standard trie insert. For search, when we hit `.`, try ALL children recursively.</p>
+                <p class="one-liner"><em>Standard trie, but search uses DFS. At `.`, recurse on ALL children. At regular char, follow that path only. Return true if any path reaches is_end.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">design add and search words data structure</span> <span class="trigger-tag">tries</span></span>,
+                    think <strong>Trie</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Adding a word with dots like "a.c":
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Is not supported in this problem
+            </div>
+            <div class="step-explanation">
+                Only search has wildcards. Words added are normal strings.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Searching "bad" (no dots):
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Uses standard trie search
+            </div>
+            <div class="step-explanation">
+                No wildcards = normal trie traversal.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                The dot <code>.</code> matches:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Any single character
+            </div>
+            <div class="step-explanation">
+                Like regex <code>.</code>, it matches exactly one character, any character.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                To search ".ad" in a trie:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Try all children of root, continue with &quot;ad&quot;
+            </div>
+            <div class="step-explanation">
+                First character is <code>.</code>, so we try 'a', 'b', 'c', ... all 26 possibilities for first character.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                When we hit a <code>.</code>:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Recurse on ALL children with remaining pattern
+            </div>
+            <div class="step-explanation">
+                Each child is a valid match for <code>.</code>. If any path succeeds, return true.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                Searching "..." (all dots) in worst case:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> O(26^m) - exponential
+            </div>
+            <div class="step-explanation">
+                Each dot branches to 26 children. m dots = 26^m paths to explore.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python">class TrieNode:
+    <span class="code-keyword">def</span> __init__(self):
+        self.children = {}
+        self.is_end = <span class="code-keyword">False</span>
+
+class WordDictionary:
+    <span class="code-keyword">def</span> __init__(self):
+        self.root = TrieNode()
+    
+    <span class="code-keyword">def</span> addWord(self, word: <span class="code-func">str</span>) -&gt; <span class="code-keyword">None</span>:
+        node = self.root
+        <span class="code-keyword">for</span> char <span class="code-keyword">in</span> word:
+            <span class="code-keyword">if</span> char <span class="code-keyword">not</span> <span class="code-keyword">in</span> node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end = <span class="code-keyword">True</span>
+    
+    <span class="code-keyword">def</span> search(self, word: <span class="code-func">str</span>) -&gt; <span class="code-func">bool</span>:
+        <span class="code-keyword">def</span> dfs(index, node):
+            <span class="code-keyword">if</span> index == <span class="code-func">len</span>(word):
+                <span class="code-keyword">return</span> node.is_end
+            
+            char = word[index]
+            <span class="code-keyword">if</span> char == &<span class="code-comment">#039;.&#039;:</span>
+                <span class="code-comment"># Try all children</span>
+                <span class="code-keyword">for</span> child <span class="code-keyword">in</span> node.children.<span class="code-func">values</span>():
+                    <span class="code-keyword">if</span> dfs(index + <span class="code-number">1</span>, child):
+                        <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+                <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+            <span class="code-keyword">else</span>:
+                <span class="code-keyword">if</span> char <span class="code-keyword">not</span> <span class="code-keyword">in</span> node.children:
+                    <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+                <span class="code-keyword">return</span> dfs(index + <span class="code-number">1</span>, node.children[char])
+        
+        <span class="code-keyword">return</span> dfs(<span class="code-number">0</span>, self.root)</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(m) add, O(26^m) search worst</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(total chars)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Trie problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=design-add-and-search-words" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Tries Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/tries/implement-trie.html">
+                <span class="problem-card-title">Implement Trie (Prefix Tree)</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/tries/word-search-ii.html">
+                <span class="problem-card-title">Word Search II</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/tries/" class="see-all-link">See all Tries problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=design-add-and-search-words" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

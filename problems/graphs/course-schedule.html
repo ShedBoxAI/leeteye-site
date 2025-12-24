@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Course Schedule using Graph Traversal. medium difficulty. Time: O(V + E), Space: O(V + E).">
+    <link rel="canonical" href="https://leeteye.com/problems/graphs/course-schedule.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Course Schedule Solution | Graph Traversal | LeetEye">
+    <meta property="og:description" content="Learn how to solve Course Schedule using Graph Traversal. medium difficulty. Time: O(V + E), Space: O(V + E).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/graphs/course-schedule.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Course Schedule Solution | Graph Traversal | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Course Schedule using Graph Traversal. medium difficulty. Time: O(V + E), Space: O(V + E).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Course Schedule Solution | Graphs | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Course Schedule",
+        "description": "Cycle in directed graph = can&#039;t finish. DFS with 3 states (unvisited/visiting/visited): if we reach a &#039;visiting&#039; node, cycle found. Or use Kahn&#039;s: if completed &lt; numCourses, cycle exists.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "prerequisites = [[1,0], [2,1]] means:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "A cycle in prerequisites means:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "To detect cycles in directed graph:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "In cycle detection DFS, each node can be:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "A cycle exists if during DFS we reach:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "Using Kahn's algorithm (BFS topological sort):",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Course Schedule?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(V + E) time complexity and O(V + E) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Course Schedule use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Course Schedule uses the Graph Traversal pattern. If there&#039;s a cycle in prerequisites, you can&#039;t finish. No cycle = can finish."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/graphs/">Graphs</a></li>
+            <li aria-current="page">Course Schedule</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/graphs/" class="pattern-badge">Graph Traversal</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Course Schedule</h1>
+                <p class="problem-tags">
+                    <span class="tag">graphs</span>
+<span class="tag">course-schedule</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    There are a total of <code>numCourses</code> courses you have to take, labeled from <code>0</code> to <code>numCourses - 1</code>. You are given an array <code>prerequisites</code> where <code>prerequisites[i] = [ai, bi]</code> indicates that you must take course <code>bi</code> first if you want to take course <code>ai</code>.<br><br>Return <code>true</code> if you can finish all courses. Otherwise, return <code>false</code>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> numCourses = 2, prerequisites = [[1,0]]</div>
+            <div class="example-output"><strong>Output:</strong> true</div>
+            <div class="example-explanation">Take course 0 first, then course 1.</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> numCourses = 2, prerequisites = [[1,0],[0,1]]</div>
+            <div class="example-output"><strong>Output:</strong> false</div>
+            <div class="example-explanation">Circular dependency. Can&#039;t finish either.</div>
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>If there&#039;s a cycle in prerequisites, you can&#039;t finish. No cycle = can finish.</p>
+                <p class="one-liner"><em>Cycle in directed graph = can&#039;t finish. DFS with 3 states (unvisited/visiting/visited): if we reach a &#039;visiting&#039; node, cycle found. Or use Kahn&#039;s: if completed &lt; numCourses, cycle exists.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">course schedule</span> <span class="trigger-tag">graphs</span></span>,
+                    think <strong>Graph Traversal</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                prerequisites = [[1,0], [2,1]] means:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Both B and C
+            </div>
+            <div class="step-explanation">
+                [a,b] means b must come before a. Edge from b to a, or "b→a".
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                A cycle in prerequisites means:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Some courses form a circular dependency
+            </div>
+            <div class="step-explanation">
+                A→B→C→A means you can't start any of them.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                To detect cycles in directed graph:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> DFS with visited states
+            </div>
+            <div class="step-explanation">
+                DFS with "visiting" (in current path) and "visited" (fully processed) states.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                In cycle detection DFS, each node can be:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Unvisited, visiting, visited (3 states)
+            </div>
+            <div class="step-explanation">
+                Unvisited = not seen. Visiting = in current DFS path. Visited = fully processed.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                A cycle exists if during DFS we reach:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> A &quot;visiting&quot; node
+            </div>
+            <div class="step-explanation">
+                Reaching a node that's currently in our path = we've found a back edge = cycle.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                Using Kahn's algorithm (BFS topological sort):
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> If queue empties before all nodes processed, there&#039;s a cycle
+            </div>
+            <div class="step-explanation">
+                Kahn's removes nodes with 0 in-degree. If cycle exists, some nodes never reach 0 in-degree.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> canFinish(numCourses: <span class="code-func">int</span>, prerequisites: List[List[<span class="code-func">int</span>]]) -&gt; <span class="code-func">bool</span>:
+    <span class="code-comment"># Build adjacency list</span>
+    graph = {i: [] <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(numCourses)}
+    <span class="code-keyword">for</span> course, prereq <span class="code-keyword">in</span> prerequisites:
+        graph[course].<span class="code-func">append</span>(prereq)
+    
+    <span class="code-comment"># 0 = unvisited, 1 = visiting, 2 = visited</span>
+    state = [<span class="code-number">0</span>] * numCourses
+    
+    <span class="code-keyword">def</span> dfs(course):
+        <span class="code-keyword">if</span> state[course] == <span class="code-number">1</span>:  <span class="code-comment"># Cycle detected</span>
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+        <span class="code-keyword">if</span> state[course] == <span class="code-number">2</span>:  <span class="code-comment"># Already processed</span>
+            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+        
+        state[course] = <span class="code-number">1</span>  <span class="code-comment"># Mark visiting</span>
+        
+        <span class="code-keyword">for</span> prereq <span class="code-keyword">in</span> graph[course]:
+            <span class="code-keyword">if</span> <span class="code-keyword">not</span> dfs(prereq):
+                <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+        
+        state[course] = <span class="code-number">2</span>  <span class="code-comment"># Mark visited</span>
+        <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+    
+    <span class="code-keyword">for</span> course <span class="code-keyword">in</span> <span class="code-func">range</span>(numCourses):
+        <span class="code-keyword">if</span> <span class="code-keyword">not</span> dfs(course):
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">True</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(V + E)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(V + E)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Graph Traversal problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=course-schedule" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Graphs Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/graphs/number-of-islands.html">
+                <span class="problem-card-title">Number of Islands</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/clone-graph.html">
+                <span class="problem-card-title">Clone Graph</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/pacific-atlantic-water-flow.html">
+                <span class="problem-card-title">Pacific Atlantic Water Flow</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/course-schedule-ii.html">
+                <span class="problem-card-title">Course Schedule II</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/rotting-oranges.html">
+                <span class="problem-card-title">Rotting Oranges</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/graphs/" class="see-all-link">See all Graphs problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=course-schedule" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

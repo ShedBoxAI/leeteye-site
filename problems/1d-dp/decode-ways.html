@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Decode Ways using 1D Dynamic Programming. medium difficulty. Time: O(n), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/1d-dp/decode-ways.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Decode Ways Solution | 1D Dynamic Programming | LeetEye">
+    <meta property="og:description" content="Learn how to solve Decode Ways using 1D Dynamic Programming. medium difficulty. Time: O(n), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/1d-dp/decode-ways.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Decode Ways Solution | 1D Dynamic Programming | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Decode Ways using 1D Dynamic Programming. medium difficulty. Time: O(n), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Decode Ways Solution | 1-D DP | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Decode Ways",
+        "description": "Like climbing stairs, but with validity checks. dp[i] = dp[i-1] (if single digit valid) + dp[i-2] (if two digits valid).",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "A single digit is valid if:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Two digits \"XY\" are valid if:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "dp[i] = number of ways to decode s[0:i]. dp[i] = ?",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "How many ways to decode \"06\"?",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "dp[0] (empty string) should be:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Decode Ways?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Decode Ways use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Decode Ways uses the 1D Dynamic Programming pattern. At each position: either take 1 digit (if valid) or 2 digits (if valid). Similar to climbing stairs with conditions."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/1d-dp/">1-D DP</a></li>
+            <li aria-current="page">Decode Ways</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/1d-dp/" class="pattern-badge">1D Dynamic Programming</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Decode Ways</h1>
+                <p class="problem-tags">
+                    <span class="tag">1d-dp</span>
+<span class="tag">decode-ways</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    A message containing letters from <code>A-Z</code> can be encoded into numbers using the following mapping:<br><br>``<code><br>'A' -> "1"<br>'B' -> "2"<br>...<br>'Z' -> "26"<br></code>`<code><br><br>Given a string </code>s` containing only digits, return the number of ways to decode it.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> s = &quot;12&quot;</div>
+            <div class="example-output"><strong>Output:</strong> 2</div>
+            <div class="example-explanation">&quot;12&quot; can be decoded as &quot;AB&quot; (1 2) or &quot;L&quot; (12).</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> s = &quot;226&quot;</div>
+            <div class="example-output"><strong>Output:</strong> 3</div>
+            <div class="example-explanation">&quot;226&quot; can be decoded as &quot;BZ&quot; (2 26), &quot;VF&quot; (22 6), or &quot;BBF&quot; (2 2 6).</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 3</div>
+            <div class="example-input"><strong>Input:</strong> s = &quot;06&quot;</div>
+            <div class="example-output"><strong>Output:</strong> 0</div>
+            <div class="example-explanation">&quot;06&quot; cannot be decoded. &quot;6&quot; is valid but not &quot;06&quot;.</div>
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>At each position: either take 1 digit (if valid) or 2 digits (if valid). Similar to climbing stairs with conditions.</p>
+                <p class="one-liner"><em>Like climbing stairs, but with validity checks. dp[i] = dp[i-1] (if single digit valid) + dp[i-2] (if two digits valid).</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">decode ways</span> <span class="trigger-tag">1d-dp</span></span>,
+                    think <strong>1D Dynamic Programming</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                A single digit is valid if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It&#039;s 1-9
+            </div>
+            <div class="step-explanation">
+                '0' alone has no letter. Only '1'-'9' map to 'A'-'I'.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Two digits "XY" are valid if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> 10 ≤ XY ≤ 26
+            </div>
+            <div class="step-explanation">
+                Must be 10-26. Numbers like "01", "05" are invalid (leading zero).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                dp[i] = number of ways to decode s[0:i]. dp[i] = ?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> dp[i-1] (if s[i-1] valid) + dp[i-2] (if s[i-2:i] valid)
+            </div>
+            <div class="step-explanation">
+                Add ways from using 1 digit (if valid) and from using 2 digits (if valid).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                How many ways to decode "06"?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> 0
+            </div>
+            <div class="step-explanation">
+                "0" is invalid single digit. "06" is invalid (leading zero). No valid decoding.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                dp[0] (empty string) should be:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> 1
+            </div>
+            <div class="step-explanation">
+                One way to decode empty string: do nothing. Needed for recurrence to work.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> numDecodings(s: <span class="code-func">str</span>) -&gt; <span class="code-func">int</span>:
+    <span class="code-keyword">if</span> <span class="code-keyword">not</span> s <span class="code-keyword">or</span> s[<span class="code-number">0</span>] == &<span class="code-comment">#039;0&#039;:</span>
+        <span class="code-keyword">return</span> <span class="code-number">0</span>
+    
+    <span class="code-comment"># prev2 = dp[i-2], prev1 = dp[i-1]</span>
+    prev2, prev1 = <span class="code-number">1</span>, <span class="code-number">1</span>
+    
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(<span class="code-number">1</span>, <span class="code-func">len</span>(s)):
+        curr = <span class="code-number">0</span>
+        
+        <span class="code-comment"># Single digit valid (1-9)</span>
+        <span class="code-keyword">if</span> s[i] != &<span class="code-comment">#039;0&#039;:</span>
+            curr += prev1
+        
+        <span class="code-comment"># Two digits valid (10-26)</span>
+        two_digit = <span class="code-func">int</span>(s[i-<span class="code-number">1</span>:i+<span class="code-number">1</span>])
+        <span class="code-keyword">if</span> <span class="code-number">10</span> &lt;= two_digit &lt;= <span class="code-number">26</span>:
+            curr += prev2
+        
+        prev2 = prev1
+        prev1 = curr
+    
+    <span class="code-keyword">return</span> prev1</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice 1D Dynamic Programming problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=decode-ways" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More 1-D DP Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/1d-dp/climbing-stairs.html">
+                <span class="problem-card-title">Climbing Stairs</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/min-cost-climbing-stairs.html">
+                <span class="problem-card-title">Min Cost Climbing Stairs</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/house-robber.html">
+                <span class="problem-card-title">House Robber</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/house-robber-ii.html">
+                <span class="problem-card-title">House Robber II</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/longest-palindromic-substring.html">
+                <span class="problem-card-title">Longest Palindromic Substring</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/1d-dp/" class="see-all-link">See all 1-D DP problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=decode-ways" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

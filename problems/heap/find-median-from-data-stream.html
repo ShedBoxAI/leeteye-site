@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Find Median from Data Stream using Heap / Priority Queue. hard difficulty. Time: O(log n) add, O(1) find, Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/heap/find-median-from-data-stream.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Find Median from Data Stream Solution | Heap / Priority Queue | LeetEye">
+    <meta property="og:description" content="Learn how to solve Find Median from Data Stream using Heap / Priority Queue. hard difficulty. Time: O(log n) add, O(1) find, Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/heap/find-median-from-data-stream.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Find Median from Data Stream Solution | Heap / Priority Queue | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Find Median from Data Stream using Heap / Priority Queue. hard difficulty. Time: O(log n) add, O(1) find, Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Find Median from Data Stream Solution | Heap / Priority Queue | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Find Median from Data Stream",
+        "description": "Two heaps: max-heap for smaller half, min-heap for larger half. Keep balanced (sizes differ &lt;= 1). Median = top of larger heap or average of tops.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Using a sorted list for each insert:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "For the smaller half, we use:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "For the larger half, we use:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "The heaps should be balanced such that:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "If total count is odd, median is:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "If total count is even, median is:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Find Median from Data Stream?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(log n) add, O(1) find time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Find Median from Data Stream use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Find Median from Data Stream uses the Heap / Priority Queue pattern. Use two heaps: max-heap for smaller half, min-heap for larger half."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/heap/">Heap / Priority Queue</a></li>
+            <li aria-current="page">Find Median from Data Stream</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-hard">Hard</span>
+                    <a href="/patterns/heap/" class="pattern-badge">Heap / Priority Queue</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Find Median from Data Stream</h1>
+                <p class="problem-tags">
+                    <span class="tag">heap</span>
+<span class="tag">find-median-from-data-stream</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    The median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value, and the median is the mean of the two middle values.<br><br>Implement the <code>MedianFinder</code> class:<br>- <code>MedianFinder()</code> initializes the MedianFinder object.<br>- <code>void addNum(int num)</code> adds the integer <code>num</code> from the data stream to the data structure.<br>- <code>double findMedian()</code> returns the median of all elements so far.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> [&quot;MedianFinder&quot;, &quot;addNum&quot;, &quot;addNum&quot;, &quot;findMedian&quot;, &quot;addNum&quot;, &quot;findMedian&quot;]</div>
+            <div class="example-output"><strong>Output:</strong> [null, null, null, 1.5, null, 2.0]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Use two heaps: max-heap for smaller half, min-heap for larger half.</p>
+                <p class="one-liner"><em>Two heaps: max-heap for smaller half, min-heap for larger half. Keep balanced (sizes differ &lt;= 1). Median = top of larger heap or average of tops.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">find median from data stream</span> <span class="trigger-tag">heap</span></span>,
+                    think <strong>Heap / Priority Queue</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Using a sorted list for each insert:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> O(n) insert, O(1) find median
+            </div>
+            <div class="step-explanation">
+                Inserting into sorted list is O(n). We want O(log n) insert.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                For the smaller half, we use:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Max-heap
+            </div>
+            <div class="step-explanation">
+                We need quick access to the LARGEST of the smaller half. Max-heap gives max at root.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                For the larger half, we use:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Min-heap
+            </div>
+            <div class="step-explanation">
+                We need quick access to the SMALLEST of the larger half. Min-heap gives min at root.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                The heaps should be balanced such that:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Sizes differ by at most 1
+            </div>
+            <div class="step-explanation">
+                For odd count, one heap has one extra element (median is its top). For even, both same size.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                If total count is odd, median is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Top of the heap with more elements
+            </div>
+            <div class="step-explanation">
+                The extra element is the median. Whichever heap has n/2+1 elements has the median.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                If total count is even, median is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Average of both tops
+            </div>
+            <div class="step-explanation">
+                Two middle elements are at the boundary. Average them.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">import</span> heapq
+
+class MedianFinder:
+    <span class="code-keyword">def</span> __init__(self):
+        self.small = []  <span class="code-comment"># Max-heap (negated values)</span>
+        self.large = []  <span class="code-comment"># Min-heap</span>
+    
+    <span class="code-keyword">def</span> addNum(self, num: <span class="code-func">int</span>) -&gt; <span class="code-keyword">None</span>:
+        <span class="code-comment"># Add to max-heap (smaller half)</span>
+        heapq.heappush(self.small, -num)
+        
+        <span class="code-comment"># Balance: move largest from small to large</span>
+        heapq.heappush(self.large, -heapq.heappop(self.small))
+        
+        <span class="code-comment"># Ensure small has &gt;= elements as large</span>
+        <span class="code-keyword">if</span> <span class="code-func">len</span>(self.large) &gt; <span class="code-func">len</span>(self.small):
+            heapq.heappush(self.small, -heapq.heappop(self.large))
+    
+    <span class="code-keyword">def</span> findMedian(self) -&gt; <span class="code-func">float</span>:
+        <span class="code-keyword">if</span> <span class="code-func">len</span>(self.small) &gt; <span class="code-func">len</span>(self.large):
+            <span class="code-keyword">return</span> -self.small[<span class="code-number">0</span>]
+        <span class="code-keyword">return</span> (-self.small[<span class="code-number">0</span>] + self.large[<span class="code-number">0</span>]) / <span class="code-number">2</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(log n) add, O(1) find</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Heap / Priority Queue problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=find-median-from-data-stream" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Heap / Priority Queue Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/heap/kth-largest-element-in-stream.html">
+                <span class="problem-card-title">Kth Largest Element in a Stream</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/last-stone-weight.html">
+                <span class="problem-card-title">Last Stone Weight</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/k-closest-points-to-origin.html">
+                <span class="problem-card-title">K Closest Points to Origin</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/kth-largest-element-in-array.html">
+                <span class="problem-card-title">Kth Largest Element in an Array</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/task-scheduler.html">
+                <span class="problem-card-title">Task Scheduler</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/heap/" class="see-all-link">See all Heap / Priority Queue problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=find-median-from-data-stream" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

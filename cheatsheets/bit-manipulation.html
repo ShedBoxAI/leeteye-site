@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bit Manipulation cheat sheet for coding interviews. Template code, complexity, and pattern recognition tips.">
+    <link rel="canonical" href="https://leeteye.com/cheatsheets/bit-manipulation.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Bit Manipulation Cheat Sheet | LeetEye">
+    <meta property="og:description" content="Bit Manipulation cheat sheet for coding interviews. Template code, complexity, and pattern recognition tips.">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/cheatsheets/bit-manipulation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bit Manipulation Cheat Sheet | LeetEye">
+    <meta name="twitter:description" content="Bit Manipulation cheat sheet for coding interviews. Template code, complexity, and pattern recognition tips.">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Bit Manipulation Cheat Sheet | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="apple-touch-icon" href="../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/pseo.css">
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Bit Manipulation Cheat Sheet",
+        "description": "Quick reference for Bit Manipulation pattern. Template code, complexity, and trigger words.",
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye"
+        }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+            <li aria-current="page">Bit Manipulation</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="cheatsheet-article">
+            <header class="cheatsheet-header" style="--pattern-color: #955251">
+                <span class="category-badge">Cheat Sheet</span>
+                <h1>Bit Manipulation Cheat Sheet</h1>
+                <p class="intro">Quick reference for coding interviews. Bookmark this page!</p>
+            </header>
+
+            <section class="cheatsheet-section">
+                <h2>What is Bit Manipulation?</h2>
+                <p>Leverage binary operations for space and time efficiency.</p>
+            </section>
+
+            <section class="cheatsheet-section trigger-section">
+                <h2>Trigger Words</h2>
+                <p>When you see these in a problem, think Bit Manipulation:</p>
+                <div class="trigger-tags">
+                    <span class="trigger-tag">single number</span>
+<span class="trigger-tag">bit-manipulation</span>
+<span class="trigger-tag">number of 1 bits</span>
+<span class="trigger-tag">counting bits</span>
+<span class="trigger-tag">reverse bits</span>
+<span class="trigger-tag">missing number</span>
+<span class="trigger-tag">sum of two integers</span>
+<span class="trigger-tag">reverse integer</span>
+                </div>
+            </section>
+
+            <section class="cheatsheet-section">
+                <h2>Template Code</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> singleNumber(nums: List[<span class="code-func">int</span>]) -&gt; <span class="code-func">int</span>:
+    result = <span class="code-number">0</span>
+    <span class="code-keyword">for</span> num <span class="code-keyword">in</span> nums:
+        result ^= num
+    <span class="code-keyword">return</span> result</code></pre>
+            </section>
+
+            <section class="cheatsheet-section">
+                <h2>Complexity</h2>
+                <table class="complexity-table">
+                    <tr>
+                        <th>Typical Time</th>
+                        <td><code>O(n)</code></td>
+                    </tr>
+                    <tr>
+                        <th>Typical Space</th>
+                        <td><code>O(1)</code></td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="cheatsheet-section">
+                <h2>Common Variations</h2>
+                <ul class="variations-list">
+                    
+        <li>Basic Bit Manipulation</li>
+        <li>Bit Manipulation with constraints</li>
+        <li>Optimized Bit Manipulation</li>
+    
+                </ul>
+            </section>
+
+            <section class="cheatsheet-section">
+                <h2>Practice Problems</h2>
+                <div class="problems-mini-grid">
+                    
+        <a href="/problems/bit-manipulation/single-number.html" class="problem-card">
+            <span class="problem-card-title">Single Number</span>
+            <span class="difficulty difficulty-easy">easy</span>
+        </a>
+    
+
+        <a href="/problems/bit-manipulation/number-of-1-bits.html" class="problem-card">
+            <span class="problem-card-title">Number of 1 Bits</span>
+            <span class="difficulty difficulty-easy">easy</span>
+        </a>
+    
+
+        <a href="/problems/bit-manipulation/counting-bits.html" class="problem-card">
+            <span class="problem-card-title">Counting Bits</span>
+            <span class="difficulty difficulty-easy">easy</span>
+        </a>
+    
+
+        <a href="/problems/bit-manipulation/reverse-bits.html" class="problem-card">
+            <span class="problem-card-title">Reverse Bits</span>
+            <span class="difficulty difficulty-easy">easy</span>
+        </a>
+    
+
+        <a href="/problems/bit-manipulation/missing-number.html" class="problem-card">
+            <span class="problem-card-title">Missing Number</span>
+            <span class="difficulty difficulty-easy">easy</span>
+        </a>
+    
+                </div>
+                <a href="/patterns/bit-manipulation/" class="see-all-link">See all Bit Manipulation problems &rarr;</a>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Practice Bit Manipulation</h2>
+                <p>Learn to recognize patterns instantly with interactive MCQs.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=cheatsheet&utm_campaign=bit-manipulation" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <aside class="other-cheatsheets">
+                <h3>Other Cheat Sheets</h3>
+                <ul>
+                    
+        <li><a href="/cheatsheets/arrays-and-hashing.html">Arrays &amp; Hashing</a></li>
+    
+
+        <li><a href="/cheatsheets/two-pointers.html">Two Pointers</a></li>
+    
+
+        <li><a href="/cheatsheets/stack.html">Stack</a></li>
+    
+
+        <li><a href="/cheatsheets/sliding-window.html">Sliding Window</a></li>
+    
+
+        <li><a href="/cheatsheets/binary-search.html">Binary Search</a></li>
+    
+                </ul>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=bit-manipulation" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/cheatsheets/">All Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

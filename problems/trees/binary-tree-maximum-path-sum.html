@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Binary Tree Maximum Path Sum using Tree Traversal. medium difficulty. Time: O(n), Space: O(h).">
+    <link rel="canonical" href="https://leeteye.com/problems/trees/binary-tree-maximum-path-sum.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Binary Tree Maximum Path Sum Solution | Tree Traversal | LeetEye">
+    <meta property="og:description" content="Learn how to solve Binary Tree Maximum Path Sum using Tree Traversal. medium difficulty. Time: O(n), Space: O(h).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/trees/binary-tree-maximum-path-sum.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Binary Tree Maximum Path Sum Solution | Tree Traversal | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Binary Tree Maximum Path Sum using Tree Traversal. medium difficulty. Time: O(n), Space: O(h).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Binary Tree Maximum Path Sum Solution | Trees | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Binary Tree Maximum Path Sum",
+        "description": "At each node: turn-sum = node + left + right (update global max). Return node + max(left, right) (one direction to parent). Ignore negative contributions.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "A valid path in this problem:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "A path can \"turn\" at node X, meaning:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "When returning a value to parent, we can include:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "At each node, we compute two things:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "If a child's contribution is negative:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "For a null node, the contribution is:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Binary Tree Maximum Path Sum?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(h) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Binary Tree Maximum Path Sum use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Binary Tree Maximum Path Sum uses the Tree Traversal pattern. At each node, compute two things: (1) path sum including both children (potential answer), (2) max single-branch sum to return to parent."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/trees/">Trees</a></li>
+            <li aria-current="page">Binary Tree Maximum Path Sum</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/trees/" class="pattern-badge">Tree Traversal</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Binary Tree Maximum Path Sum</h1>
+                <p class="problem-tags">
+                    <span class="tag">trees</span>
+<span class="tag">binary-tree-maximum-path-sum</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.<br><br>The path sum of a path is the sum of the node's values in the path.<br><br>Given the <code>root</code> of a binary tree, return the maximum path sum of any non-empty path.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> root = [1,2,3]</div>
+            <div class="example-output"><strong>Output:</strong> 6</div>
+            <div class="example-explanation">Path 2 -&gt; 1 -&gt; 3 has sum 6.</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> root = [-10,9,20,null,null,15,7]</div>
+            <div class="example-output"><strong>Output:</strong> 42</div>
+            <div class="example-explanation">Path 15 -&gt; 20 -&gt; 7 has sum 42.</div>
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>At each node, compute two things: (1) path sum including both children (potential answer), (2) max single-branch sum to return to parent.</p>
+                <p class="one-liner"><em>At each node: turn-sum = node + left + right (update global max). Return node + max(left, right) (one direction to parent). Ignore negative contributions.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">binary tree maximum path sum</span> <span class="trigger-tag">trees</span></span>,
+                    think <strong>Tree Traversal</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                A valid path in this problem:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Can start and end anywhere
+            </div>
+            <div class="step-explanation">
+                A path is any connected sequence. It can be entirely in a subtree.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                A path can "turn" at node X, meaning:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It includes both left and right children of X
+            </div>
+            <div class="step-explanation">
+                Path goes through left subtree, through X, and through right subtree.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                When returning a value to parent, we can include:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> At most one child&#039;s path
+            </div>
+            <div class="step-explanation">
+                A path can't branch. If we go to parent, we came from one direction only.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                At each node, we compute two things:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Turn-sum (global update) and straight-sum (return)
+            </div>
+            <div class="step-explanation">
+                Turn-sum includes both children (potential answer). Straight-sum is what we can extend upward.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                If a child's contribution is negative:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Treat it as 0 (don&#039;t include it)
+            </div>
+            <div class="step-explanation">
+                A negative contribution makes the path worse. Better to not include that subtree.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                For a null node, the contribution is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> 0
+            </div>
+            <div class="step-explanation">
+                No node = no contribution. Neutral value is 0.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> maxPathSum(root: TreeNode) -&gt; <span class="code-func">int</span>:
+    max_sum = <span class="code-func">float</span>(&<span class="code-comment">#039;-inf&#039;)</span>
+    
+    <span class="code-keyword">def</span> dfs(node):
+        <span class="code-keyword">nonlocal</span> max_sum
+        <span class="code-keyword">if</span> <span class="code-keyword">not</span> node:
+            <span class="code-keyword">return</span> <span class="code-number">0</span>
+        
+        <span class="code-comment"># Get max gain from children (ignore negative)</span>
+        left_gain = <span class="code-func">max</span>(dfs(node.left), <span class="code-number">0</span>)
+        right_gain = <span class="code-func">max</span>(dfs(node.right), <span class="code-number">0</span>)
+        
+        <span class="code-comment"># Path sum if we &quot;turn&quot; at this node</span>
+        path_sum = node.val + left_gain + right_gain
+        max_sum = <span class="code-func">max</span>(max_sum, path_sum)
+        
+        <span class="code-comment"># Return max gain we can extend to parent</span>
+        <span class="code-keyword">return</span> node.val + <span class="code-func">max</span>(left_gain, right_gain)
+    
+    dfs(root)
+    <span class="code-keyword">return</span> max_sum</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(h)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Tree Traversal problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=binary-tree-maximum-path-sum" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Trees Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/trees/invert-binary-tree.html">
+                <span class="problem-card-title">Invert Binary Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/maximum-depth-of-binary-tree.html">
+                <span class="problem-card-title">Maximum Depth of Binary Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/validate-binary-search-tree.html">
+                <span class="problem-card-title">Validate Binary Search Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/lowest-common-ancestor.html">
+                <span class="problem-card-title">Lowest Common Ancestor of a Binary Search Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/binary-tree-level-order-traversal.html">
+                <span class="problem-card-title">Binary Tree Level Order Traversal</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/trees/" class="see-all-link">See all Trees problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=binary-tree-maximum-path-sum" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

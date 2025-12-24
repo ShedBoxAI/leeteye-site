@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Rotate Image using Math &amp; Geometry. medium difficulty. Time: O(n²), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/math-and-geometry/rotate-image.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rotate Image Solution | Math &amp; Geometry | LeetEye">
+    <meta property="og:description" content="Learn how to solve Rotate Image using Math &amp; Geometry. medium difficulty. Time: O(n²), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/math-and-geometry/rotate-image.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rotate Image Solution | Math &amp; Geometry | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Rotate Image using Math &amp; Geometry. medium difficulty. Time: O(n²), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Rotate Image Solution | Math &amp; Geometry | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Rotate Image",
+        "description": "90° clockwise = Transpose + Reverse each row. Transpose swaps (i,j)&lt;-&gt;(j,i). Both operations are in-place.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Transposing a matrix:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "After 90° clockwise, element at (i, j) goes to:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "90° clockwise rotation equals:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "In-place transpose swaps:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "For in-place transpose, we iterate:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Rotate Image?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n²) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Rotate Image use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Rotate Image uses the Math &amp; Geometry pattern. 90° clockwise rotation = transpose + reverse each row."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/math-and-geometry/">Math &amp; Geometry</a></li>
+            <li aria-current="page">Rotate Image</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/math-and-geometry/" class="pattern-badge">Math &amp; Geometry</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Rotate Image</h1>
+                <p class="problem-tags">
+                    <span class="tag">math-and-geometry</span>
+<span class="tag">rotate-image</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    You are given an <code>n x n</code> 2D matrix representing an image, rotate the image by 90 degrees (clockwise).<br><br>You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> matrix = [[1,2,3],[4,5,6],[7,8,9]]</div>
+            <div class="example-output"><strong>Output:</strong> [[7,4,1],[8,5,2],[9,6,3]]</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]</div>
+            <div class="example-output"><strong>Output:</strong> [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>90° clockwise rotation = transpose + reverse each row.</p>
+                <p class="one-liner"><em>90° clockwise = Transpose + Reverse each row. Transpose swaps (i,j)&lt;-&gt;(j,i). Both operations are in-place.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">rotate image</span> <span class="trigger-tag">math-and-geometry</span></span>,
+                    think <strong>Math &amp; Geometry</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Transposing a matrix:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Swaps rows and columns
+            </div>
+            <div class="step-explanation">
+                Element at (i,j) goes to (j,i).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                After 90° clockwise, element at (i, j) goes to:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> (j, n-1-i)
+            </div>
+            <div class="step-explanation">
+                Row i becomes column n-1-i. Column j becomes row j.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                90° clockwise rotation equals:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Transpose + reverse rows
+            </div>
+            <div class="step-explanation">
+                Transpose swaps (i,j)->(j,i). Reversing rows of transpose gives 90° clockwise.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                In-place transpose swaps:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> matrix[i][j] with matrix[j][i]
+            </div>
+            <div class="step-explanation">
+                Only swap upper triangle with lower triangle.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                For in-place transpose, we iterate:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Only upper triangle (j &gt; i)
+            </div>
+            <div class="step-explanation">
+                Swapping all would swap twice (back to original). Only swap where j > i.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> rotate(matrix: List[List[<span class="code-func">int</span>]]) -&gt; <span class="code-keyword">None</span>:
+    n = <span class="code-func">len</span>(matrix)
+    
+    <span class="code-comment"># Step 1: Transpose (swap across diagonal)</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(n):
+        <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-func">range</span>(i + <span class="code-number">1</span>, n):
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+    
+    <span class="code-comment"># Step 2: Reverse each row</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(n):
+        matrix[i].reverse()</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n²)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Math &amp; Geometry problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=rotate-image" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Math &amp; Geometry Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/math-and-geometry/spiral-matrix.html">
+                <span class="problem-card-title">Spiral Matrix</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/math-and-geometry/set-matrix-zeroes.html">
+                <span class="problem-card-title">Set Matrix Zeroes</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/math-and-geometry/happy-number.html">
+                <span class="problem-card-title">Happy Number</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/math-and-geometry/plus-one.html">
+                <span class="problem-card-title">Plus One</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/math-and-geometry/pow-x-n.html">
+                <span class="problem-card-title">Pow(x, n)</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/math-and-geometry/" class="see-all-link">See all Math &amp; Geometry problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=rotate-image" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

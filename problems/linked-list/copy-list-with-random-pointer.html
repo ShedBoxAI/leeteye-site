@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Copy List with Random Pointer using Linked List. medium difficulty. Time: O(n), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/linked-list/copy-list-with-random-pointer.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Copy List with Random Pointer Solution | Linked List | LeetEye">
+    <meta property="og:description" content="Learn how to solve Copy List with Random Pointer using Linked List. medium difficulty. Time: O(n), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/linked-list/copy-list-with-random-pointer.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Copy List with Random Pointer Solution | Linked List | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Copy List with Random Pointer using Linked List. medium difficulty. Time: O(n), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Copy List with Random Pointer Solution | Linked List | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Copy List with Random Pointer",
+        "description": "Challenge: random points to not-yet-created nodes. Solution: create all nodes first (map them), then set pointers. Or interleave for O(1) space.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Simply creating nodes as we traverse fails because:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Using a hash map {old_node: new_node} helps because:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "Interleaving means placing each new node:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "With interleaving, if old.random = X, then new.random should be:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "After setting all pointers, we need to:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Copy List with Random Pointer?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Copy List with Random Pointer use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Copy List with Random Pointer uses the Linked List pattern. Map old nodes to new nodes. When setting random pointers, look up the corresponding new node."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/linked-list/">Linked List</a></li>
+            <li aria-current="page">Copy List with Random Pointer</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/linked-list/" class="pattern-badge">Linked List</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Copy List with Random Pointer</h1>
+                <p class="problem-tags">
+                    <span class="tag">linked-list</span>
+<span class="tag">copy-list-with-random-pointer</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    A linked list of length <code>n</code> is given such that each node contains an additional random pointer, which could point to any node in the list, or <code>null</code>.<br><br>Construct a deep copy of the list. The deep copy should consist of exactly <code>n</code> brand new nodes, where each new node has its value set to the value of its corresponding original node. Both the <code>next</code> and <code>random</code> pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state.<br><br>Return the head of the copied linked list.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> head = [[7,null],[13,0],[11,4],[10,2],[1,0]]</div>
+            <div class="example-output"><strong>Output:</strong> [[7,null],[13,0],[11,4],[10,2],[1,0]]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Map old nodes to new nodes. When setting random pointers, look up the corresponding new node.</p>
+                <p class="one-liner"><em>Challenge: random points to not-yet-created nodes. Solution: create all nodes first (map them), then set pointers. Or interleave for O(1) space.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">copy list with random pointer</span> <span class="trigger-tag">linked-list</span></span>,
+                    think <strong>Linked List</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Simply creating nodes as we traverse fails because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Random might point to a node not yet created
+            </div>
+            <div class="step-explanation">
+                If node 1's random points to node 5, when we're at node 1, node 5's copy doesn't exist yet.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Using a hash map {old_node: new_node} helps because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> We can look up corresponding new node for any old node
+            </div>
+            <div class="step-explanation">
+                When setting random, we find old_node's random in the map to get the new target.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                Interleaving means placing each new node:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Right after its corresponding old node
+            </div>
+            <div class="step-explanation">
+                old1 → new1 → old2 → new2 → ... This lets us access new nodes without a map.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                With interleaving, if old.random = X, then new.random should be:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> X.next
+            </div>
+            <div class="step-explanation">
+                X.next is the new copy of X (due to interleaving). So old.random.next = corresponding new node.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                After setting all pointers, we need to:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Separate the lists (restore original and extract copy)
+            </div>
+            <div class="step-explanation">
+                We need to return a clean copy and restore the original list to its state.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> copyRandomList(head: Node) -&gt; Node:
+    <span class="code-keyword">if</span> <span class="code-keyword">not</span> head:
+        <span class="code-keyword">return</span> <span class="code-keyword">None</span>
+    
+    <span class="code-comment"># Map old nodes to new nodes</span>
+    old_to_new = {}
+    
+    <span class="code-comment"># First pass: create all new nodes</span>
+    curr = head
+    <span class="code-keyword">while</span> curr:
+        old_to_new[curr] = Node(curr.val)
+        curr = curr.next
+    
+    <span class="code-comment"># Second pass: set next and random pointers</span>
+    curr = head
+    <span class="code-keyword">while</span> curr:
+        old_to_new[curr].next = old_to_new.<span class="code-func">get</span>(curr.next)
+        old_to_new[curr].random = old_to_new.<span class="code-func">get</span>(curr.random)
+        curr = curr.next
+    
+    <span class="code-keyword">return</span> old_to_new[head]</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Linked List problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=copy-list-with-random-pointer" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Linked List Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/linked-list/reverse-linked-list.html">
+                <span class="problem-card-title">Reverse Linked List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/merge-two-sorted-lists.html">
+                <span class="problem-card-title">Merge Two Sorted Lists</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/linked-list-cycle.html">
+                <span class="problem-card-title">Linked List Cycle</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/reorder-list.html">
+                <span class="problem-card-title">Reorder List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/remove-nth-node-from-end.html">
+                <span class="problem-card-title">Remove Nth Node From End of List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/linked-list/" class="see-all-link">See all Linked List problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=copy-list-with-random-pointer" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

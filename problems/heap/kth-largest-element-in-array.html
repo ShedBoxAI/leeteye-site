@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Kth Largest Element in an Array using Heap / Priority Queue. hard difficulty. Time: O(n log k), Space: O(k).">
+    <link rel="canonical" href="https://leeteye.com/problems/heap/kth-largest-element-in-array.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Kth Largest Element in an Array Solution | Heap / Priority Queue | LeetEye">
+    <meta property="og:description" content="Learn how to solve Kth Largest Element in an Array using Heap / Priority Queue. hard difficulty. Time: O(n log k), Space: O(k).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/heap/kth-largest-element-in-array.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kth Largest Element in an Array Solution | Heap / Priority Queue | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Kth Largest Element in an Array using Heap / Priority Queue. hard difficulty. Time: O(n log k), Space: O(k).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Kth Largest Element in an Array Solution | Heap / Priority Queue | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Kth Largest Element in an Array",
+        "description": "Min-heap of size k: process all elements, keeping k largest. Root is kth largest. Quickselect for O(n) average.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Sort descending, return arr[k-1]:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Min-heap of size k gives kth largest because:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "Using heap of size n vs size k:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "Quickselect is like quicksort but:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "After partition around pivot, if pivot is at index p:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "For guaranteed O(n log k) with simple code:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Kth Largest Element in an Array?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n log k) time complexity and O(k) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Kth Largest Element in an Array use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Kth Largest Element in an Array uses the Heap / Priority Queue pattern. Min-heap of size k: process all elements, keeping k largest. Root is kth largest."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/heap/">Heap / Priority Queue</a></li>
+            <li aria-current="page">Kth Largest Element in an Array</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-hard">Hard</span>
+                    <a href="/patterns/heap/" class="pattern-badge">Heap / Priority Queue</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Kth Largest Element in an Array</h1>
+                <p class="problem-tags">
+                    <span class="tag">heap</span>
+<span class="tag">kth-largest-element-in-an-array</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given an integer array <code>nums</code> and an integer <code>k</code>, return the <code>k</code>th largest element in the array.<br><br>Note that it is the <code>k</code>th largest element in the sorted order, not the <code>k</code>th distinct element.<br><br>Can you solve it without sorting?
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> nums = [3,2,1,5,6,4], k = 2</div>
+            <div class="example-output"><strong>Output:</strong> 5</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> nums = [3,2,3,1,2,4,5,5,6], k = 4</div>
+            <div class="example-output"><strong>Output:</strong> 4</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Min-heap of size k: process all elements, keeping k largest. Root is kth largest.</p>
+                <p class="one-liner"><em>Min-heap of size k: process all elements, keeping k largest. Root is kth largest. Quickselect for O(n) average.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">kth largest element in an array</span> <span class="trigger-tag">heap</span></span>,
+                    think <strong>Heap / Priority Queue</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Sort descending, return arr[k-1]:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Works, O(n log n)
+            </div>
+            <div class="step-explanation">
+                Sorting works but isn't optimal. O(n log n) time.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Min-heap of size k gives kth largest because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Both A and C
+            </div>
+            <div class="step-explanation">
+                Heap keeps k largest. Min among them = kth largest overall.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                Using heap of size n vs size k:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Size k is faster for k &lt;&lt; n
+            </div>
+            <div class="step-explanation">
+                O(n log k) vs O(n log n). When k is small, log k << log n.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                Quickselect is like quicksort but:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Only recurses on one side
+            </div>
+            <div class="step-explanation">
+                We only care about kth position. Recurse only on the side containing it.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                After partition around pivot, if pivot is at index p:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> All of the above
+            </div>
+            <div class="step-explanation">
+                Partition puts pivot in correct sorted position. Compare with target position n-k.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                For guaranteed O(n log k) with simple code:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Heap
+            </div>
+            <div class="step-explanation">
+                Quickselect is O(n) average but O(n^2) worst. Heap is reliably O(n log k).
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">import</span> heapq
+
+<span class="code-keyword">def</span> findKthLargest(nums: List[<span class="code-func">int</span>], k: <span class="code-func">int</span>) -&gt; <span class="code-func">int</span>:
+    <span class="code-comment"># Min-heap of size k</span>
+    heap = []
+    
+    <span class="code-keyword">for</span> num <span class="code-keyword">in</span> nums:
+        heapq.heappush(heap, num)
+        <span class="code-keyword">if</span> <span class="code-func">len</span>(heap) &gt; k:
+            heapq.heappop(heap)
+    
+    <span class="code-keyword">return</span> heap[<span class="code-number">0</span>]</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n log k)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(k)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Heap / Priority Queue problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=kth-largest-element-in-array" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Heap / Priority Queue Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/heap/kth-largest-element-in-stream.html">
+                <span class="problem-card-title">Kth Largest Element in a Stream</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/last-stone-weight.html">
+                <span class="problem-card-title">Last Stone Weight</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/k-closest-points-to-origin.html">
+                <span class="problem-card-title">K Closest Points to Origin</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/task-scheduler.html">
+                <span class="problem-card-title">Task Scheduler</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/design-twitter.html">
+                <span class="problem-card-title">Design Twitter</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/heap/" class="see-all-link">See all Heap / Priority Queue problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=kth-largest-element-in-array" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Merge Two Sorted Lists using Linked List. medium difficulty. Time: O(n + m), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/linked-list/merge-two-sorted-lists.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Merge Two Sorted Lists Solution | Linked List | LeetEye">
+    <meta property="og:description" content="Learn how to solve Merge Two Sorted Lists using Linked List. medium difficulty. Time: O(n + m), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/linked-list/merge-two-sorted-lists.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Merge Two Sorted Lists Solution | Linked List | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Merge Two Sorted Lists using Linked List. medium difficulty. Time: O(n + m), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Merge Two Sorted Lists Solution | Linked List | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Merge Two Sorted Lists",
+        "description": "Compare heads, take smaller, advance that pointer. Use dummy node. Attach remaining list when one exhausts.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "At each step, we compare:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "If list1.val < list2.val, we:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "After appending a node from list1, we:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "A dummy node helps because:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "When list1 becomes null (exhausted):",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "We return:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Merge Two Sorted Lists?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n + m) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Merge Two Sorted Lists use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Merge Two Sorted Lists uses the Linked List pattern. Compare heads of both lists. Take the smaller one, advance that list&#039;s pointer. Repeat."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/linked-list/">Linked List</a></li>
+            <li aria-current="page">Merge Two Sorted Lists</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/linked-list/" class="pattern-badge">Linked List</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Merge Two Sorted Lists</h1>
+                <p class="problem-tags">
+                    <span class="tag">linked-list</span>
+<span class="tag">merge-two-sorted-lists</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    You are given the heads of two sorted linked lists <code>list1</code> and <code>list2</code>.<br><br>Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.<br><br>Return the head of the merged linked list.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> list1 = [1,2,4], list2 = [1,3,4]</div>
+            <div class="example-output"><strong>Output:</strong> [1,1,2,3,4,4]</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> list1 = [], list2 = []</div>
+            <div class="example-output"><strong>Output:</strong> []</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 3</div>
+            <div class="example-input"><strong>Input:</strong> list1 = [], list2 = [0]</div>
+            <div class="example-output"><strong>Output:</strong> [0]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Compare heads of both lists. Take the smaller one, advance that list&#039;s pointer. Repeat.</p>
+                <p class="one-liner"><em>Compare heads, take smaller, advance that pointer. Use dummy node. Attach remaining list when one exhausts.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">merge two sorted lists</span> <span class="trigger-tag">linked-list</span></span>,
+                    think <strong>Linked List</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                At each step, we compare:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Heads (current nodes) of both lists
+            </div>
+            <div class="step-explanation">
+                Both lists are sorted. Smallest remaining element is always at the head of one list.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                If list1.val < list2.val, we:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Take node from list1
+            </div>
+            <div class="step-explanation">
+                We want sorted order. Smaller goes first.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                After appending a node from list1, we:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Advance list1 to list1.next
+            </div>
+            <div class="step-explanation">
+                We've used this node. Move to the next candidate.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                A dummy node helps because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It simplifies handling the head of result
+            </div>
+            <div class="step-explanation">
+                Without dummy, we need special logic for the first node. With dummy, we always append to dummy's current position.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                When list1 becomes null (exhausted):
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Append remaining list2
+            </div>
+            <div class="step-explanation">
+                Remaining nodes of list2 are already sorted. Just attach them.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                We return:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> dummy.next
+            </div>
+            <div class="step-explanation">
+                Dummy is just a placeholder. The actual merged list starts at dummy.next.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> mergeTwoLists(list1: ListNode, list2: ListNode) -&gt; ListNode:
+    dummy = ListNode()
+    curr = dummy
+    
+    <span class="code-keyword">while</span> list1 <span class="code-keyword">and</span> list2:
+        <span class="code-keyword">if</span> list1.val &lt;= list2.val:
+            curr.next = list1
+            list1 = list1.next
+        <span class="code-keyword">else</span>:
+            curr.next = list2
+            list2 = list2.next
+        curr = curr.next
+    
+    <span class="code-comment"># Attach remaining nodes</span>
+    curr.next = list1 <span class="code-keyword">if</span> list1 <span class="code-keyword">else</span> list2
+    
+    <span class="code-keyword">return</span> dummy.next</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n + m)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Linked List problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=merge-two-sorted-lists" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Linked List Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/linked-list/reverse-linked-list.html">
+                <span class="problem-card-title">Reverse Linked List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/linked-list-cycle.html">
+                <span class="problem-card-title">Linked List Cycle</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/reorder-list.html">
+                <span class="problem-card-title">Reorder List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/remove-nth-node-from-end.html">
+                <span class="problem-card-title">Remove Nth Node From End of List</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/linked-list/copy-list-with-random-pointer.html">
+                <span class="problem-card-title">Copy List with Random Pointer</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/linked-list/" class="see-all-link">See all Linked List problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=merge-two-sorted-lists" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

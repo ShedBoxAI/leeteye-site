@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Serialize and Deserialize Binary Tree using Tree Traversal. medium difficulty. Time: O(n), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/trees/serialize-and-deserialize-binary-tree.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Serialize and Deserialize Binary Tree Solution | Tree Traversal | LeetEye">
+    <meta property="og:description" content="Learn how to solve Serialize and Deserialize Binary Tree using Tree Traversal. medium difficulty. Time: O(n), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/trees/serialize-and-deserialize-binary-tree.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Serialize and Deserialize Binary Tree Solution | Tree Traversal | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Serialize and Deserialize Binary Tree using Tree Traversal. medium difficulty. Time: O(n), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Serialize and Deserialize Binary Tree Solution | Trees | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Serialize and Deserialize Binary Tree",
+        "description": "Pre-order with null markers: serialize by visiting root, left, right with &#039;null&#039; for None. Deserialize by consuming values in same order, recursively building left then right.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Storing just values [1, 2, 3, 4, 5] fails because:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Including \"null\" for missing children helps because:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "Which traversals can uniquely serialize a tree with null markers?",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "For tree [1, [2], [3, [4], [5]]], pre-order with nulls is:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "When deserializing pre-order, we:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "When we encounter \"null\" during deserialization:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Serialize and Deserialize Binary Tree?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Serialize and Deserialize Binary Tree use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Serialize and Deserialize Binary Tree uses the Tree Traversal pattern. Pre-order traversal with null markers creates a unique, reconstructable representation."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/trees/">Trees</a></li>
+            <li aria-current="page">Serialize and Deserialize Binary Tree</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/trees/" class="pattern-badge">Tree Traversal</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Serialize and Deserialize Binary Tree</h1>
+                <p class="problem-tags">
+                    <span class="tag">trees</span>
+<span class="tag">serialize-and-deserialize-binary-tree</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Serialization is the process of converting a data structure or object into a sequence of bits so that it can be stored in a file or memory buffer, or transmitted across a network connection link to be reconstructed later in the same or another computer environment.<br><br>Design an algorithm to serialize and deserialize a binary tree. There is no restriction on how your serialization/deserialization algorithm should work. You just need to ensure that a binary tree can be serialized to a string and this string can be deserialized to the original tree structure.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> root = [1,2,3,null,null,4,5]</div>
+            <div class="example-output"><strong>Output:</strong> [1,2,3,null,null,4,5]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Pre-order traversal with null markers creates a unique, reconstructable representation.</p>
+                <p class="one-liner"><em>Pre-order with null markers: serialize by visiting root, left, right with &#039;null&#039; for None. Deserialize by consuming values in same order, recursively building left then right.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">serialize and deserialize binary tree</span> <span class="trigger-tag">trees</span></span>,
+                    think <strong>Tree Traversal</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Storing just values [1, 2, 3, 4, 5] fails because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It doesn&#039;t capture tree structure
+            </div>
+            <div class="step-explanation">
+                Same values can form different trees. We need structure info.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Including "null" for missing children helps because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It marks where branches end
+            </div>
+            <div class="step-explanation">
+                Without nulls, we can't tell where a subtree ends. Nulls are the "stop" signals.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                Which traversals can uniquely serialize a tree with null markers?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Pre-order or level-order (both work)
+            </div>
+            <div class="step-explanation">
+                Both work with null markers. In-order doesn't work because multiple trees can have the same in-order with nulls.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                For tree [1, [2], [3, [4], [5]]], pre-order with nulls is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> 1, 2, null, null, 3, 4, null, null, 5, null, null
+            </div>
+            <div class="step-explanation">
+                Visit 1, go left (2, null, null), go right (3, left (4, null, null), right (5, null, null)).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                When deserializing pre-order, we:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Process values in order, recursively building left then right
+            </div>
+            <div class="step-explanation">
+                First value is root. Then recursively build left subtree, then right subtree. Nulls signal "no child here."
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                When we encounter "null" during deserialization:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Return None and move to next value
+            </div>
+            <div class="step-explanation">
+                Null means no node here. Return None, but continue processing remaining values.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python">class Codec:
+    <span class="code-keyword">def</span> serialize(self, root: TreeNode) -&gt; <span class="code-func">str</span>:
+        result = []
+        
+        <span class="code-keyword">def</span> preorder(node):
+            <span class="code-keyword">if</span> <span class="code-keyword">not</span> node:
+                result.<span class="code-func">append</span>(&<span class="code-comment">#039;N&#039;)</span>
+                <span class="code-keyword">return</span>
+            result.<span class="code-func">append</span>(<span class="code-func">str</span>(node.val))
+            preorder(node.left)
+            preorder(node.right)
+        
+        preorder(root)
+        <span class="code-keyword">return</span> &<span class="code-comment">#039;,&#039;.join(result)</span>
+    
+    <span class="code-keyword">def</span> deserialize(self, data: <span class="code-func">str</span>) -&gt; TreeNode:
+        <span class="code-func">values</span> = iter(data.split(&<span class="code-comment">#039;,&#039;))</span>
+        
+        <span class="code-keyword">def</span> build():
+            val = next(<span class="code-func">values</span>)
+            <span class="code-keyword">if</span> val == &<span class="code-comment">#039;N&#039;:</span>
+                <span class="code-keyword">return</span> <span class="code-keyword">None</span>
+            node = TreeNode(<span class="code-func">int</span>(val))
+            node.left = build()
+            node.right = build()
+            <span class="code-keyword">return</span> node
+        
+        <span class="code-keyword">return</span> build()</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Tree Traversal problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=serialize-and-deserialize-binary-tree" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Trees Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/trees/invert-binary-tree.html">
+                <span class="problem-card-title">Invert Binary Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/maximum-depth-of-binary-tree.html">
+                <span class="problem-card-title">Maximum Depth of Binary Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/validate-binary-search-tree.html">
+                <span class="problem-card-title">Validate Binary Search Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/lowest-common-ancestor.html">
+                <span class="problem-card-title">Lowest Common Ancestor of a Binary Search Tree</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/trees/binary-tree-level-order-traversal.html">
+                <span class="problem-card-title">Binary Tree Level Order Traversal</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/trees/" class="see-all-link">See all Trees problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=serialize-and-deserialize-binary-tree" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

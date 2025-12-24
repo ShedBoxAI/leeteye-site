@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Product of Array Except Self using Prefix/Suffix Arrays. easy difficulty. Time: O(n), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/arrays-and-hashing/product-of-array-except-self.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Product of Array Except Self Solution | Prefix/Suffix Arrays | LeetEye">
+    <meta property="og:description" content="Learn how to solve Product of Array Except Self using Prefix/Suffix Arrays. easy difficulty. Time: O(n), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/arrays-and-hashing/product-of-array-except-self.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Product of Array Except Self Solution | Prefix/Suffix Arrays | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Product of Array Except Self using Prefix/Suffix Arrays. easy difficulty. Time: O(n), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Product of Array Except Self Solution | Arrays &amp; Hashing | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Product of Array Except Self",
+        "description": "Product except self = prefix product × suffix product. Compute in two passes.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "If division were allowed, the solution would be:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Product of all elements except nums[i] equals:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "prefix[i] represents:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "suffix[i] represents:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "The answer for position i is:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "We can reduce from O(n) extra space to O(1) by:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Product of Array Except Self?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Product of Array Except Self use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Product of Array Except Self uses the Prefix/Suffix Arrays pattern. Product of all except nums[i] = (product of everything left of i) × (product of everything right of i)"
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/arrays-and-hashing/">Arrays &amp; Hashing</a></li>
+            <li aria-current="page">Product of Array Except Self</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-easy">Easy</span>
+                    <a href="/patterns/arrays-and-hashing/" class="pattern-badge">Prefix/Suffix Arrays</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Product of Array Except Self</h1>
+                <p class="problem-tags">
+                    <span class="tag">arrays-and-hashing</span>
+<span class="tag">product-of-array-except-self</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given an integer array <code>nums</code>, return an array <code>answer</code> such that <code>answer[i]</code> is equal to the product of all the elements of <code>nums</code> except <code>nums[i]</code>.<br><br>You must write an algorithm that runs in O(n) time and <strong>without using the division operation</strong>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1,2,3,4]</div>
+            <div class="example-output"><strong>Output:</strong> [24,12,8,6]</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> nums = [-1,1,0,-3,3]</div>
+            <div class="example-output"><strong>Output:</strong> [0,0,9,0,0]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Product of all except nums[i] = (product of everything left of i) × (product of everything right of i)</p>
+                <p class="one-liner"><em>Product except self = prefix product × suffix product. Compute in two passes.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">product of array except self</span> <span class="trigger-tag">arrays-and-hashing</span></span>,
+                    think <strong>Prefix/Suffix Arrays</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                If division were allowed, the solution would be:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Compute total product, divide by each element
+            </div>
+            <div class="step-explanation">
+                Total product / nums[i] = product of all others. But the problem forbids division, likely to handle zeros properly (division by zero) or as a learning exercise.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Product of all elements except nums[i] equals:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> (Product of elements before i) × (Product of elements after i)
+            </div>
+            <div class="step-explanation">
+                This decomposition avoids needing nums[i] itself. We multiply everything to the left with everything to the right.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                prefix[i] represents:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> nums[0] × nums[1] × ... × nums[i-1]
+            </div>
+            <div class="step-explanation">
+                Prefix product at i is the product of all elements BEFORE index i (exclusive of i).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                suffix[i] represents:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> nums[i+1] × nums[i+2] × ... × nums[n-1]
+            </div>
+            <div class="step-explanation">
+                Suffix product at i is the product of all elements AFTER index i (exclusive of i).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                The answer for position i is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> prefix[i] × suffix[i]
+            </div>
+            <div class="step-explanation">
+                Product of everything before × product of everything after = product of everything except nums[i].
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                We can reduce from O(n) extra space to O(1) by:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Computing prefix in result array, then multiplying suffix on second pass
+            </div>
+            <div class="step-explanation">
+                First pass: fill result with prefix products. Second pass: multiply each result[i] by running suffix product. We only need a single variable for the running suffix.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> productExceptSelf(nums: List[<span class="code-func">int</span>]) -&gt; List[<span class="code-func">int</span>]:
+    n = <span class="code-func">len</span>(nums)
+    result = [<span class="code-number">1</span>] * n
+    
+    <span class="code-comment"># First pass: compute prefix products</span>
+    prefix = <span class="code-number">1</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(n):
+        result[i] = prefix
+        prefix *= nums[i]
+    
+    <span class="code-comment"># Second pass: multiply by suffix products</span>
+    suffix = <span class="code-number">1</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(n - <span class="code-number">1</span>, -<span class="code-number">1</span>, -<span class="code-number">1</span>):
+        result[i] *= suffix
+        suffix *= nums[i]
+    
+    <span class="code-keyword">return</span> result</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Prefix/Suffix Arrays problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=product-of-array-except-self" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Arrays &amp; Hashing Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/arrays-and-hashing/contains-duplicate.html">
+                <span class="problem-card-title">Contains Duplicate</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/valid-anagram.html">
+                <span class="problem-card-title">Valid Anagram</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/two-sum.html">
+                <span class="problem-card-title">Two Sum</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/group-anagrams.html">
+                <span class="problem-card-title">Group Anagrams</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/top-k-frequent-elements.html">
+                <span class="problem-card-title">Top K Frequent Elements</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/arrays-and-hashing/" class="see-all-link">See all Arrays &amp; Hashing problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=product-of-array-except-self" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Clone Graph using Graph Traversal. medium difficulty. Time: O(V + E), Space: O(V).">
+    <link rel="canonical" href="https://leeteye.com/problems/graphs/clone-graph.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Clone Graph Solution | Graph Traversal | LeetEye">
+    <meta property="og:description" content="Learn how to solve Clone Graph using Graph Traversal. medium difficulty. Time: O(V + E), Space: O(V).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/graphs/clone-graph.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Clone Graph Solution | Graph Traversal | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Clone Graph using Graph Traversal. medium difficulty. Time: O(V + E), Space: O(V).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Clone Graph Solution | Graphs | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Clone Graph",
+        "description": "DFS/BFS with old→new hashmap. For each node: create clone if not in map, then set neighbors to cloned versions (lookup in map).",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Copying node.neighbors directly fails because:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "The old→new hashmap:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "For cycles (node A's neighbor is B, B's neighbor is A):",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "We can traverse the graph using:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "We create a clone:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "For clone of node N, its neighbors are:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Clone Graph?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(V + E) time complexity and O(V) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Clone Graph use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Clone Graph uses the Graph Traversal pattern. Map old nodes to new nodes. When setting neighbors, look up the clone."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/graphs/">Graphs</a></li>
+            <li aria-current="page">Clone Graph</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/graphs/" class="pattern-badge">Graph Traversal</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Clone Graph</h1>
+                <p class="problem-tags">
+                    <span class="tag">graphs</span>
+<span class="tag">clone-graph</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph.<br><br>Each node in the graph contains a value (<code>int</code>) and a list (<code>List[Node]</code>) of its neighbors.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1,2,3]</div>
+            <div class="example-output"><strong>Output:</strong> result</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Map old nodes to new nodes. When setting neighbors, look up the clone.</p>
+                <p class="one-liner"><em>DFS/BFS with old→new hashmap. For each node: create clone if not in map, then set neighbors to cloned versions (lookup in map).</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">clone graph</span> <span class="trigger-tag">graphs</span></span>,
+                    think <strong>Graph Traversal</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Copying node.neighbors directly fails because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It still points to original nodes
+            </div>
+            <div class="step-explanation">
+                We need neighbors to point to NEW cloned nodes, not originals.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                The old→new hashmap:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Maps original nodes to their clones
+            </div>
+            <div class="step-explanation">
+                When we need the clone of a node, we look it up in the map.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                For cycles (node A's neighbor is B, B's neighbor is A):
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> B and C
+            </div>
+            <div class="step-explanation">
+                If we've already cloned a node (it's in hashmap), reuse that clone instead of creating another.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                We can traverse the graph using:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Either
+            </div>
+            <div class="step-explanation">
+                Both work. We just need to visit all nodes.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                We create a clone:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> When we first visit a node
+            </div>
+            <div class="step-explanation">
+                Create clone immediately, add to hashmap, then process neighbors.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                For clone of node N, its neighbors are:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Clones of each neighbor (from hashmap)
+            </div>
+            <div class="step-explanation">
+                Each neighbor must be the cloned version, which we look up (or create).
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> cloneGraph(node: &<span class="code-comment">#039;Node&#039;) -&gt; &#039;Node&#039;:</span>
+    <span class="code-keyword">if</span> <span class="code-keyword">not</span> node:
+        <span class="code-keyword">return</span> <span class="code-keyword">None</span>
+    
+    old_to_new = {}
+    
+    <span class="code-keyword">def</span> dfs(node):
+        <span class="code-keyword">if</span> node <span class="code-keyword">in</span> old_to_new:
+            <span class="code-keyword">return</span> old_to_new[node]
+        
+        <span class="code-comment"># Create clone</span>
+        copy = Node(node.val)
+        old_to_new[node] = copy
+        
+        <span class="code-comment"># Clone neighbors</span>
+        <span class="code-keyword">for</span> neighbor <span class="code-keyword">in</span> node.neighbors:
+            copy.neighbors.<span class="code-func">append</span>(dfs(neighbor))
+        
+        <span class="code-keyword">return</span> copy
+    
+    <span class="code-keyword">return</span> dfs(node)</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(V + E)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(V)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Graph Traversal problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=clone-graph" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Graphs Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/graphs/number-of-islands.html">
+                <span class="problem-card-title">Number of Islands</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/pacific-atlantic-water-flow.html">
+                <span class="problem-card-title">Pacific Atlantic Water Flow</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/course-schedule.html">
+                <span class="problem-card-title">Course Schedule</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/course-schedule-ii.html">
+                <span class="problem-card-title">Course Schedule II</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/graphs/rotting-oranges.html">
+                <span class="problem-card-title">Rotting Oranges</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/graphs/" class="see-all-link">See all Graphs problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=clone-graph" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

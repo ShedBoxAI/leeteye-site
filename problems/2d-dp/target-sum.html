@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Target Sum using 2D Dynamic Programming. medium difficulty. Time: O(n × sum), Space: O(sum).">
+    <link rel="canonical" href="https://leeteye.com/problems/2d-dp/target-sum.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Target Sum Solution | 2D Dynamic Programming | LeetEye">
+    <meta property="og:description" content="Learn how to solve Target Sum using 2D Dynamic Programming. medium difficulty. Time: O(n × sum), Space: O(sum).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/2d-dp/target-sum.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Target Sum Solution | 2D Dynamic Programming | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Target Sum using 2D Dynamic Programming. medium difficulty. Time: O(n × sum), Space: O(sum).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Target Sum Solution | 2-D DP | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Target Sum",
+        "description": "Transform: P - N = target, P + N = sum → P = (sum+target)/2. Count subsets summing to P. Classic 0/1 knapsack with reverse loop.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Assigning +/- splits numbers into:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "If P = sum of positive, N = sum of negative:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "From P - N = target and P + N = sum:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "No solution exists if:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "This becomes:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Target Sum?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n × sum) time complexity and O(sum) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Target Sum use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Target Sum uses the 2D Dynamic Programming pattern. Split into two groups: positive (P) and negative (N). P - N = target, P + N = sum. Solve for P."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/2d-dp/">2-D DP</a></li>
+            <li aria-current="page">Target Sum</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/2d-dp/" class="pattern-badge">2D Dynamic Programming</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Target Sum</h1>
+                <p class="problem-tags">
+                    <span class="tag">2d-dp</span>
+<span class="tag">target-sum</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    You are given an integer array <code>nums</code> and an integer <code>target</code>.<br><br>You want to build an expression out of nums by adding one of the symbols <code>'+'</code> and <code>'-'</code> before each integer in nums and then concatenate all the integers.<br><br>Return the number of different expressions that you can build, which evaluates to <code>target</code>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1,1,1,1,1], target = 3</div>
+            <div class="example-output"><strong>Output:</strong> 5</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1], target = 1</div>
+            <div class="example-output"><strong>Output:</strong> 1</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Split into two groups: positive (P) and negative (N). P - N = target, P + N = sum. Solve for P.</p>
+                <p class="one-liner"><em>Transform: P - N = target, P + N = sum → P = (sum+target)/2. Count subsets summing to P. Classic 0/1 knapsack with reverse loop.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">target sum</span> <span class="trigger-tag">2d-dp</span></span>,
+                    think <strong>2D Dynamic Programming</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Assigning +/- splits numbers into:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Positive group P and negative group N
+            </div>
+            <div class="step-explanation">
+                Numbers with + form P, numbers with - form N.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                If P = sum of positive, N = sum of negative:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> P - N = target AND P + N = sum
+            </div>
+            <div class="step-explanation">
+                P - N gives target. P + N = total sum of all numbers.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                From P - N = target and P + N = sum:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> P = (sum + target) / 2
+            </div>
+            <div class="step-explanation">
+                Adding equations: 2P = sum + target, so P = (sum + target) / 2.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                No solution exists if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Both
+            </div>
+            <div class="step-explanation">
+                P must be integer (odd sum+target is impossible). Target beyond range is impossible.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                This becomes:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Subset Sum counting
+            </div>
+            <div class="step-explanation">
+                Count subsets with sum = (sum + target) / 2.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> findTargetSumWays(nums: List[<span class="code-func">int</span>], target: <span class="code-func">int</span>) -&gt; <span class="code-func">int</span>:
+    total = <span class="code-func">sum</span>(nums)
+    
+    <span class="code-comment"># P - N = target, P + N = total</span>
+    <span class="code-comment"># 2P = total + target, P = (total + target) / 2</span>
+    <span class="code-keyword">if</span> (total + target) % <span class="code-number">2</span> != <span class="code-number">0</span> <span class="code-keyword">or</span> <span class="code-func">abs</span>(target) &gt; total:
+        <span class="code-keyword">return</span> <span class="code-number">0</span>
+    
+    P = (total + target) // <span class="code-number">2</span>
+    
+    <span class="code-comment"># Count subsets summing to P (0/1 knapsack)</span>
+    dp = [<span class="code-number">0</span>] * (P + <span class="code-number">1</span>)
+    dp[<span class="code-number">0</span>] = <span class="code-number">1</span>
+    
+    <span class="code-keyword">for</span> num <span class="code-keyword">in</span> nums:
+        <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-func">range</span>(P, num - <span class="code-number">1</span>, -<span class="code-number">1</span>):  <span class="code-comment"># Reverse to avoid reuse</span>
+            dp[j] += dp[j - num]
+    
+    <span class="code-keyword">return</span> dp[P]</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n × sum)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(sum)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice 2D Dynamic Programming problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=target-sum" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More 2-D DP Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/2d-dp/unique-paths.html">
+                <span class="problem-card-title">Unique Paths</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/2d-dp/longest-common-subsequence.html">
+                <span class="problem-card-title">Longest Common Subsequence</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/2d-dp/best-time-to-buy-and-sell-stock-with-cooldown.html">
+                <span class="problem-card-title">Best Time to Buy and Sell Stock with Cooldown</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/2d-dp/coin-change-ii.html">
+                <span class="problem-card-title">Coin Change II</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/2d-dp/interleaving-string.html">
+                <span class="problem-card-title">Interleaving String</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/2d-dp/" class="see-all-link">See all 2-D DP problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=target-sum" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

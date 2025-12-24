@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Generate Parentheses using Stack. medium difficulty. Time: O(4^n / √n), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/stack/generate-parentheses.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Generate Parentheses Solution | Stack | LeetEye">
+    <meta property="og:description" content="Learn how to solve Generate Parentheses using Stack. medium difficulty. Time: O(4^n / √n), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/stack/generate-parentheses.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Generate Parentheses Solution | Stack | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Generate Parentheses using Stack. medium difficulty. Time: O(4^n / √n), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Generate Parentheses Solution | Stack | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Generate Parentheses",
+        "description": "Generate valid parentheses by backtracking: add &#039;(&#039; if &lt; n used, add &#039;)&#039; if close &lt; open. Both constraints must hold.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "For n pairs, a valid sequence must have:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "At any prefix of a valid sequence:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "We can add an opening bracket if:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "We can add a closing bracket if:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "We've completed a valid sequence when:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Generate Parentheses?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(4^n / √n) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Generate Parentheses use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Generate Parentheses uses the Stack pattern. Build sequences character by character, tracking counts."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/stack/">Stack</a></li>
+            <li aria-current="page">Generate Parentheses</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/stack/" class="pattern-badge">Stack</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Generate Parentheses</h1>
+                <p class="problem-tags">
+                    <span class="tag">stack</span>
+<span class="tag">generate-parentheses</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given <code>n</code> pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> n = 3</div>
+            <div class="example-output"><strong>Output:</strong> [&quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot;]</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> n = 1</div>
+            <div class="example-output"><strong>Output:</strong> [&quot;()&quot;]</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Build sequences character by character, tracking counts.</p>
+                <p class="one-liner"><em>Generate valid parentheses by backtracking: add &#039;(&#039; if &lt; n used, add &#039;)&#039; if close &lt; open. Both constraints must hold.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">generate parentheses</span> <span class="trigger-tag">stack</span></span>,
+                    think <strong>Stack</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                For n pairs, a valid sequence must have:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> n &#039;(&#039; and n &#039;)&#039; characters
+            </div>
+            <div class="step-explanation">
+                Exactly n of each type, total length 2n.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                At any prefix of a valid sequence:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Count of &#039;(&#039; ≥ count of &#039;)&#039;
+            </div>
+            <div class="step-explanation">
+                If ')' ever exceeds '(', there's an unmatched closer. Invalid.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                We can add an opening bracket if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> We&#039;ve used fewer than n &#039;(&#039; so far
+            </div>
+            <div class="step-explanation">
+                We have n opens to use. If used < n, we can add more.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                We can add a closing bracket if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Both A and B
+            </div>
+            <div class="step-explanation">
+                We need both: (1) ')' available and (2) a '(' to match. Condition B implies A when building sequentially.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                We've completed a valid sequence when:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Length equals 2n
+            </div>
+            <div class="step-explanation">
+                2n characters = n opens + n closes = complete sequence.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> generateParenthesis(n: <span class="code-func">int</span>) -&gt; List[<span class="code-func">str</span>]:
+    result = []
+    
+    <span class="code-keyword">def</span> backtrack(current: <span class="code-func">str</span>, open_count: <span class="code-func">int</span>, close_count: <span class="code-func">int</span>):
+        <span class="code-keyword">if</span> <span class="code-func">len</span>(current) == <span class="code-number">2</span> * n:
+            result.<span class="code-func">append</span>(current)
+            <span class="code-keyword">return</span>
+        
+        <span class="code-comment"># Can add &#039;(&#039; if we haven&#039;t used all n</span>
+        <span class="code-keyword">if</span> open_count &lt; n:
+            backtrack(current + &<span class="code-comment">#039;(&#039;, open_count + 1, close_count)</span>
+        
+        <span class="code-comment"># Can add &#039;)&#039; if it doesn&#039;t exceed open count</span>
+        <span class="code-keyword">if</span> close_count &lt; open_count:
+            backtrack(current + &<span class="code-comment">#039;)&#039;, open_count, close_count + 1)</span>
+    
+    backtrack(&<span class="code-comment">#039;&#039;, 0, 0)</span>
+    <span class="code-keyword">return</span> result</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(4^n / √n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Stack problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=generate-parentheses" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Stack Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/stack/valid-parentheses.html">
+                <span class="problem-card-title">Valid Parentheses</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/min-stack.html">
+                <span class="problem-card-title">Min Stack</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/evaluate-reverse-polish-notation.html">
+                <span class="problem-card-title">Evaluate Reverse Polish Notation</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/daily-temperatures.html">
+                <span class="problem-card-title">Daily Temperatures</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/car-fleet.html">
+                <span class="problem-card-title">Car Fleet</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/stack/" class="see-all-link">See all Stack problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=generate-parentheses" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

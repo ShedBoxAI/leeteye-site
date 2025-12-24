@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Car Fleet using Stack. medium difficulty. Time: O(n log n), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/stack/car-fleet.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Car Fleet Solution | Stack | LeetEye">
+    <meta property="og:description" content="Learn how to solve Car Fleet using Stack. medium difficulty. Time: O(n log n), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/stack/car-fleet.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Car Fleet Solution | Stack | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Car Fleet using Stack. medium difficulty. Time: O(n log n), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Car Fleet Solution | Stack | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Car Fleet",
+        "description": "Sort cars by position (front first). Car joins fleet ahead if its arrival time ≤ fleet&#039;s time, else forms new fleet. Count distinct fleet times.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "For a car at position p with speed s, time to reach target T is:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "We process cars from closest to target because:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "Car B (behind) merges with Car A (ahead) if:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "When car B merges with car A's fleet:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "The stack stores:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Car Fleet?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n log n) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Car Fleet use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Car Fleet uses the Stack pattern. Calculate arrival time for each car. Process from position closest to target backward."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/stack/">Stack</a></li>
+            <li aria-current="page">Car Fleet</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/stack/" class="pattern-badge">Stack</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Car Fleet</h1>
+                <p class="problem-tags">
+                    <span class="tag">stack</span>
+<span class="tag">car-fleet</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    There are <code>n</code> cars going to the same destination along a one-lane road. The destination is <code>target</code> miles away.<br><br>You are given two integer arrays <code>position</code> and <code>speed</code>, both of length <code>n</code>, where <code>position[i]</code> is the position of the <code>i</code>th car and <code>speed[i]</code> is the speed of the <code>i</code>th car (in miles per hour).<br><br>A car can never pass another car ahead of it, but it can catch up to it and then travel at the same speed. The faster car will slow down to match the slower car's speed.<br><br>A <strong>car fleet</strong> is some non-empty set of cars driving at the same position and same speed. A single car is also a fleet.<br><br>If a car catches up to a car fleet right at the destination point, it still counts as one fleet.<br><br>Return the number of car fleets that will arrive at the destination.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> target = 12, position = [10,8,0,5,3], speed = [2,4,1,1,3]</div>
+            <div class="example-output"><strong>Output:</strong> 3</div>
+            
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> target = 10, position = [3], speed = [3]</div>
+            <div class="example-output"><strong>Output:</strong> 1</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Calculate arrival time for each car. Process from position closest to target backward.</p>
+                <p class="one-liner"><em>Sort cars by position (front first). Car joins fleet ahead if its arrival time ≤ fleet&#039;s time, else forms new fleet. Count distinct fleet times.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">car fleet</span> <span class="trigger-tag">stack</span></span>,
+                    think <strong>Stack</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                For a car at position p with speed s, time to reach target T is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> (T - p) / s
+            </div>
+            <div class="step-explanation">
+                Distance to travel = T - p. Time = distance / speed.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                We process cars from closest to target because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Front cars can block/slow down cars behind them
+            </div>
+            <div class="step-explanation">
+                A slower car in front creates a "barrier" — faster cars behind can only match its arrival time, not beat it.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                Car B (behind) merges with Car A (ahead) if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> B would arrive at target before or at same time as A
+            </div>
+            <div class="step-explanation">
+                If B's arrival time ≤ A's, B catches up (or ties at target). B can't pass A, so B joins A's fleet.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                When car B merges with car A's fleet:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Fleet takes A&#039;s (slower) arrival time
+            </div>
+            <div class="step-explanation">
+                B can't pass A, so B slows down to A's pace. Fleet arrival = A's original arrival time.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                The stack stores:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Arrival times of fleet &quot;leaders&quot;
+            </div>
+            <div class="step-explanation">
+                Each stack entry represents a fleet. We track its arrival time to compare with the next car.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> carFleet(target: <span class="code-func">int</span>, position: List[<span class="code-func">int</span>], speed: List[<span class="code-func">int</span>]) -&gt; <span class="code-func">int</span>:
+    <span class="code-comment"># Pair positions with arrival times, sort by position descending</span>
+    cars = <span class="code-func">sorted</span>(<span class="code-func">zip</span>(position, speed), reverse=<span class="code-keyword">True</span>)
+    stack = []  <span class="code-comment"># Arrival times of fleet leaders</span>
+    
+    <span class="code-keyword">for</span> pos, spd <span class="code-keyword">in</span> cars:
+        arrival_time = (target - pos) / spd
+        
+        <span class="code-comment"># If this car arrives later than the fleet ahead, it&#039;s a new fleet</span>
+        <span class="code-keyword">if</span> <span class="code-keyword">not</span> stack <span class="code-keyword">or</span> arrival_time &gt; stack[-<span class="code-number">1</span>]:
+            stack.<span class="code-func">append</span>(arrival_time)
+        <span class="code-comment"># Otherwise, it merges with the fleet ahead (don&#039;t push)</span>
+    
+    <span class="code-keyword">return</span> <span class="code-func">len</span>(stack)</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n log n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Stack problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=car-fleet" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Stack Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/stack/valid-parentheses.html">
+                <span class="problem-card-title">Valid Parentheses</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/min-stack.html">
+                <span class="problem-card-title">Min Stack</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/evaluate-reverse-polish-notation.html">
+                <span class="problem-card-title">Evaluate Reverse Polish Notation</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/generate-parentheses.html">
+                <span class="problem-card-title">Generate Parentheses</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/daily-temperatures.html">
+                <span class="problem-card-title">Daily Temperatures</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/stack/" class="see-all-link">See all Stack problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=car-fleet" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

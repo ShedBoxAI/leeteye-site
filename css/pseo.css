@@ -1,0 +1,1115 @@
+/* pSEO Pages - Extends content.css styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.7;
+    color: #1a1a1a;
+    background: #fafafa;
+    padding: 0;
+    margin: 0;
+    padding-bottom: 80px; /* Space for sticky CTA */
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.header {
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1rem 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #F97316;
+}
+
+.logo-small {
+    height: 32px;
+    width: auto;
+}
+
+/* ============================================
+   Breadcrumb Navigation
+   ============================================ */
+.breadcrumb {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 1.25rem;
+    font-size: 0.85rem;
+}
+
+.breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.5rem;
+}
+
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+    color: #666;
+    margin: 0;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: '/';
+    margin-left: 0.5rem;
+    color: #ccc;
+}
+
+.breadcrumb a {
+    color: #666;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #F97316;
+}
+
+.breadcrumb [aria-current="page"] {
+    color: #333;
+    font-weight: 500;
+}
+
+/* ============================================
+   Main Content
+   ============================================ */
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 4rem;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #0a0a0a;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0a0a0a;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+p {
+    margin-bottom: 1.25rem;
+    color: #333;
+}
+
+strong {
+    font-weight: 600;
+    color: #0a0a0a;
+}
+
+/* ============================================
+   Category/Pattern Badge
+   ============================================ */
+.category-badge {
+    display: inline-block;
+    background: #FFF7ED;
+    color: #C2410C;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+}
+
+.pattern-badge {
+    display: inline-block;
+    background: #EEF2FF;
+    color: #4338CA;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    text-decoration: none;
+}
+
+.pattern-badge:hover {
+    background: #E0E7FF;
+    text-decoration: none;
+}
+
+/* ============================================
+   Difficulty Badges
+   ============================================ */
+.difficulty {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    text-transform: capitalize;
+}
+
+.difficulty-easy {
+    background: #ECFDF5;
+    color: #047857;
+}
+
+.difficulty-medium {
+    background: #FEF3C7;
+    color: #B45309;
+}
+
+.difficulty-hard {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+/* ============================================
+   Problem Page Specific
+   ============================================ */
+.problem-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.problem-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.time-estimate {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+.problem-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.problem-tags .tag {
+    background: #f5f5f5;
+    color: #666;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Problem Statement */
+.problem-statement {
+    margin-bottom: 2rem;
+}
+
+.statement-text {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.examples {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+
+.example {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.example:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.example-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.example-input,
+.example-output {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+    background: #f5f5f5;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.example-explanation {
+    color: #666;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* ============================================
+   Key Insight Box
+   ============================================ */
+.key-insight {
+    background: linear-gradient(135deg, #FFF7ED 0%, #FEF3C7 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 1px solid #FDE68A;
+}
+
+.key-insight-title {
+    font-weight: 700;
+    color: #92400E;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.key-insight p {
+    color: #78350F;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+.one-liner {
+    margin-top: 0.75rem;
+    color: #92400E !important;
+}
+
+/* ============================================
+   Trigger Words
+   ============================================ */
+.trigger-words {
+    background: #f0f9ff;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.triggers {
+    display: inline;
+}
+
+.trigger-tag {
+    display: inline-block;
+    background: #dbeafe;
+    color: #1e40af;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    margin: 0.25rem 0.25rem 0.25rem 0;
+}
+
+.trigger-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* ============================================
+   Reasoning Steps
+   ============================================ */
+.reasoning-steps {
+    margin-top: 1.5rem;
+}
+
+.reasoning-step {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #F97316;
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+}
+
+.step-question {
+    font-weight: 600;
+    color: #0a0a0a;
+    margin-bottom: 0.75rem;
+}
+
+.step-answer {
+    background: #ECFDF5;
+    border-left: 3px solid #10B981;
+    padding: 0.75rem 1rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 0.75rem;
+}
+
+.step-answer strong {
+    color: #047857;
+}
+
+.step-explanation {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   Code Blocks
+   ============================================ */
+pre {
+    background: #1e1e2e;
+    border-radius: 12px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+    color: #e5e5e5;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    background: #f0f0f0;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    color: #c7254e;
+}
+
+/* Syntax highlighting */
+.code-keyword { color: #FF79C6; }
+.code-func { color: #8BE9FD; }
+.code-string { color: #50FA7B; }
+.code-comment { color: #6272A4; }
+.code-number { color: #BD93F9; }
+
+/* ============================================
+   Complexity Table
+   ============================================ */
+.complexity-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.complexity-table th,
+.complexity-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.complexity-table th {
+    background: #f5f5f5;
+    font-weight: 600;
+    color: #333;
+    width: 40%;
+}
+
+.complexity-table td {
+    color: #555;
+}
+
+/* ============================================
+   CTA Boxes
+   ============================================ */
+.cta-box {
+    background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+    border: 1px solid #FED7AA;
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2.5rem 0;
+    text-align: center;
+}
+
+.cta-box h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #C2410C;
+}
+
+.cta-box p {
+    color: #7c2d12;
+    margin-bottom: 1.5rem;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #F97316;
+    color: white;
+    padding: 0.875rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.cta-button:hover {
+    background: #EA580C;
+    transform: translateY(-2px);
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.cta-primary {
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+}
+
+/* Sticky Mobile CTA */
+.sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    padding: 1rem;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+}
+
+.sticky-cta .cta-button {
+    width: 100%;
+    max-width: 400px;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .sticky-cta {
+        display: none;
+    }
+
+    body {
+        padding-bottom: 0;
+    }
+}
+
+/* ============================================
+   Related Problems / Aside
+   ============================================ */
+.related-problems,
+.related-patterns,
+.related-comparisons,
+.other-cheatsheets {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.related-problems h3,
+.related-patterns h3,
+.related-comparisons h3,
+.other-cheatsheets h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.problem-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.problem-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.problem-list li:last-child {
+    border-bottom: none;
+}
+
+.problem-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #333;
+    text-decoration: none;
+}
+
+.problem-list a:hover {
+    color: #F97316;
+}
+
+.see-all-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #F97316;
+    font-weight: 500;
+}
+
+/* ============================================
+   Pattern Hub Specific
+   ============================================ */
+.pattern-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.pattern-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.stat {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0a0a0a;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.difficulty-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tab {
+    padding: 0.5rem 1rem;
+    background: #f5f5f5;
+    border-radius: 8px;
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.tab:hover {
+    background: #e5e5e5;
+}
+
+.tab.active {
+    background: #F97316;
+    color: white;
+}
+
+.problems-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.problem-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.problem-card:hover {
+    border-color: #F97316;
+    transform: translateX(4px);
+}
+
+.problem-card-title {
+    color: #0a0a0a;
+    font-weight: 500;
+}
+
+.problem-card .difficulty {
+    font-size: 0.7rem;
+}
+
+/* Cheatsheet link */
+.cheatsheet-link {
+    margin-top: 2rem;
+}
+
+.cheatsheet-link a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    background: #EEF2FF;
+    border-radius: 10px;
+    color: #4338CA;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cheatsheet-link a:hover {
+    background: #E0E7FF;
+}
+
+.cheatsheet-icon {
+    font-size: 1.25rem;
+}
+
+.arrow {
+    margin-left: auto;
+}
+
+/* ============================================
+   Comparison Page Specific
+   ============================================ */
+.comparison-header {
+    margin-bottom: 2rem;
+}
+
+.tldr-box {
+    background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 1px solid #A7F3D0;
+}
+
+.tldr-box p {
+    margin-bottom: 0.75rem;
+    color: #065F46;
+    font-size: 1.05rem;
+}
+
+.tldr-box p:last-child {
+    margin-bottom: 0;
+}
+
+.comparison-table-section {
+    margin: 2rem 0;
+}
+
+/* Card-based comparison instead of table */
+.comparison-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.compare-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid #e5e5e5;
+    transition: all 0.2s;
+}
+
+.compare-card-orange {
+    border-color: #F97316;
+    background: linear-gradient(180deg, #FFF7ED 0%, #FFFFFF 100%);
+}
+
+.compare-card-purple {
+    border-color: #6366F1;
+    background: linear-gradient(180deg, #EEF2FF 0%, #FFFFFF 100%);
+}
+
+.compare-card-header {
+    text-align: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.compare-card-orange .compare-card-header {
+    border-color: #FED7AA;
+}
+
+.compare-card-purple .compare-card-header {
+    border-color: #C7D2FE;
+}
+
+.compare-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.compare-card-orange .compare-card-title {
+    color: #C2410C;
+}
+
+.compare-card-purple .compare-card-title {
+    color: #4338CA;
+}
+
+.compare-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.compare-item:last-child {
+    border-bottom: none;
+}
+
+.compare-item-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.compare-item-value {
+    color: #1a1a1a;
+    font-size: 0.95rem;
+}
+
+/* Card comparison rows - new structure */
+.compare-card-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.compare-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.compare-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+}
+
+.compare-value {
+    color: #1a1a1a;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.compare-value code {
+    background: #f3f4f6;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.compare-card-orange .compare-card-header {
+    color: #C2410C;
+}
+
+.compare-card-purple .compare-card-header {
+    color: #4338CA;
+}
+
+.compare-item-value code {
+    background: #f5f5f5;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+/* VS Badge */
+.vs-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: -0.5rem 0;
+    z-index: 10;
+}
+
+.vs-badge span {
+    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+@media (max-width: 640px) {
+    .comparison-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* Legacy table styling (fallback) */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.comparison-table {
+    width: 100%;
+    min-width: 500px;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e5e5;
+}
+
+.comparison-table th {
+    background: #f9f9f9;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.comparison-table td {
+    padding: 1rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.comparison-table th:first-child {
+    width: 25%;
+}
+
+.decision-flowchart {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.decision-item {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.example-box {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 1.25rem;
+}
+
+.example-box h3 {
+    margin-top: 0;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.example-link {
+    display: block;
+    color: #0a0a0a;
+    font-weight: 500;
+}
+
+/* ============================================
+   Cheatsheet Page Specific
+   ============================================ */
+.cheatsheet-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.cheatsheet-section {
+    margin-bottom: 2.5rem;
+}
+
+.trigger-section .trigger-tags {
+    justify-content: flex-start;
+}
+
+.variations-list {
+    list-style: none;
+    padding: 0;
+}
+
+.variations-list li {
+    padding: 0.75rem 1rem;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.problems-mini-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    padding: 2rem 1.25rem;
+    margin-top: 3rem;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-content p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.footer-nav a:hover {
+    color: #F97316;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (min-width: 768px) {
+    html {
+        font-size: 19px;
+    }
+
+    .content {
+        padding: 2rem 2rem 4rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .pattern-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .pattern-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .difficulty-tabs {
+        flex-direction: column;
+    }
+}
+
+/* ============================================
+   Print
+   ============================================ */
+@media print {
+    .header,
+    .sticky-cta,
+    .cta-box,
+    .footer {
+        display: none;
+    }
+
+    .content {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    body {
+        padding-bottom: 0;
+    }
+}

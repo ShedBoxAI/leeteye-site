@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Contains Duplicate using Hash Set / Hash Map. easy difficulty. Time: O(n), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/arrays-and-hashing/contains-duplicate.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Contains Duplicate Solution | Hash Set / Hash Map | LeetEye">
+    <meta property="og:description" content="Learn how to solve Contains Duplicate using Hash Set / Hash Map. easy difficulty. Time: O(n), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/arrays-and-hashing/contains-duplicate.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contains Duplicate Solution | Hash Set / Hash Map | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Contains Duplicate using Hash Set / Hash Map. easy difficulty. Time: O(n), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Contains Duplicate Solution | Arrays &amp; Hashing | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Contains Duplicate",
+        "description": "When you need to answer &#039;have I seen this before?&#039; in O(1), use a hash set.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "What is the core operation you need to perform for each element?",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "If you check each element against all previous elements, what's the time complexity?",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "What operation needs to be faster to improve the solution?",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "Which data structure provides O(1) average membership checking?",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "Complete the algorithm:\n1. Create empty hash set\n2. For each number in array:\n   a. If number is in set → ___\n   b. If number is not in set → ___",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "What should the function return if the loop completes without finding a duplicate?",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Contains Duplicate?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Contains Duplicate use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Contains Duplicate uses the Hash Set / Hash Map pattern. The bottleneck is the &quot;have I seen this?&quot; lookup."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/arrays-and-hashing/">Arrays &amp; Hashing</a></li>
+            <li aria-current="page">Contains Duplicate</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-easy">Easy</span>
+                    <a href="/patterns/arrays-and-hashing/" class="pattern-badge">Hash Set / Hash Map</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Contains Duplicate</h1>
+                <p class="problem-tags">
+                    <span class="tag">arrays-and-hashing</span>
+<span class="tag">contains-duplicate</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given an integer array <code>nums</code>, return <code>true</code> if any value appears <strong>at least twice</strong> in the array, and return <code>false</code> if every element is distinct.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1, 2, 3, 1]</div>
+            <div class="example-output"><strong>Output:</strong> true</div>
+            <div class="example-explanation">1 appears twice</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1, 2, 3, 4]</div>
+            <div class="example-output"><strong>Output:</strong> false</div>
+            <div class="example-explanation">All elements are distinct</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 3</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]</div>
+            <div class="example-output"><strong>Output:</strong> true</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>The bottleneck is the &quot;have I seen this?&quot; lookup.</p>
+                <p class="one-liner"><em>When you need to answer &#039;have I seen this before?&#039; in O(1), use a hash set.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">contains duplicate</span> <span class="trigger-tag">arrays-and-hashing</span></span>,
+                    think <strong>Hash Set / Hash Map</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                What is the core operation you need to perform for each element?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Check if you&#039;ve seen it before
+            </div>
+            <div class="step-explanation">
+                The problem asks if ANY value appears twice. You don't need counts, positions, or adjacent comparisons. You just need to know: seen or not seen.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                If you check each element against all previous elements, what's the time complexity?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> O(n²)
+            </div>
+            <div class="step-explanation">
+                For each of n elements, you potentially scan all previous elements. First element: 0 comparisons, second: 1, third: 2, ... nth: n-1. Total: 0+1+2+...+(n-1) = n(n-1)/2 = O(n²)
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                What operation needs to be faster to improve the solution?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Checking if an element was seen before
+            </div>
+            <div class="step-explanation">
+                Iteration is already O(n) - you must look at each element once. The bottleneck is that for each element, you're doing O(n) membership check. Make that O(1), and you get O(n) overall.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                Which data structure provides O(1) average membership checking?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Hash Set
+            </div>
+            <div class="step-explanation">
+                Hash sets use hashing to achieve O(1) average insert and lookup. Arrays need O(n) scan, linked lists need O(n) traversal, BSTs need O(log n) traversal.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                Complete the algorithm:<br>1. Create empty hash set<br>2. For each number in array:<br>   a. If number is in set → ___<br>   b. If number is not in set → ___
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> return true; add to set
+            </div>
+            <div class="step-explanation">
+                If you find the number already in the set, you've found a duplicate → return true immediately. Otherwise, add it to track it for future checks.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                What should the function return if the loop completes without finding a duplicate?
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> false
+            </div>
+            <div class="step-explanation">
+                If you check every element and never find one already in the set, all elements are unique → no duplicate exists → return false.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> containsDuplicate(nums: List[<span class="code-func">int</span>]) -&gt; <span class="code-func">bool</span>:
+    seen = <span class="code-func">set</span>()
+    <span class="code-keyword">for</span> num <span class="code-keyword">in</span> nums:
+        <span class="code-keyword">if</span> num <span class="code-keyword">in</span> seen:
+            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+        seen.<span class="code-func">add</span>(num)
+    <span class="code-keyword">return</span> <span class="code-keyword">False</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Hash Set / Hash Map problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=contains-duplicate" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Arrays &amp; Hashing Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/arrays-and-hashing/valid-anagram.html">
+                <span class="problem-card-title">Valid Anagram</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/two-sum.html">
+                <span class="problem-card-title">Two Sum</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/group-anagrams.html">
+                <span class="problem-card-title">Group Anagrams</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/top-k-frequent-elements.html">
+                <span class="problem-card-title">Top K Frequent Elements</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/arrays-and-hashing/product-of-array-except-self.html">
+                <span class="problem-card-title">Product of Array Except Self</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/arrays-and-hashing/" class="see-all-link">See all Arrays &amp; Hashing problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=contains-duplicate" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

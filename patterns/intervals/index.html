@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master the Intervals pattern for coding interviews. 6 practice problems with step-by-step solutions.">
+    <link rel="canonical" href="https://leeteye.com/patterns/intervals/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Intervals Pattern Guide | LeetEye">
+    <meta property="og:description" content="Master the Intervals pattern for coding interviews. 6 practice problems with step-by-step solutions.">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/patterns/intervals/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Intervals Pattern Guide | LeetEye">
+    <meta name="twitter:description" content="Master the Intervals pattern for coding interviews. 6 practice problems with step-by-step solutions.">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Intervals Pattern | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/pseo.css">
+
+    <!-- Schema.org Article + ItemList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Intervals Pattern Guide",
+        "description": "Handle overlapping ranges and scheduling problems.",
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://leeteye.com/assets/logo.png"
+            }
+        },
+        "hasPart": {
+            "@type": "ItemList",
+            "name": "Intervals Problems",
+            "numberOfItems": 6,
+            "itemListElement": [
+                {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+            "@type": "Article",
+            "name": "Insert Interval",
+            "url": "https://leeteye.com/problems/intervals/insert-interval.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+            "@type": "Article",
+            "name": "Merge Intervals",
+            "url": "https://leeteye.com/problems/intervals/merge-intervals.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+            "@type": "Article",
+            "name": "Non-overlapping Intervals",
+            "url": "https://leeteye.com/problems/intervals/non-overlapping-intervals.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+            "@type": "Article",
+            "name": "Meeting Rooms",
+            "url": "https://leeteye.com/problems/intervals/meeting-rooms.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+            "@type": "Article",
+            "name": "Meeting Rooms II",
+            "url": "https://leeteye.com/problems/intervals/meeting-rooms-ii.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+            "@type": "Article",
+            "name": "Minimum Interval to Include Each Query",
+            "url": "https://leeteye.com/problems/intervals/minimum-interval-to-include-each-query.html"
+        }
+    }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li aria-current="page">Intervals</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="pattern-article">
+            <header class="pattern-header" style="--pattern-color: #92A8D1">
+                <span class="category-badge" style="background: #92A8D1">Pattern</span>
+                <h1>Intervals</h1>
+                <p class="intro">Handle overlapping ranges and scheduling problems.</p>
+
+                <div class="pattern-stats">
+                    <div class="stat">
+                        <span class="stat-value">6</span>
+                        <span class="stat-label">Problems</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">1</span>
+                        <span class="stat-label">Easy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Medium</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">1</span>
+                        <span class="stat-label">Hard</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="recognition">
+                <h2>When to Use Intervals</h2>
+
+                <div class="key-insight">
+                    <div class="key-insight-title">Pattern Recognition</div>
+                    <p>Look for these trigger words in problem statements:</p>
+                </div>
+
+                <div class="trigger-words-list">
+                    <span class="trigger-tag">insert interval</span>
+<span class="trigger-tag">intervals</span>
+<span class="trigger-tag">merge intervals</span>
+<span class="trigger-tag">non-overlapping intervals</span>
+<span class="trigger-tag">meeting rooms</span>
+<span class="trigger-tag">meeting rooms ii</span>
+<span class="trigger-tag">minimum interval to include each query</span>
+                </div>
+            </section>
+
+            
+
+            <section class="problems-by-difficulty">
+                <h2>Practice Problems</h2>
+
+                <div class="difficulty-tabs">
+                    <a href="/patterns/intervals/easy.html" class="tab">Easy (1)</a>
+                    <a href="/patterns/intervals/medium.html" class="tab">Medium (4)</a>
+                    <a href="/patterns/intervals/hard.html" class="tab">Hard (1)</a>
+                </div>
+
+                <div class="problems-grid">
+                    
+        <a href="/problems/intervals/insert-interval.html" class="problem-card">
+            <span class="problem-card-title">Insert Interval</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/intervals/merge-intervals.html" class="problem-card">
+            <span class="problem-card-title">Merge Intervals</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/intervals/non-overlapping-intervals.html" class="problem-card">
+            <span class="problem-card-title">Non-overlapping Intervals</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/intervals/meeting-rooms.html" class="problem-card">
+            <span class="problem-card-title">Meeting Rooms</span>
+            <span class="difficulty difficulty-easy">easy</span>
+        </a>
+    
+
+        <a href="/problems/intervals/meeting-rooms-ii.html" class="problem-card">
+            <span class="problem-card-title">Meeting Rooms II</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/intervals/minimum-interval-to-include-each-query.html" class="problem-card">
+            <span class="problem-card-title">Minimum Interval to Include Each Query</span>
+            <span class="difficulty difficulty-hard">hard</span>
+        </a>
+    
+                </div>
+            </section>
+
+            <section class="related-patterns"><h2>Related Patterns</h2><div class="patterns-grid">
+        <a href="/patterns/heap/" class="pattern-badge" style="background: #85C1E920; color: #85C1E9">
+            Heap / Priority Queue
+        </a>
+    </div></section>
+
+            
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master Intervals</h2>
+                <p>Build pattern recognition with interactive MCQs. Understand <em>why</em> to use Intervals, not just how.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=pattern&utm_campaign=intervals" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <aside class="cheatsheet-link">
+                <a href="/cheatsheets/intervals.html">
+                    <span class="cheatsheet-icon">📋</span>
+                    <span>Intervals Cheat Sheet</span>
+                    <span class="arrow">&rarr;</span>
+                </a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=intervals" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

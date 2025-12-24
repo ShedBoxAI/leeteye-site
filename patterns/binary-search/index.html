@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master the Binary Search pattern for coding interviews. 7 practice problems with step-by-step solutions.">
+    <link rel="canonical" href="https://leeteye.com/patterns/binary-search/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Binary Search Pattern Guide | LeetEye">
+    <meta property="og:description" content="Master the Binary Search pattern for coding interviews. 7 practice problems with step-by-step solutions.">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/patterns/binary-search/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Binary Search Pattern Guide | LeetEye">
+    <meta name="twitter:description" content="Master the Binary Search pattern for coding interviews. 7 practice problems with step-by-step solutions.">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Binary Search Pattern | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/pseo.css">
+
+    <!-- Schema.org Article + ItemList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Binary Search Pattern Guide",
+        "description": "Divide and conquer with logarithmic time complexity.",
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://leeteye.com/assets/logo.png"
+            }
+        },
+        "hasPart": {
+            "@type": "ItemList",
+            "name": "Binary Search Problems",
+            "numberOfItems": 7,
+            "itemListElement": [
+                {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+            "@type": "Article",
+            "name": "Binary Search",
+            "url": "https://leeteye.com/problems/binary-search/binary-search.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+            "@type": "Article",
+            "name": "Search a 2D Matrix",
+            "url": "https://leeteye.com/problems/binary-search/search-2d-matrix.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+            "@type": "Article",
+            "name": "Koko Eating Bananas",
+            "url": "https://leeteye.com/problems/binary-search/koko-eating-bananas.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+            "@type": "Article",
+            "name": "Search in Rotated Sorted Array",
+            "url": "https://leeteye.com/problems/binary-search/search-in-rotated-sorted-array.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+            "@type": "Article",
+            "name": "Find Minimum in Rotated Sorted Array",
+            "url": "https://leeteye.com/problems/binary-search/find-minimum-in-rotated-sorted-array.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 6,
+        "item": {
+            "@type": "Article",
+            "name": "Time Based Key-Value Store",
+            "url": "https://leeteye.com/problems/binary-search/time-based-key-value-store.html"
+        }
+    },
+{
+        "@type": "ListItem",
+        "position": 7,
+        "item": {
+            "@type": "Article",
+            "name": "Median of Two Sorted Arrays",
+            "url": "https://leeteye.com/problems/binary-search/median-of-two-sorted-arrays.html"
+        }
+    }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li aria-current="page">Binary Search</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="pattern-article">
+            <header class="pattern-header" style="--pattern-color: #FFEAA7">
+                <span class="category-badge" style="background: #FFEAA7">Pattern</span>
+                <h1>Binary Search</h1>
+                <p class="intro">Divide and conquer with logarithmic time complexity.</p>
+
+                <div class="pattern-stats">
+                    <div class="stat">
+                        <span class="stat-value">7</span>
+                        <span class="stat-label">Problems</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">Easy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">7</span>
+                        <span class="stat-label">Medium</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">0</span>
+                        <span class="stat-label">Hard</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="recognition">
+                <h2>When to Use Binary Search</h2>
+
+                <div class="key-insight">
+                    <div class="key-insight-title">Pattern Recognition</div>
+                    <p>Look for these trigger words in problem statements:</p>
+                </div>
+
+                <div class="trigger-words-list">
+                    <span class="trigger-tag">binary search</span>
+<span class="trigger-tag">binary-search</span>
+<span class="trigger-tag">search a 2d matrix</span>
+<span class="trigger-tag">koko eating bananas</span>
+<span class="trigger-tag">search in rotated sorted array</span>
+<span class="trigger-tag">find minimum in rotated sorted array</span>
+<span class="trigger-tag">time based key-value store</span>
+<span class="trigger-tag">median of two sorted arrays</span>
+                </div>
+            </section>
+
+            
+
+            <section class="problems-by-difficulty">
+                <h2>Practice Problems</h2>
+
+                <div class="difficulty-tabs">
+                    <a href="/patterns/binary-search/easy.html" class="tab">Easy (0)</a>
+                    <a href="/patterns/binary-search/medium.html" class="tab">Medium (7)</a>
+                    <a href="/patterns/binary-search/hard.html" class="tab">Hard (0)</a>
+                </div>
+
+                <div class="problems-grid">
+                    
+        <a href="/problems/binary-search/binary-search.html" class="problem-card">
+            <span class="problem-card-title">Binary Search</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/binary-search/search-2d-matrix.html" class="problem-card">
+            <span class="problem-card-title">Search a 2D Matrix</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/binary-search/koko-eating-bananas.html" class="problem-card">
+            <span class="problem-card-title">Koko Eating Bananas</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/binary-search/search-in-rotated-sorted-array.html" class="problem-card">
+            <span class="problem-card-title">Search in Rotated Sorted Array</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/binary-search/find-minimum-in-rotated-sorted-array.html" class="problem-card">
+            <span class="problem-card-title">Find Minimum in Rotated Sorted Array</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/binary-search/time-based-key-value-store.html" class="problem-card">
+            <span class="problem-card-title">Time Based Key-Value Store</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+
+        <a href="/problems/binary-search/median-of-two-sorted-arrays.html" class="problem-card">
+            <span class="problem-card-title">Median of Two Sorted Arrays</span>
+            <span class="difficulty difficulty-medium">medium</span>
+        </a>
+    
+                </div>
+            </section>
+
+            <section class="related-patterns"><h2>Related Patterns</h2><div class="patterns-grid">
+        <a href="/patterns/two-pointers/" class="pattern-badge" style="background: #4ECDC420; color: #4ECDC4">
+            Two Pointers
+        </a>
+    
+
+        <a href="/patterns/trees/" class="pattern-badge" style="background: #98D8C820; color: #98D8C8">
+            Trees
+        </a>
+    </div></section>
+
+            
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master Binary Search</h2>
+                <p>Build pattern recognition with interactive MCQs. Understand <em>why</em> to use Binary Search, not just how.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=pattern&utm_campaign=binary-search" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <aside class="cheatsheet-link">
+                <a href="/cheatsheets/binary-search.html">
+                    <span class="cheatsheet-icon">📋</span>
+                    <span>Binary Search Cheat Sheet</span>
+                    <span class="arrow">&rarr;</span>
+                </a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=binary-search" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

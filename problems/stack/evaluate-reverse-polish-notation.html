@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Evaluate Reverse Polish Notation using Stack. medium difficulty. Time: O(n), Space: O(n).">
+    <link rel="canonical" href="https://leeteye.com/problems/stack/evaluate-reverse-polish-notation.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Evaluate Reverse Polish Notation Solution | Stack | LeetEye">
+    <meta property="og:description" content="Learn how to solve Evaluate Reverse Polish Notation using Stack. medium difficulty. Time: O(n), Space: O(n).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/stack/evaluate-reverse-polish-notation.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Evaluate Reverse Polish Notation Solution | Stack | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Evaluate Reverse Polish Notation using Stack. medium difficulty. Time: O(n), Space: O(n).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Evaluate Reverse Polish Notation Solution | Stack | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Evaluate Reverse Polish Notation",
+        "description": "RPN evaluation: numbers go on stack, operators pop two, compute, push result. Final answer is stack&#039;s only element.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "When you encounter a number token, you should:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "When you encounter an operator, you should:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "For tokens [\"10\", \"3\", \"-\"], the result is:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "If stack is [10, 3] and operator is \"/\": Pop 3, pop 10. The computation is:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "After processing all tokens, the answer is:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Evaluate Reverse Polish Notation?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(n) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Evaluate Reverse Polish Notation use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Evaluate Reverse Polish Notation uses the Stack pattern. When you see an operator, apply it to the two most recent numbers."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/stack/">Stack</a></li>
+            <li aria-current="page">Evaluate Reverse Polish Notation</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/stack/" class="pattern-badge">Stack</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Evaluate Reverse Polish Notation</h1>
+                <p class="problem-tags">
+                    <span class="tag">stack</span>
+<span class="tag">evaluate-reverse-polish-notation</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    You are given an array of strings <code>tokens</code> that represents an arithmetic expression in Reverse Polish Notation (RPN).<br><br>Evaluate the expression and return an integer representing the value.<br><br><strong>Notes:</strong><br>- Valid operators are <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code><br>- Each operand may be an integer or another expression<br>- Division truncates toward zero<br>- No division by zero<br>- Answer fits in 32-bit integer
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> tokens = [&quot;2&quot;,&quot;1&quot;,&quot;+&quot;,&quot;3&quot;,&quot;*&quot;]</div>
+            <div class="example-output"><strong>Output:</strong> 9</div>
+            <div class="example-explanation">((2 + 1) * 3) = 9</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> tokens = [&quot;4&quot;,&quot;13&quot;,&quot;5&quot;,&quot;/&quot;,&quot;+&quot;]</div>
+            <div class="example-output"><strong>Output:</strong> 6</div>
+            <div class="example-explanation">(4 + (13 / 5)) = 4 + 2 = 6</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 3</div>
+            <div class="example-input"><strong>Input:</strong> tokens = [&quot;10&quot;,&quot;6&quot;,&quot;9&quot;,&quot;3&quot;,&quot;+&quot;,&quot;-11&quot;,&quot;*&quot;,&quot;/&quot;,&quot;*&quot;,&quot;17&quot;,&quot;+&quot;,&quot;5&quot;,&quot;+&quot;]</div>
+            <div class="example-output"><strong>Output:</strong> 22</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>When you see an operator, apply it to the two most recent numbers.</p>
+                <p class="one-liner"><em>RPN evaluation: numbers go on stack, operators pop two, compute, push result. Final answer is stack&#039;s only element.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">evaluate reverse polish notation</span> <span class="trigger-tag">stack</span></span>,
+                    think <strong>Stack</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                When you encounter a number token, you should:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Push it onto the stack
+            </div>
+            <div class="step-explanation">
+                Numbers wait on the stack until an operator needs them.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                When you encounter an operator, you should:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Pop two operands, apply operator, push result
+            </div>
+            <div class="step-explanation">
+                Binary operators need two operands. Result goes back on stack for future operations.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                For tokens ["10", "3", "-"], the result is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> 10 - 3 = 7
+            </div>
+            <div class="step-explanation">
+                First number pushed (10) is second popped. Order is: second_popped OP first_popped = 10 - 3 = 7.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                If stack is [10, 3] and operator is "/": Pop 3, pop 10. The computation is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> 10 / 3
+            </div>
+            <div class="step-explanation">
+                The operand pushed first (10) is the dividend. Operand pushed second (3) is the divisor. 10 / 3 = 3 (truncated).
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                After processing all tokens, the answer is:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> The top (and only) element of the stack
+            </div>
+            <div class="step-explanation">
+                Valid RPN expression reduces to exactly one value on the stack.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> evalRPN(tokens: List[<span class="code-func">str</span>]) -&gt; <span class="code-func">int</span>:
+    stack = []
+    operators = {&<span class="code-comment">#039;+&#039;, &#039;-&#039;, &#039;*&#039;, &#039;/&#039;}</span>
+    
+    <span class="code-keyword">for</span> token <span class="code-keyword">in</span> tokens:
+        <span class="code-keyword">if</span> token <span class="code-keyword">in</span> operators:
+            b = stack.<span class="code-func">pop</span>()  <span class="code-comment"># Second operand</span>
+            a = stack.<span class="code-func">pop</span>()  <span class="code-comment"># First operand</span>
+            
+            <span class="code-keyword">if</span> token == &<span class="code-comment">#039;+&#039;:</span>
+                stack.<span class="code-func">append</span>(a + b)
+            <span class="code-keyword">elif</span> token == &<span class="code-comment">#039;-&#039;:</span>
+                stack.<span class="code-func">append</span>(a - b)
+            <span class="code-keyword">elif</span> token == &<span class="code-comment">#039;*&#039;:</span>
+                stack.<span class="code-func">append</span>(a * b)
+            <span class="code-keyword">else</span>:  <span class="code-comment"># Division truncates toward zero</span>
+                stack.<span class="code-func">append</span>(<span class="code-func">int</span>(a / b))
+        <span class="code-keyword">else</span>:
+            stack.<span class="code-func">append</span>(<span class="code-func">int</span>(token))
+    
+    <span class="code-keyword">return</span> stack[<span class="code-number">0</span>]</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Stack problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=evaluate-reverse-polish-notation" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Stack Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/stack/valid-parentheses.html">
+                <span class="problem-card-title">Valid Parentheses</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/min-stack.html">
+                <span class="problem-card-title">Min Stack</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/generate-parentheses.html">
+                <span class="problem-card-title">Generate Parentheses</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/daily-temperatures.html">
+                <span class="problem-card-title">Daily Temperatures</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/stack/car-fleet.html">
+                <span class="problem-card-title">Car Fleet</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/stack/" class="see-all-link">See all Stack problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=evaluate-reverse-polish-notation" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

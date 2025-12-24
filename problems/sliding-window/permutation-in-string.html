@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Permutation in String using Sliding Window. medium difficulty. Time: O(n), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/sliding-window/permutation-in-string.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Permutation in String Solution | Sliding Window | LeetEye">
+    <meta property="og:description" content="Learn how to solve Permutation in String using Sliding Window. medium difficulty. Time: O(n), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/sliding-window/permutation-in-string.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Permutation in String Solution | Sliding Window | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Permutation in String using Sliding Window. medium difficulty. Time: O(n), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Permutation in String Solution | Sliding Window | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Permutation in String",
+        "description": "Permutation = same frequency. Slide fixed-size window, update counts incrementally, check for match.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Two strings are permutations of each other if:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "For s1 of length n, generating all permutations takes:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "To find a permutation of s1 in s2, the window size should be:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "With a fixed-size window, when we slide right by 1:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "The simplest way to check if window matches s1:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "Instead of comparing full maps, we can track:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Permutation in String?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Permutation in String use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Permutation in String uses the Sliding Window pattern. A permutation has the same characters in different order. Same characters = same frequency count."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/sliding-window/">Sliding Window</a></li>
+            <li aria-current="page">Permutation in String</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/sliding-window/" class="pattern-badge">Sliding Window</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Permutation in String</h1>
+                <p class="problem-tags">
+                    <span class="tag">sliding-window</span>
+<span class="tag">permutation-in-string</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given two strings <code>s1</code> and <code>s2</code>, return <code>true</code> if <code>s2</code> contains a permutation of <code>s1</code>, or <code>false</code> otherwise.<br><br>In other words, return <code>true</code> if one of <code>s1</code>'s permutations is a substring of <code>s2</code>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> s1 = &quot;ab&quot;, s2 = &quot;eidbaooo&quot;</div>
+            <div class="example-output"><strong>Output:</strong> true</div>
+            <div class="example-explanation">s2 contains one permutation of s1 (&quot;ba&quot;).</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> s1 = &quot;ab&quot;, s2 = &quot;eidboaoo&quot;</div>
+            <div class="example-output"><strong>Output:</strong> false</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>A permutation has the same characters in different order. Same characters = same frequency count.</p>
+                <p class="one-liner"><em>Permutation = same frequency. Slide fixed-size window, update counts incrementally, check for match.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">permutation in string</span> <span class="trigger-tag">sliding-window</span></span>,
+                    think <strong>Sliding Window</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Two strings are permutations of each other if:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> They have identical character frequency counts
+            </div>
+            <div class="step-explanation">
+                "abc" and "bca" are permutations — same chars, same counts, different order.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                For s1 of length n, generating all permutations takes:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> O(n!) time
+            </div>
+            <div class="step-explanation">
+                n! permutations exist. For n=10, that's 3.6 million. Way too slow.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                To find a permutation of s1 in s2, the window size should be:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> len(s1)
+            </div>
+            <div class="step-explanation">
+                Permutation has exact same length as original. Window must match s1's length.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                With a fixed-size window, when we slide right by 1:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Add new char on right, remove old char on left
+            </div>
+            <div class="step-explanation">
+                Sliding by 1 = one char enters (right), one char exits (left). Update counts incrementally.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                The simplest way to check if window matches s1:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Compare frequency dictionaries
+            </div>
+            <div class="step-explanation">
+                Two frequency maps can be compared in O(26) = O(1) for lowercase letters.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                Instead of comparing full maps, we can track:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Number of matching character counts
+            </div>
+            <div class="step-explanation">
+                Track how many of the 26 characters have matching counts. When all 26 match (or all present chars match), we found a permutation.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> checkInclusion(s1: <span class="code-func">str</span>, s2: <span class="code-func">str</span>) -&gt; <span class="code-func">bool</span>:
+    <span class="code-keyword">if</span> <span class="code-func">len</span>(s1) &gt; <span class="code-func">len</span>(s2):
+        <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    
+    s1_count = [<span class="code-number">0</span>] * <span class="code-number">26</span>
+    window_count = [<span class="code-number">0</span>] * <span class="code-number">26</span>
+    
+    <span class="code-keyword">for</span> c <span class="code-keyword">in</span> s1:
+        s1_count[ord(c) - ord(&<span class="code-comment">#039;a&#039;)] += 1</span>
+    
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-func">range</span>(<span class="code-func">len</span>(s2)):
+        <span class="code-comment"># Add char to window</span>
+        window_count[ord(s2[i]) - ord(&<span class="code-comment">#039;a&#039;)] += 1</span>
+        
+        <span class="code-comment"># Remove char that left the window</span>
+        <span class="code-keyword">if</span> i &gt;= <span class="code-func">len</span>(s1):
+            window_count[ord(s2[i - <span class="code-func">len</span>(s1)]) - ord(&<span class="code-comment">#039;a&#039;)] -= 1</span>
+        
+        <span class="code-comment"># Check if window matches s1</span>
+        <span class="code-keyword">if</span> window_count == s1_count:
+            <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">False</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Sliding Window problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=permutation-in-string" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Sliding Window Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/sliding-window/best-time-to-buy-and-sell-stock.html">
+                <span class="problem-card-title">Best Time to Buy and Sell Stock</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/longest-substring-without-repeating.html">
+                <span class="problem-card-title">Longest Substring Without Repeating Characters</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/longest-repeating-character-replacement.html">
+                <span class="problem-card-title">Longest Repeating Character Replacement</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/minimum-window-substring.html">
+                <span class="problem-card-title">Minimum Window Substring</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/sliding-window/sliding-window-maximum.html">
+                <span class="problem-card-title">Sliding Window Maximum</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/sliding-window/" class="see-all-link">See all Sliding Window problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=permutation-in-string" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

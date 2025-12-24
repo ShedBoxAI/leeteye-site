@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Task Scheduler using Heap / Priority Queue. hard difficulty. Time: O(n), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/heap/task-scheduler.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Task Scheduler Solution | Heap / Priority Queue | LeetEye">
+    <meta property="og:description" content="Learn how to solve Task Scheduler using Heap / Priority Queue. hard difficulty. Time: O(n), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/heap/task-scheduler.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Task Scheduler Solution | Heap / Priority Queue | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Task Scheduler using Heap / Priority Queue. hard difficulty. Time: O(n), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Task Scheduler Solution | Heap / Priority Queue | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Task Scheduler",
+        "description": "Greedy: always pick most frequent available task. Use formula: max(total_tasks, (maxFreq-1)*(n+1) + count_of_max_freq_tasks).",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "At each time unit, we should pick:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "Greedy picks most frequent because:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "To respect cooldown, we:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "We idle when:",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "Max-heap helps because:",
+            "position": 5
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 6",
+            "text": "A queue can track:",
+            "position": 6
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Task Scheduler?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Task Scheduler use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Task Scheduler uses the Heap / Priority Queue pattern. Greedy: always process the most frequent task available."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/heap/">Heap / Priority Queue</a></li>
+            <li aria-current="page">Task Scheduler</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-hard">Hard</span>
+                    <a href="/patterns/heap/" class="pattern-badge">Heap / Priority Queue</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Task Scheduler</h1>
+                <p class="problem-tags">
+                    <span class="tag">heap</span>
+<span class="tag">task-scheduler</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    Given a characters array <code>tasks</code>, representing the tasks a CPU needs to do, where each letter represents a different task. Tasks could be done in any order. Each task is done in one unit of time. For each unit of time, the CPU could complete either one task or just be idle.<br><br>However, there is a non-negative integer <code>n</code> that represents the cooldown period between two same tasks (the same letter in the array), that is that there must be at least <code>n</code> units of time between any two same tasks.<br><br>Return the least number of units of times that the CPU will take to finish all the given tasks.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> tasks = [&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;], n = 2</div>
+            <div class="example-output"><strong>Output:</strong> 8</div>
+            <div class="example-explanation">A -&gt; B -&gt; idle -&gt; A -&gt; B -&gt; idle -&gt; A -&gt; B</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> tasks = [&quot;A&quot;,&quot;A&quot;,&quot;A&quot;,&quot;B&quot;,&quot;B&quot;,&quot;B&quot;], n = 0</div>
+            <div class="example-output"><strong>Output:</strong> 6</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Greedy: always process the most frequent task available.</p>
+                <p class="one-liner"><em>Greedy: always pick most frequent available task. Use formula: max(total_tasks, (maxFreq-1)*(n+1) + count_of_max_freq_tasks).</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">task scheduler</span> <span class="trigger-tag">heap</span></span>,
+                    think <strong>Heap / Priority Queue</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                At each time unit, we should pick:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Task with highest remaining count
+            </div>
+            <div class="step-explanation">
+                Processing frequent tasks early gives more flexibility to schedule them with gaps.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                Greedy picks most frequent because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> It minimizes idle slots needed
+            </div>
+            <div class="step-explanation">
+                High-frequency tasks need the most gaps. Handle them first to fill gaps optimally.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                To respect cooldown, we:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Track when each task becomes available
+            </div>
+            <div class="step-explanation">
+                A task used at time t is available again at time t + n + 1.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                We idle when:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> There are tasks but none are available due to cooldown
+            </div>
+            <div class="step-explanation">
+                If all remaining tasks are on cooldown, must idle.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                Max-heap helps because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> O(log k) access to most frequent task
+            </div>
+            <div class="step-explanation">
+                We repeatedly need the task with max remaining count.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">6</span>
+                A queue can track:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Tasks currently on cooldown
+            </div>
+            <div class="step-explanation">
+                Queue holds (available_time, count) for tasks on cooldown. Pop when time arrives.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">from</span> collections <span class="code-keyword">import</span> Counter
+
+<span class="code-keyword">def</span> leastInterval(tasks: List[<span class="code-func">str</span>], n: <span class="code-func">int</span>) -&gt; <span class="code-func">int</span>:
+    counts = Counter(tasks)
+    max_freq = <span class="code-func">max</span>(counts.<span class="code-func">values</span>())
+    max_freq_count = <span class="code-func">sum</span>(<span class="code-number">1</span> <span class="code-keyword">for</span> c <span class="code-keyword">in</span> counts.<span class="code-func">values</span>() <span class="code-keyword">if</span> c == max_freq)
+    
+    <span class="code-comment"># Formula: (max_freq - 1) cycles of (n + 1) slots + final tasks</span>
+    min_time = (max_freq - <span class="code-number">1</span>) * (n + <span class="code-number">1</span>) + max_freq_count
+    
+    <span class="code-comment"># At least need time for all tasks</span>
+    <span class="code-keyword">return</span> <span class="code-func">max</span>(min_time, <span class="code-func">len</span>(tasks))</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Heap / Priority Queue problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=task-scheduler" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Heap / Priority Queue Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/heap/kth-largest-element-in-stream.html">
+                <span class="problem-card-title">Kth Largest Element in a Stream</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/last-stone-weight.html">
+                <span class="problem-card-title">Last Stone Weight</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/k-closest-points-to-origin.html">
+                <span class="problem-card-title">K Closest Points to Origin</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/kth-largest-element-in-array.html">
+                <span class="problem-card-title">Kth Largest Element in an Array</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/heap/design-twitter.html">
+                <span class="problem-card-title">Design Twitter</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/heap/" class="see-all-link">See all Heap / Priority Queue problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=task-scheduler" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

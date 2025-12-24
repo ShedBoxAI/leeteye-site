@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve Network Delay Time using Advanced Graphs. hard difficulty. Time: O((V + E) log V), Space: O(V + E).">
+    <link rel="canonical" href="https://leeteye.com/problems/advanced-graphs/network-delay-time.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Network Delay Time Solution | Advanced Graphs | LeetEye">
+    <meta property="og:description" content="Learn how to solve Network Delay Time using Advanced Graphs. hard difficulty. Time: O((V + E) log V), Space: O(V + E).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/advanced-graphs/network-delay-time.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Network Delay Time Solution | Advanced Graphs | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve Network Delay Time using Advanced Graphs. hard difficulty. Time: O((V + E) log V), Space: O(V + E).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>Network Delay Time Solution | Advanced Graphs | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve Network Delay Time",
+        "description": "Dijkstra from source k to find shortest paths to all nodes. Answer = max shortest path. If any node unreachable, return -1.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "Dijkstra's is used because:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "We maintain for each node:",
+            "position": 2
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of Network Delay Time?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O((V + E) log V) time complexity and O(V + E) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does Network Delay Time use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Network Delay Time uses the Advanced Graphs pattern. Dijkstra&#039;s algorithm: find shortest path from source to all nodes."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/advanced-graphs/">Advanced Graphs</a></li>
+            <li aria-current="page">Network Delay Time</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-hard">Hard</span>
+                    <a href="/patterns/advanced-graphs/" class="pattern-badge">Advanced Graphs</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>Network Delay Time</h1>
+                <p class="problem-tags">
+                    <span class="tag">advanced-graphs</span>
+<span class="tag">network-delay-time</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    You are given a network of <code>n</code> nodes, labeled from <code>1</code> to <code>n</code>. You are also given <code>times</code>, a list of travel times as directed edges <code>times[i] = (ui, vi, wi)</code>, where <code>ui</code> is the source node, <code>vi</code> is the target node, and <code>wi</code> is the time it takes for a signal to travel from source to target.<br><br>We will send a signal from a given node <code>k</code>. Return the minimum time it takes for all the <code>n</code> nodes to receive the signal. If it is impossible for all the <code>n</code> nodes to receive the signal, return <code>-1</code>.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> times = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2</div>
+            <div class="example-output"><strong>Output:</strong> 2</div>
+            
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Dijkstra&#039;s algorithm: find shortest path from source to all nodes.</p>
+                <p class="one-liner"><em>Dijkstra from source k to find shortest paths to all nodes. Answer = max shortest path. If any node unreachable, return -1.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">network delay time</span> <span class="trigger-tag">advanced-graphs</span></span>,
+                    think <strong>Advanced Graphs</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                Dijkstra's is used because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> All of above
+            </div>
+            <div class="step-explanation">
+                Dijkstra's finds shortest paths from one source to all nodes with non-negative weights.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                We maintain for each node:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Both
+            </div>
+            <div class="step-explanation">
+                Signal reaches all when the farthest node receives it.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">import</span> heapq
+<span class="code-keyword">from</span> collections <span class="code-keyword">import</span> defaultdict
+
+<span class="code-keyword">def</span> networkDelayTime(times: List[List[<span class="code-func">int</span>]], n: <span class="code-func">int</span>, k: <span class="code-func">int</span>) -&gt; <span class="code-func">int</span>:
+    <span class="code-comment"># Build adjacency list</span>
+    graph = defaultdict(<span class="code-func">list</span>)
+    <span class="code-keyword">for</span> u, v, w <span class="code-keyword">in</span> times:
+        graph[u].<span class="code-func">append</span>((v, w))
+    
+    <span class="code-comment"># Dijkstra&#039;s algorithm</span>
+    min_heap = [(<span class="code-number">0</span>, k)]  <span class="code-comment"># (time, node)</span>
+    dist = {}
+    
+    <span class="code-keyword">while</span> min_heap:
+        time, node = heapq.heappop(min_heap)
+        
+        <span class="code-keyword">if</span> node <span class="code-keyword">in</span> dist:
+            <span class="code-keyword">continue</span>
+        
+        dist[node] = time
+        
+        <span class="code-keyword">for</span> neighbor, weight <span class="code-keyword">in</span> graph[node]:
+            <span class="code-keyword">if</span> neighbor <span class="code-keyword">not</span> <span class="code-keyword">in</span> dist:
+                heapq.heappush(min_heap, (time + weight, neighbor))
+    
+    <span class="code-comment"># Check if all nodes reached</span>
+    <span class="code-keyword">if</span> <span class="code-func">len</span>(dist) == n:
+        <span class="code-keyword">return</span> <span class="code-func">max</span>(dist.<span class="code-func">values</span>())
+    <span class="code-keyword">return</span> -<span class="code-number">1</span></code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O((V + E) log V)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(V + E)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice Advanced Graphs problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=network-delay-time" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More Advanced Graphs Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/advanced-graphs/min-cost-to-connect-all-points.html">
+                <span class="problem-card-title">Min Cost to Connect All Points</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/swim-in-rising-water.html">
+                <span class="problem-card-title">Swim in Rising Water</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/alien-dictionary.html">
+                <span class="problem-card-title">Alien Dictionary</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/cheapest-flights-within-k-stops.html">
+                <span class="problem-card-title">Cheapest Flights Within K Stops</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/advanced-graphs/reconstruct-itinerary.html">
+                <span class="problem-card-title">Reconstruct Itinerary</span>
+                <span class="difficulty difficulty-hard">hard</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/advanced-graphs/" class="see-all-link">See all Advanced Graphs problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=network-delay-time" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>

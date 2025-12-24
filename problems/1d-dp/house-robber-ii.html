@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how to solve House Robber II using 1D Dynamic Programming. medium difficulty. Time: O(n), Space: O(1).">
+    <link rel="canonical" href="https://leeteye.com/problems/1d-dp/house-robber-ii.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="House Robber II Solution | 1D Dynamic Programming | LeetEye">
+    <meta property="og:description" content="Learn how to solve House Robber II using 1D Dynamic Programming. medium difficulty. Time: O(n), Space: O(1).">
+    <meta property="og:image" content="https://leeteye.com/assets/og-image.png">
+    <meta property="og:url" content="https://leeteye.com/problems/1d-dp/house-robber-ii.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="LeetEye">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="House Robber II Solution | 1D Dynamic Programming | LeetEye">
+    <meta name="twitter:description" content="Learn how to solve House Robber II using 1D Dynamic Programming. medium difficulty. Time: O(n), Space: O(1).">
+    <meta name="twitter:image" content="https://leeteye.com/assets/og-image.png">
+
+    <title>House Robber II Solution | 1-D DP | LeetEye</title>
+
+    <link rel="icon" type="image/png" href="../../../assets/logo.png">
+    <link rel="apple-touch-icon" href="../../../assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/pseo.css">
+
+    <!-- Schema.org HowTo -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Solve House Robber II",
+        "description": "Circle = first and last adjacent. Break it: max(rob houses 0 to n-2, rob houses 1 to n-1). Solve two linear House Robber problems.",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python"
+        },
+        "step": [
+            {
+            "@type": "HowToStep",
+            "name": "Step 1",
+            "text": "In a circle, houses 0 and n-1 are:",
+            "position": 1
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 2",
+            "text": "We can split this into:",
+            "position": 2
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 3",
+            "text": "max(rob[0..n-2], rob[1..n-1]) is correct because:",
+            "position": 3
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 4",
+            "text": "Middle houses (not first or last):",
+            "position": 4
+        },
+{
+            "@type": "HowToStep",
+            "name": "Step 5",
+            "text": "With only one house:",
+            "position": 5
+        }
+        ],
+        "author": {
+            "@type": "Organization",
+            "name": "LeetEye",
+            "url": "https://leeteye.com"
+        }
+    }
+    </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is the time complexity of House Robber II?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The optimal solution has O(n) time complexity and O(1) space complexity."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What pattern does House Robber II use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "House Robber II uses the 1D Dynamic Programming pattern. Break the circle: either skip the first house OR skip the last house. Solve two linear problems."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="../../../assets/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/patterns/">Patterns</a></li>
+            <li><a href="/patterns/1d-dp/">1-D DP</a></li>
+            <li aria-current="page">House Robber II</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <article class="problem-article">
+            <header class="problem-header">
+                <div class="problem-meta">
+                    <span class="difficulty difficulty-medium">Medium</span>
+                    <a href="/patterns/1d-dp/" class="pattern-badge">1D Dynamic Programming</a>
+                    <span class="time-estimate">~5 min</span>
+                </div>
+                <h1>House Robber II</h1>
+                <p class="problem-tags">
+                    <span class="tag">1d-dp</span>
+<span class="tag">house-robber-ii</span>
+                </p>
+            </header>
+
+            <section class="problem-statement">
+                <h2>Problem</h2>
+                <div class="statement-text">
+                    You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.<br><br>Given an integer array <code>nums</code> representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+                </div>
+
+                <div class="examples">
+                    <h3>Examples</h3>
+                    
+        <div class="example">
+            <div class="example-label">Example 1</div>
+            <div class="example-input"><strong>Input:</strong> nums = [2,3,2]</div>
+            <div class="example-output"><strong>Output:</strong> 3</div>
+            <div class="example-explanation">Cannot rob house 0 and 2 (adjacent in circle). Rob house 1.</div>
+        </div>
+    
+
+        <div class="example">
+            <div class="example-label">Example 2</div>
+            <div class="example-input"><strong>Input:</strong> nums = [1,2,3,1]</div>
+            <div class="example-output"><strong>Output:</strong> 4</div>
+            <div class="example-explanation">Rob house 0 (1) + house 2 (3) = 4</div>
+        </div>
+    
+                </div>
+            </section>
+
+            <section class="key-insight">
+                <div class="key-insight-title">Key Insight</div>
+                <p>Break the circle: either skip the first house OR skip the last house. Solve two linear problems.</p>
+                <p class="one-liner"><em>Circle = first and last adjacent. Break it: max(rob houses 0 to n-2, rob houses 1 to n-1). Solve two linear House Robber problems.</em></p>
+            </section>
+
+            <section class="approach">
+                <h2>How to Approach This Problem</h2>
+
+                <div class="trigger-words">
+                    <strong>Pattern Recognition:</strong> When you see keywords like
+                    <span class="triggers"><span class="trigger-tag">house robber ii</span> <span class="trigger-tag">1d-dp</span></span>,
+                    think <strong>1D Dynamic Programming</strong>.
+                </div>
+
+                <h3>Step-by-Step Reasoning</h3>
+                <div class="reasoning-steps">
+                    
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">1</span>
+                In a circle, houses 0 and n-1 are:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Adjacent (can&#039;t both be robbed)
+            </div>
+            <div class="step-explanation">
+                Circle means first and last are neighbors.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">2</span>
+                We can split this into:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Consider houses [0, n-2] OR [1, n-1]
+            </div>
+            <div class="step-explanation">
+                If we exclude last house, first can be robbed. If we exclude first, last can be robbed. One of these is optimal.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">3</span>
+                max(rob[0..n-2], rob[1..n-1]) is correct because:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> One range includes first, other includes last
+            </div>
+            <div class="step-explanation">
+                [0..n-2] allows robbing first but not last. [1..n-1] allows robbing last but not first. The optimal answer falls into one of these.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">4</span>
+                Middle houses (not first or last):
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Are in both ranges
+            </div>
+            <div class="step-explanation">
+                Both ranges include middle houses. They can be robbed in either scenario.
+            </div>
+        </div>
+
+        <div class="reasoning-step">
+            <div class="step-question">
+                <span class="step-number">5</span>
+                With only one house:
+            </div>
+            <div class="step-answer">
+                <strong>Answer:</strong> Return nums[0]
+            </div>
+            <div class="step-explanation">
+                One house has no neighbors (including itself). Rob it.
+            </div>
+        </div>
+                </div>
+            </section>
+
+            <section class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python"><span class="code-keyword">def</span> rob(nums: List[<span class="code-func">int</span>]) -&gt; <span class="code-func">int</span>:
+    <span class="code-keyword">if</span> <span class="code-func">len</span>(nums) == <span class="code-number">1</span>:
+        <span class="code-keyword">return</span> nums[<span class="code-number">0</span>]
+    
+    <span class="code-keyword">def</span> rob_linear(houses):
+        prev2, prev1 = <span class="code-number">0</span>, <span class="code-number">0</span>
+        <span class="code-keyword">for</span> money <span class="code-keyword">in</span> houses:
+            curr = <span class="code-func">max</span>(money + prev2, prev1)
+            prev2 = prev1
+            prev1 = curr
+        <span class="code-keyword">return</span> prev1
+    
+    <span class="code-comment"># Skip last house OR skip first house</span>
+    <span class="code-keyword">return</span> <span class="code-func">max</span>(rob_linear(nums[:-<span class="code-number">1</span>]), rob_linear(nums[<span class="code-number">1</span>:]))</code></pre>
+
+                <div class="complexity">
+                    <h3>Complexity Analysis</h3>
+                    <table class="complexity-table">
+                        <tr>
+                            <th>Time</th>
+                            <td><code>O(n)</code></td>
+                        </tr>
+                        <tr>
+                            <th>Space</th>
+                            <td><code>O(1)</code></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Primary CTA -->
+            <section class="cta-box">
+                <h2>Master This Pattern</h2>
+                <p>Build intuition with interactive MCQs. Practice 1D Dynamic Programming problems in the LeetEye app.</p>
+                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=problem&utm_campaign=house-robber-ii" class="cta-button cta-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                    </svg>
+                    Download LeetEye Free
+                </a>
+            </section>
+
+            <!-- Related Problems -->
+            <aside class="related-problems">
+                <h3>More 1-D DP Problems</h3>
+                <ul class="problem-list">
+                    
+        <li>
+            <a href="/problems/1d-dp/climbing-stairs.html">
+                <span class="problem-card-title">Climbing Stairs</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/min-cost-climbing-stairs.html">
+                <span class="problem-card-title">Min Cost Climbing Stairs</span>
+                <span class="difficulty difficulty-easy">easy</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/house-robber.html">
+                <span class="problem-card-title">House Robber</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/longest-palindromic-substring.html">
+                <span class="problem-card-title">Longest Palindromic Substring</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+
+        <li>
+            <a href="/problems/1d-dp/palindromic-substrings.html">
+                <span class="problem-card-title">Palindromic Substrings</span>
+                <span class="difficulty difficulty-medium">medium</span>
+            </a>
+        </li>
+    
+                </ul>
+                <a href="/patterns/1d-dp/" class="see-all-link">See all 1-D DP problems &rarr;</a>
+            </aside>
+        </article>
+    </main>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=house-robber-ii" class="cta-button">
+            Practice in LeetEye
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <nav class="footer-nav">
+                <a href="/patterns/">All Patterns</a>
+                <a href="/problems/">All Problems</a>
+                <a href="/cheatsheets/">Cheat Sheets</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
