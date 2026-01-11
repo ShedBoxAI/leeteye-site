@@ -1364,6 +1364,22 @@ section {
     color: #888;
 }
 
+.footer-links {
+    display: flex;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+}
+
+.footer-links a {
+    font-size: 0.875rem;
+    color: #888;
+    transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--color-text);
+}
+
 /* ===== Responsive Design ===== */
 @media (max-width: 1024px) {
     .code-feature {

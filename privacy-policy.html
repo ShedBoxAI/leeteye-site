@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WNFTH58D"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-58WNFTH58D');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy for LeetEye - Learn how we collect, use, and protect your data.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://leeteye.com/privacy-policy.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Privacy Policy - LeetEye">
+    <meta property="og:description" content="Learn how LeetEye collects, uses, and protects your personal information.">
+    <meta property="og:url" content="https://leeteye.com/privacy-policy.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="LeetEye">
+
+    <title>Privacy Policy - LeetEye</title>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Privacy Policy",
+      "description": "Privacy Policy for LeetEye iOS application",
+      "publisher": {
+        "@type": "Organization",
+        "name": "ShedboxAI",
+        "url": "https://shedboxai.com"
+      },
+      "dateModified": "2025-01-10"
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <link rel="apple-touch-icon" href="assets/logo.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            --color-bg: #0A0A0F;
+            --color-bg-secondary: #12121A;
+            --color-surface: #1E1E2E;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --color-text: #FAFAFA;
+            --color-text-secondary: #A1A1AA;
+            --color-text-tertiary: #71717A;
+            --color-primary: #F97316;
+            --color-primary-hover: #EA580C;
+            --color-accent: #14B8A6;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --transition-fast: 150ms ease;
+            --container-max: 800px;
+            --container-padding: 1.5rem;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        a:hover {
+            color: var(--color-primary-hover);
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        /* Header */
+        .header {
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-bg-secondary);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-left: auto;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+
+        .logo-highlight {
+            color: var(--color-primary);
+        }
+
+        /* Main Content */
+        main {
+            padding: var(--space-3xl) 0;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--color-text-tertiary);
+            font-size: 0.875rem;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .intro {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-3xl);
+            padding-bottom: var(--space-2xl);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--color-text);
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-md);
+            color: var(--color-text);
+        }
+
+        p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        ul, ol {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+            padding-left: var(--space-xl);
+        }
+
+        li {
+            margin-bottom: var(--space-sm);
+        }
+
+        li strong {
+            color: var(--color-text);
+        }
+
+        .highlight-box {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+            color: var(--color-accent);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-lg) 0;
+            font-size: 0.9375rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .data-table th {
+            color: var(--color-text);
+            font-weight: 600;
+            background: var(--color-surface);
+        }
+
+        .data-table td {
+            color: var(--color-text-secondary);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Contact Card */
+        .contact-card {
+            background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-bg-secondary) 100%);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            margin-top: var(--space-3xl);
+        }
+
+        .contact-card h2 {
+            margin-bottom: var(--space-md);
+        }
+
+        .contact-card p {
+            margin-bottom: var(--space-lg);
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            transition: background var(--transition-fast);
+        }
+
+        .contact-email:hover {
+            background: var(--color-primary-hover);
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            padding: var(--space-2xl) 0;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .footer-logo {
+            width: 28px;
+            height: 28px;
+        }
+
+        .footer-logo-text {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-logo-highlight {
+            color: var(--color-primary);
+        }
+
+        .footer-tagline {
+            color: var(--color-text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--space-lg);
+            margin-top: var(--space-sm);
+        }
+
+        .footer-links a {
+            color: var(--color-text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .page-title {
+                font-size: 1.875rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .data-table {
+                font-size: 0.875rem;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: var(--space-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Home
+                </a>
+                <a href="/" class="logo">
+                    <img src="assets/logo.png" alt="LeetEye">
+                    <span class="logo-text">Leet<span class="logo-highlight">Eye</span></span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1 class="page-title">Privacy Policy</h1>
+            <p class="last-updated">Last updated: January 10, 2025</p>
+
+            <p class="intro">
+                LeetEye ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our iOS mobile application LeetEye (the "App"). Please read this policy carefully. By using the App, you agree to the collection and use of information in accordance with this policy.
+            </p>
+
+            <!-- Information We Collect -->
+            <section>
+                <h2>1. Information We Collect</h2>
+
+                <h3>Information You Provide Directly</h3>
+                <p>When you create an account or sign in using third-party authentication providers, we may collect:</p>
+                <ul>
+                    <li><strong>Account Information:</strong> Your name, email address, and profile photo when you sign in with Google or GitHub</li>
+                    <li><strong>Authentication Data:</strong> OAuth tokens and unique user identifiers from Google or GitHub</li>
+                </ul>
+
+                <h3>Information Collected Automatically</h3>
+                <p>When you use the App, we automatically collect certain information:</p>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Data Type</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Device Identifiers</td>
+                            <td>App functionality and analytics</td>
+                        </tr>
+                        <tr>
+                            <td>Usage Data</td>
+                            <td>Problems completed, accuracy scores, learning progress</td>
+                        </tr>
+                        <tr>
+                            <td>App Interaction Data</td>
+                            <td>Features used, session duration, navigation patterns</td>
+                        </tr>
+                        <tr>
+                            <td>Crash and Diagnostic Data</td>
+                            <td>App stability and performance improvement</td>
+                        </tr>
+                        <tr>
+                            <td>Push Notification Tokens</td>
+                            <td>Sending optional learning reminders (if enabled)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight-box">
+                    <h3>Guest Mode</h3>
+                    <p>You can use LeetEye without creating an account. In guest mode, your progress is stored locally on your device only. We do not collect any personal information from guest users except anonymous analytics data to improve the App.</p>
+                </div>
+            </section>
+
+            <!-- How We Use Your Information -->
+            <section>
+                <h2>2. How We Use Your Information</h2>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li><strong>Provide Core App Functionality:</strong> Track your learning progress, streaks, and completed problems</li>
+                    <li><strong>Sync Your Progress:</strong> If signed in, sync your progress across multiple devices via cloud storage</li>
+                    <li><strong>Personalize Your Experience:</strong> Identify weak areas and recommend problems based on your performance</li>
+                    <li><strong>Send Notifications:</strong> Deliver optional push notifications for learning reminders (with your permission)</li>
+                    <li><strong>Improve the App:</strong> Analyze usage patterns to fix bugs, improve features, and enhance user experience</li>
+                    <li><strong>Ensure Security:</strong> Detect and prevent fraud, abuse, or unauthorized access</li>
+                </ul>
+            </section>
+
+            <!-- Third-Party Services -->
+            <section>
+                <h2>3. Third-Party Services</h2>
+                <p>We use the following third-party services that may collect information:</p>
+
+                <h3>Firebase (Google)</h3>
+                <p>We use Firebase for authentication, cloud storage, analytics, and push notifications. Firebase may collect device identifiers, IP addresses, and usage data. For more information, see <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy</a>.</p>
+
+                <h3>Google Sign-In</h3>
+                <p>If you choose to sign in with Google, Google will share your basic profile information (name, email, profile photo) with us. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+
+                <h3>GitHub Sign-In</h3>
+                <p>If you choose to sign in with GitHub, GitHub will share your basic profile information with us. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub's Privacy Statement</a>.</p>
+
+                <p>These third-party services provide the same or equivalent protection of your data as described in this policy. We do not sell your personal information to any third parties.</p>
+            </section>
+
+            <!-- Data Storage and Security -->
+            <section>
+                <h2>4. Data Storage and Security</h2>
+                <p>Your data is stored in the following ways:</p>
+                <ul>
+                    <li><strong>Local Storage:</strong> Your progress data is stored locally on your device using secure on-device storage</li>
+                    <li><strong>Cloud Storage:</strong> If signed in, your progress is synced to Firebase Cloud Firestore, hosted on Google Cloud Platform with industry-standard security measures</li>
+                </ul>
+                <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of electronic transmission or storage is 100% secure.</p>
+            </section>
+
+            <!-- Data Retention -->
+            <section>
+                <h2>5. Data Retention</h2>
+                <p>We retain your personal information for as long as your account is active or as needed to provide you with our services. Specifically:</p>
+                <ul>
+                    <li><strong>Account Data:</strong> Retained until you delete your account</li>
+                    <li><strong>Progress Data:</strong> Retained until you delete your account or request deletion</li>
+                    <li><strong>Analytics Data:</strong> Aggregated and anonymized data may be retained indefinitely for product improvement</li>
+                    <li><strong>Guest Data:</strong> Stored locally on your device until you uninstall the App or clear app data</li>
+                </ul>
+            </section>
+
+            <!-- Your Rights and Choices -->
+            <section>
+                <h2>6. Your Rights and Choices</h2>
+                <p>You have the following rights regarding your personal information:</p>
+
+                <h3>Access and Portability</h3>
+                <p>You can view your learning progress and statistics within the App at any time.</p>
+
+                <h3>Deletion</h3>
+                <p>You can delete your account and all associated data by:</p>
+                <ul>
+                    <li>Going to Profile > Settings > Delete Account within the App</li>
+                    <li>Contacting us through <a href="https://shedboxai.com" target="_blank" rel="noopener">shedboxai.com</a></li>
+                </ul>
+                <p>Upon deletion request, we will remove your personal data within 30 days, except where we are required to retain it for legal or legitimate business purposes.</p>
+
+                <h3>Opt-Out Options</h3>
+                <ul>
+                    <li><strong>Push Notifications:</strong> You can disable notifications in your device settings or within the App</li>
+                    <li><strong>Analytics:</strong> You can limit analytics collection through your device's privacy settings</li>
+                    <li><strong>Account:</strong> You can use the App in guest mode without creating an account</li>
+                </ul>
+
+                <h3>Revoke Consent</h3>
+                <p>If you signed in with Google or GitHub, you can revoke LeetEye's access to your account through your Google or GitHub account settings.</p>
+            </section>
+
+            <!-- Children's Privacy -->
+            <section>
+                <h2>7. Children's Privacy</h2>
+                <p>LeetEye is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us through <a href="https://shedboxai.com" target="_blank" rel="noopener">shedboxai.com</a>, and we will take steps to delete such information.</p>
+            </section>
+
+            <!-- International Data Transfers -->
+            <section>
+                <h2>8. International Data Transfers</h2>
+                <p>Your information may be transferred to and processed in countries other than your country of residence, including the United States where our service providers (Firebase/Google Cloud) operate. These countries may have different data protection laws. By using the App, you consent to such transfers.</p>
+            </section>
+
+            <!-- Changes to This Policy -->
+            <section>
+                <h2>9. Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by:</p>
+                <ul>
+                    <li>Posting the new Privacy Policy on this page</li>
+                    <li>Updating the "Last updated" date at the top of this policy</li>
+                    <li>Sending a notification through the App for significant changes</li>
+                </ul>
+                <p>We encourage you to review this Privacy Policy periodically for any changes.</p>
+            </section>
+
+            <!-- California Privacy Rights -->
+            <section>
+                <h2>10. California Privacy Rights (CCPA)</h2>
+                <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p>
+                <ul>
+                    <li><strong>Right to Know:</strong> You can request information about the categories and specific pieces of personal information we have collected about you</li>
+                    <li><strong>Right to Delete:</strong> You can request deletion of your personal information</li>
+                    <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your privacy rights</li>
+                </ul>
+                <p>We do not sell personal information to third parties.</p>
+            </section>
+
+            <!-- Contact Us -->
+            <div class="contact-card">
+                <h2>Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy or our data practices, please reach out through our website:</p>
+                <p style="margin-top: var(--space-lg); font-size: 0.875rem;">
+                    ShedboxAI<br>
+                    <a href="https://shedboxai.com" target="_blank" rel="noopener">https://shedboxai.com</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="assets/logo.png" alt="LeetEye" class="footer-logo">
+                    <span class="footer-logo-text">Leet<span class="footer-logo-highlight">Eye</span></span>
+                </div>
+                <p class="footer-tagline">Made with love for developers, by developers.</p>
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms-of-service.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
