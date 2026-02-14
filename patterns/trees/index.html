@@ -189,6 +189,14 @@
                 </div>
             </header>
 
+            <section class="pattern-diagram">
+                <h2>How Trees Works</h2>
+                <img src="/assets/diagrams/trees.png" alt="Trees pattern visualization" class="diagram-img" loading="lazy" width="800" height="500">
+                <div class="how-it-works">
+                    <p>Tree problems are solved recursively by breaking them into subproblems at each node. At every node you have three choices: process the node before its children (preorder), between children (inorder), or after children (postorder). Most tree problems follow a pattern: define what information you need from left and right subtrees, combine it at the current node, and return the result upward. BFS (level-order) uses a queue to process nodes level by level, useful for shortest path or level-specific operations.</p>
+                </div>
+            </section>
+
             <section class="recognition">
                 <h2>When to Use Trees</h2>
 
@@ -208,6 +216,25 @@
 <span class="trigger-tag">serialize and deserialize binary tree</span>
 <span class="trigger-tag">binary tree maximum path sum</span>
                 </div>
+            </section>
+
+            <section class="common-mistakes">
+                <h2>Common Mistakes</h2>
+                <ul class="mistakes-list">
+                    <li>Not handling the null/None base case (every recursive tree function needs it)</li>
+<li>Confusing when to use DFS vs BFS — use DFS for path problems, BFS for level problems</li>
+<li>Returning values incorrectly in recursive calls (the return value must propagate up)</li>
+<li>Not considering that a tree might be unbalanced, leading to O(n) height instead of O(log n)</li>
+                </ul>
+            </section>
+
+            <section class="when-not-to-use">
+                <h2>When NOT to Use Trees</h2>
+                <ul class="not-use-list">
+                    <li>When the structure has cycles (it&#039;s a graph, not a tree — use graph algorithms)</li>
+<li>When you need to process all pairs of nodes (the recursive approach won&#039;t help)</li>
+<li>When the problem is about sequences or arrays with no hierarchical structure</li>
+                </ul>
             </section>
 
             
@@ -300,7 +327,7 @@
             <section class="cta-box">
                 <h2>Master Trees</h2>
                 <p>Build pattern recognition with interactive MCQs. Understand <em>why</em> to use Trees, not just how.</p>
-                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=pattern&utm_campaign=trees" class="cta-button cta-primary">
+                <a href="https://apps.apple.com/us/app/leeteye/id6756695234?utm_source=website&utm_medium=pattern&utm_campaign=trees" class="cta-button cta-primary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                     </svg>
@@ -320,14 +347,14 @@
 
     <!-- Sticky Mobile CTA -->
     <div class="sticky-cta">
-        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=trees" class="cta-button">
+        <a href="https://apps.apple.com/us/app/leeteye/id6756695234?utm_source=website&utm_medium=sticky&utm_campaign=trees" class="cta-button">
             Practice in LeetEye
         </a>
     </div>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <p>&copy; 2025 LeetEye. Pattern recognition for coding interviews.</p>
             <nav class="footer-nav">
                 <a href="/patterns/">All Patterns</a>
                 <a href="/problems/">All Problems</a>

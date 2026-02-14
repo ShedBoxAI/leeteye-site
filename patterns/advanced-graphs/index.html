@@ -171,6 +171,14 @@
                 </div>
             </header>
 
+            <section class="pattern-diagram">
+                <h2>How Advanced Graphs Works</h2>
+                <img src="/assets/diagrams/advanced-graphs.png" alt="Advanced Graphs pattern visualization" class="diagram-img" loading="lazy" width="800" height="500">
+                <div class="how-it-works">
+                    <p>Advanced graph algorithms handle weighted edges, shortest paths, and minimum spanning trees. Dijkstra&#039;s algorithm finds shortest paths from a source using a priority queue, always expanding the closest unvisited node. Bellman-Ford handles negative weights by relaxing all edges V-1 times. Kruskal&#039;s and Prim&#039;s algorithms find minimum spanning trees. Topological sort orders nodes in a DAG so every edge goes from earlier to later, essential for dependency resolution.</p>
+                </div>
+            </section>
+
             <section class="recognition">
                 <h2>When to Use Advanced Graphs</h2>
 
@@ -188,6 +196,25 @@
 <span class="trigger-tag">cheapest flights within k stops</span>
 <span class="trigger-tag">reconstruct itinerary</span>
                 </div>
+            </section>
+
+            <section class="common-mistakes">
+                <h2>Common Mistakes</h2>
+                <ul class="mistakes-list">
+                    <li>Using Dijkstra with negative edge weights (it won&#039;t work — use Bellman-Ford)</li>
+<li>Not using a priority queue for Dijkstra, resulting in O(V²) instead of O((V+E)log V)</li>
+<li>Forgetting to detect negative cycles with Bellman-Ford</li>
+<li>Applying topological sort to a graph with cycles (it only works on DAGs)</li>
+                </ul>
+            </section>
+
+            <section class="when-not-to-use">
+                <h2>When NOT to Use Advanced Graphs</h2>
+                <ul class="not-use-list">
+                    <li>When all edges have equal weight (use simple BFS for shortest path)</li>
+<li>When the graph is small enough for brute-force approaches</li>
+<li>When the problem doesn&#039;t actually need shortest paths or spanning trees</li>
+                </ul>
             </section>
 
             
@@ -253,7 +280,7 @@
             <section class="cta-box">
                 <h2>Master Advanced Graphs</h2>
                 <p>Build pattern recognition with interactive MCQs. Understand <em>why</em> to use Advanced Graphs, not just how.</p>
-                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=pattern&utm_campaign=advanced-graphs" class="cta-button cta-primary">
+                <a href="https://apps.apple.com/us/app/leeteye/id6756695234?utm_source=website&utm_medium=pattern&utm_campaign=advanced-graphs" class="cta-button cta-primary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                     </svg>
@@ -273,14 +300,14 @@
 
     <!-- Sticky Mobile CTA -->
     <div class="sticky-cta">
-        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=advanced-graphs" class="cta-button">
+        <a href="https://apps.apple.com/us/app/leeteye/id6756695234?utm_source=website&utm_medium=sticky&utm_campaign=advanced-graphs" class="cta-button">
             Practice in LeetEye
         </a>
     </div>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <p>&copy; 2025 LeetEye. Pattern recognition for coding interviews.</p>
             <nav class="footer-nav">
                 <a href="/patterns/">All Patterns</a>
                 <a href="/problems/">All Problems</a>

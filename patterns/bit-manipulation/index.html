@@ -180,6 +180,14 @@
                 </div>
             </header>
 
+            <section class="pattern-diagram">
+                <h2>How Bit Manipulation Works</h2>
+                <img src="/assets/diagrams/bit-manipulation.png" alt="Bit Manipulation pattern visualization" class="diagram-img" loading="lazy" width="800" height="500">
+                <div class="how-it-works">
+                    <p>Bit manipulation operates directly on the binary representation of numbers using bitwise operators: AND (&amp;), OR (|), XOR (^), NOT (~), and shifts (&lt;&lt;, &gt;&gt;). XOR is especially powerful: a ^ a = 0 and a ^ 0 = a, so XORing all elements cancels out pairs, leaving the unique element. Common tricks include n &amp; (n-1) to clear the lowest set bit, n &amp; (-n) to isolate the lowest set bit, and bit masks to track state in O(1) space. This enables solving certain problems without extra data structures.</p>
+                </div>
+            </section>
+
             <section class="recognition">
                 <h2>When to Use Bit Manipulation</h2>
 
@@ -198,6 +206,25 @@
 <span class="trigger-tag">sum of two integers</span>
 <span class="trigger-tag">reverse integer</span>
                 </div>
+            </section>
+
+            <section class="common-mistakes">
+                <h2>Common Mistakes</h2>
+                <ul class="mistakes-list">
+                    <li>Operator precedence errors — bitwise operators have lower precedence than comparison operators in most languages</li>
+<li>Not considering signed vs unsigned integers (negative numbers have different bit patterns)</li>
+<li>Assuming 32-bit integers when the problem uses different sizes</li>
+<li>Overcomplicating solutions — bit manipulation should simplify, not obscure the logic</li>
+                </ul>
+            </section>
+
+            <section class="when-not-to-use">
+                <h2>When NOT to Use Bit Manipulation</h2>
+                <ul class="not-use-list">
+                    <li>When a hash set or hash map solution is clearer and equally efficient</li>
+<li>When the numbers are too large for fixed-width bit operations</li>
+<li>When the bit manipulation trick is obscure and makes the code unreadable</li>
+                </ul>
             </section>
 
             
@@ -269,7 +296,7 @@
             <section class="cta-box">
                 <h2>Master Bit Manipulation</h2>
                 <p>Build pattern recognition with interactive MCQs. Understand <em>why</em> to use Bit Manipulation, not just how.</p>
-                <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=pattern&utm_campaign=bit-manipulation" class="cta-button cta-primary">
+                <a href="https://apps.apple.com/us/app/leeteye/id6756695234?utm_source=website&utm_medium=pattern&utm_campaign=bit-manipulation" class="cta-button cta-primary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                     </svg>
@@ -289,14 +316,14 @@
 
     <!-- Sticky Mobile CTA -->
     <div class="sticky-cta">
-        <a href="https://apps.apple.com/app/leeteye?utm_source=website&utm_medium=sticky&utm_campaign=bit-manipulation" class="cta-button">
+        <a href="https://apps.apple.com/us/app/leeteye/id6756695234?utm_source=website&utm_medium=sticky&utm_campaign=bit-manipulation" class="cta-button">
             Practice in LeetEye
         </a>
     </div>
 
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2024 LeetEye. Pattern recognition for coding interviews.</p>
+            <p>&copy; 2025 LeetEye. Pattern recognition for coding interviews.</p>
             <nav class="footer-nav">
                 <a href="/patterns/">All Patterns</a>
                 <a href="/problems/">All Problems</a>
