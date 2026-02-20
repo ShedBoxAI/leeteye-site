@@ -533,6 +533,14 @@ function generateProblemPage(problem, category) {
         </li>
     `).join('\n');
 
+    // Find relevant comparisons for this category
+    const relevantComparisons = (data.comparisons || []).filter(c =>
+        c.pattern1 === category.id || c.pattern2 === category.id
+    ).slice(0, 3);
+    const comparisonLinksHtml = relevantComparisons.map(c =>
+        `<li><a href="/compare/${c.pattern1}-vs-${c.pattern2}.html">${escapeHtml(c.title)}</a></li>`
+    ).join('\n');
+
     // Replace placeholders
     let html = template
         .replace('{{HEAD}}', head)
@@ -556,6 +564,7 @@ function generateProblemPage(problem, category) {
         .replace(/\{\{space_complexity\}\}/g, escapeHtml(problem.spaceComplexity || 'O(1)'))
         .replace(/\{\{tags_html\}\}/g, tagsHtml)
         .replace(/\{\{related_problems_html\}\}/g, relatedProblemsHtml)
+        .replace(/\{\{comparison_links_html\}\}/g, comparisonLinksHtml)
         .replace(/\{\{assets_path\}\}/g, getAssetPath(depth));
 
     return html;
@@ -696,6 +705,14 @@ function generateCheatsheetPage(category) {
         <li><a href="/cheatsheets/${c.id}.html">${escapeHtml(c.displayName)}</a></li>
     `).join('\n');
 
+    // Find relevant comparisons for this pattern
+    const relevantComparisons = (data.comparisons || []).filter(c =>
+        c.pattern1 === category.id || c.pattern2 === category.id
+    );
+    const comparisonLinksHtml = relevantComparisons.map(c =>
+        `<li><a href="/compare/${c.pattern1}-vs-${c.pattern2}.html">${escapeHtml(c.title)}</a></li>`
+    ).join('\n');
+
     // Get template code from first problem with a solution
     const templateProblem = problems.find(p => p.pythonSolution);
     const templateCode = templateProblem?.pythonSolution || '# Template code coming soon';
@@ -724,7 +741,15 @@ function generateCheatsheetPage(category) {
         .replace(/\{\{variations_html\}\}/g, variationsHtml)
         .replace(/\{\{problems_html\}\}/g, problemsHtml)
         .replace(/\{\{other_cheatsheets_html\}\}/g, otherCheatsheetsHtml)
+        .replace(/\{\{comparison_links_html\}\}/g, comparisonLinksHtml)
         .replace(/\{\{assets_path\}\}/g, getAssetPath(depth));
+
+    // Handle conditional comparison_links section
+    if (relevantComparisons.length > 0) {
+        html = html.replace('{{#if comparison_links}}', '').replace('{{/if}}', '');
+    } else {
+        html = html.replace(/\{\{#if comparison_links\}\}[\s\S]*?\{\{\/if\}\}/, '');
+    }
 
     return html;
 }

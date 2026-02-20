@@ -495,6 +495,111 @@ function generateCompareIndexPage() {
 </html>`;
 }
 
+// Generate HTML sitemap page
+function generateHtmlSitemapPage() {
+    const depth = 0;
+    const head = generateHead({
+        meta_description: 'Complete sitemap of LeetEye - all algorithm patterns, problems, cheat sheets, and comparisons for coding interview prep.',
+        canonical_path: '/sitemap.html',
+        og_title: 'Sitemap | LeetEye',
+        page_title: 'Sitemap | LeetEye',
+        assets_path: getAssetPath(depth),
+        css_path: getCssPath(depth)
+    });
+
+    // Build pattern sections with their problems and cheatsheets
+    const patternSections = data.categories.map(cat => {
+        const problems = (data.problems[cat.id] || []).map(p =>
+            `<li><a href="/problems/${cat.id}/${p.slug}.html">${escapeHtml(p.title)}</a></li>`
+        ).join('\n');
+        return `
+            <div class="sitemap-category">
+                <h3><a href="/patterns/${cat.id}/">${escapeHtml(cat.displayName)}</a></h3>
+                <ul>
+                    <li><a href="/cheatsheets/${cat.id}.html">${escapeHtml(cat.displayName)} Cheat Sheet</a></li>
+                    ${problems}
+                </ul>
+            </div>`;
+    }).join('\n');
+
+    // Comparisons
+    const comparisonsHtml = data.comparisons.map(c =>
+        `<li><a href="/compare/${c.pattern1}-vs-${c.pattern2}.html">${escapeHtml(c.title)}</a></li>`
+    ).join('\n');
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    ${head}
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                LeetEye
+            </a>
+            <img src="${getAssetPath(depth)}/logo.png" alt="LeetEye" class="logo-small">
+        </div>
+    </header>
+
+    <nav class="breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li aria-current="page">Sitemap</li>
+        </ol>
+    </nav>
+
+    <main class="content">
+        <h1>Sitemap</h1>
+        <p class="intro">All pages on LeetEye - algorithm patterns, practice problems, cheat sheets, and comparisons.</p>
+
+        <section class="sitemap-section">
+            <h2><a href="/patterns/">Algorithm Patterns</a></h2>
+            ${patternSections}
+        </section>
+
+        <section class="sitemap-section">
+            <h2><a href="/cheatsheets/">All Cheat Sheets</a></h2>
+            <ul>
+                ${data.categories.map(c => `<li><a href="/cheatsheets/${c.id}.html">${escapeHtml(c.displayName)} Cheat Sheet</a></li>`).join('\n')}
+            </ul>
+        </section>
+
+        <section class="sitemap-section">
+            <h2><a href="/compare/">Pattern Comparisons</a></h2>
+            <ul>
+                ${comparisonsHtml}
+            </ul>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 LeetEye. Pattern recognition for coding interviews.</p>
+        </div>
+    </footer>
+
+    <style>
+        .sitemap-section { margin-bottom: 2rem; }
+        .sitemap-section h2 { margin-bottom: 1rem; }
+        .sitemap-section h2 a { color: #0a0a0a; text-decoration: none; }
+        .sitemap-section h2 a:hover { color: #F97316; }
+        .sitemap-category { margin-bottom: 1.5rem; }
+        .sitemap-category h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+        .sitemap-category h3 a { color: #333; text-decoration: none; }
+        .sitemap-category h3 a:hover { color: #F97316; }
+        .sitemap-section ul { list-style: none; padding: 0; }
+        .sitemap-section li { padding: 0.25rem 0; }
+        .sitemap-section li a { color: #555; text-decoration: none; font-size: 0.9rem; }
+        .sitemap-section li a:hover { color: #F97316; }
+    </style>
+</body>
+</html>`;
+}
+
 // Main
 function main() {
     console.log('🚀 Generating extra pages...\n');
@@ -528,7 +633,12 @@ function main() {
     });
     console.log(`   ✅ Generated ${diffCount} difficulty pages`);
 
-    // 3. Update sitemap
+    // 3. HTML sitemap page
+    console.log('📁 Generating HTML sitemap...');
+    writeHtml(path.join(OUTPUT_PATH, 'sitemap.html'), generateHtmlSitemapPage());
+    console.log('   ✅ Generated sitemap.html');
+
+    // 4. Update sitemap
     console.log('📁 Updating sitemap...');
     const sitemapPath = path.join(OUTPUT_PATH, 'sitemap-pseo.xml');
     let sitemap = fs.readFileSync(sitemapPath, 'utf8');

@@ -561,6 +561,7 @@ code {
 /* ============================================
    Related Problems / Aside
    ============================================ */
+.related-resources,
 .related-problems,
 .related-patterns,
 .related-comparisons,
@@ -571,6 +572,7 @@ code {
     margin-top: 2rem;
 }
 
+.related-resources h3,
 .related-problems h3,
 .related-patterns h3,
 .related-comparisons h3,
